@@ -12,8 +12,6 @@ class Moderation(commands.Cog):
     async def clear(self, ctx, amount=5):
         await ctx.channel.purge(limit=amount)
 
-
-
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
@@ -28,4 +26,4 @@ class Moderation(commands.Cog):
 
 
 def setup(client):
-   client.add_cog(Moderation(client))
+    client.add_cog(Moderation(client))
