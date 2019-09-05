@@ -5,6 +5,7 @@ from discord.ext import commands
 
 client = commands.Bot(command_prefix=".")
 modulliste = []
+testmodule = []
 print('Module werden geladen')
 
 
@@ -31,17 +32,24 @@ async def unload(ctx, extension):
 async def module(ctx):
     await ctx.send(modulliste)
 
+
 for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}')
-        print(filename[:-3] + ' aktiviert')
-        modulliste.append({filename[:-3]})
-    elif filename.endswith('__pycache__'):
-        print('Py-Cache gefunden')
+    if filename.startswith('test'):
+        try:
+            client.load_extension(f'cogs.{filename[:-3]}')
+        except:
+            print("TestModul " + f'{filename}' + "ist fehlerhaft")
+        testmodule.append({filename[:-3]})
     else:
-        print(F'{filename}' + ' ist fehlerhaft')
+        if filename.endswith('.py'):
+            client.load_extension(f'cogs.{filename[:-3]}')
+            print(filename[:-3] + ' aktiviert')
+            modulliste.append({filename[:-3]})
+        elif filename.endswith('__pycache__'):
+            print('Py-Cache gefunden')
+        else:
+            print(F'{filename}' + ' ist fehlerhaft')
 print('Module geladen')
 print(modulliste)
-
 
 client.run(SECRETS.TOKEN)
