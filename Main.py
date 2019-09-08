@@ -1,7 +1,10 @@
-import SECRETS
-import discord
 import os
+import time
+
+import discord
 from discord.ext import commands
+
+import SECRETS
 
 client = commands.Bot(command_prefix=".")
 modulliste = []
@@ -11,7 +14,6 @@ print('Module werden geladen')
 
 @client.event
 async def on_ready():
-    print('{0.user} ist jetzt online'.format(client))
     await client.change_presence(status=discord.Status.online, activity=discord.Game('Bot online und bereit'))
     print('Status geändert')
 
@@ -20,18 +22,27 @@ async def on_ready():
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')
     print(extension + ' aktiviert')
+    await ctx.channel.purge(limit=amount)
 
 
 @client.command()
 async def unload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
     print(extension + ' deaktiviert')
+    unloadmessage = await ctx.send('Modul ' + f'{extension}' + ' deaktiviert.')
+    time.sleep(10)
+    await ctx.delete_message(unloadmessage)
 
 
 @client.command()
 async def module(ctx):
     await ctx.send(modulliste)
 
+
+@commands.command()
+async def reload(self, ctx, extension):
+    client.reload_extension(f'cogs.{extension}')
+    print(extension + ' neugeladen')
 
 for filename in os.listdir('./cogs'):
     if filename.startswith('test'):
@@ -52,4 +63,5 @@ for filename in os.listdir('./cogs'):
 print('Module geladen')
 print(modulliste)
 
+print("Botstart abgeschlossen!")
 client.run(SECRETS.TOKEN)

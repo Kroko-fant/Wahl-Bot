@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.0.1" />
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.0.1">
+      <change beforePath="$PROJECT_DIR$/.idea/Wahl-Bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Wahl-Bot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,13 +35,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Programmieren/Privat/DiscordPY/Wahl-Bot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/venv/Scripts/python.exe" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -99,6 +105,13 @@
       <updated>1566149515186</updated>
       <workItem from="1567689129521" duration="237000" />
       <workItem from="1567705077979" duration="2429000" />
+      <workItem from="1567707696762" duration="3525000" />
+      <workItem from="1567713791441" duration="3278000" />
+      <workItem from="1567773122506" duration="9431000" />
+      <workItem from="1567800353297" duration="464000" />
+      <workItem from="1567880326715" duration="1818000" />
+      <workItem from="1567935049083" duration="208000" />
+      <workItem from="1567952369398" duration="277000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -158,6 +171,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.0.1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1567706628878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1567952672964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
