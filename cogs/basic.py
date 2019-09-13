@@ -1,5 +1,3 @@
-import discord
-import os
 from discord.ext import commands
 
 
@@ -10,7 +8,6 @@ class Basic(commands.Cog):
 
     # Events
     # @commands.Cog.listener()
-    # async def on_ready(self):
 
     # Commands
     @commands.command()
