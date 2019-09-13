@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.0.2">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
-    </list>
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.0" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +112,7 @@
       <workItem from="1568316457949" duration="814000" />
       <workItem from="1568392121890" duration="278000" />
       <workItem from="1568398085101" duration="3282000" />
-      <workItem from="1568401994006" duration="9924000" />
+      <workItem from="1568401994006" duration="10186000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -140,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567952809832</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Pre-Version 1.1.0">
+      <created>1568414057399</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1568414057399</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -182,7 +184,8 @@
     <MESSAGE value="Pre-Version 1.0" />
     <MESSAGE value="Pre-Version 1.0.1" />
     <MESSAGE value="Pre-Version 1.0.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.0.2" />
+    <MESSAGE value="Pre-Version 1.1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.1.0" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
