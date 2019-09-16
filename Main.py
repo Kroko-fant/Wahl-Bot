@@ -1,5 +1,6 @@
 import json
 import os
+from _ast import Pass
 
 import discord
 from discord.ext import commands
@@ -8,7 +9,7 @@ import SECRETS
 
 
 def get_prefix(client, message):
-    with open('./Data/prefixes.json', 'r') as prefix:
+    with open('./data/prefixes.json', 'r') as prefix:
         prefixes = json.load(prefix)
 
     return prefixes[str(message.guild.id)]
@@ -21,7 +22,7 @@ def botowner(ctx):
 client = commands.Bot(command_prefix=get_prefix)
 modulliste = []
 testmodule = []
-
+server = client.guilds
 print('Module werden geladen')
 
 
@@ -31,39 +32,38 @@ async def on_ready():
     print('{0.user} ist jetzt online'.format(client))
     await client.change_presence(status=discord.Status.online, activity=discord.Game('Bot online und bereit'))
     print('Status geändert')
-    print('------------------------------------------------------------------')
-    for s in client.guilds:
-        print(s)
-    print('------------------------------------------------------------------')
+    number = 0
+    for s in range(len(client.guilds)):
+        number += 1
+    print('Bot läuft auf', number, 'Servern')
 
 
 # Start-Prefix
 @client.event
 async def on_guild_join(guild):
-    with open('./Data/prefixes.json', 'r') as f:
+    with open('./data/prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     prefixes[str(guild.id)] = '!'
 
-    with open('./Data/prefixes.json', 'w') as f:
+    with open('./data/prefixes.json', 'w') as f:
         json.dump(prefixes, f, indent=4)
 
 
 @client.event
 async def on_guild_remove(guild):
-    with open('./Data/prefixes.json', 'r') as f:
+    with open('./data/prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     prefixes.pop[str(guild.id)] = '!'
 
-    with open('./Data/prefixes.json', 'w') as f:
+    with open('./data/prefixes.json', 'w') as f:
         json.dump(prefixes, f, indent=4)
 
 
 @client.command()
-@commands.check(botowner)
 async def newprefix(ctx, prefix):
-    with open('./Data/prefixes.json', 'r') as f:
+    with open('./data/prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     prefixes[str(ctx.guild.id)] = prefix
@@ -116,21 +116,25 @@ async def shutdown(ctx):
 
 
 for filename in os.listdir('./cogs'):
-    if filename.startswith('test'):
-        try:
-            client.load_extension(f'cogs.{filename[:-3]}')
-        except Exception as e:
-            print("TestModul " + f'{filename}' + "ist fehlerhaft")
-        testmodule.append({filename[:-3]})
-    else:
-        if filename.endswith('.py'):
-            client.load_extension(f'cogs.{filename[:-3]}')
-            print(filename[:-3] + ' aktiviert')
-            modulliste.append({filename[:-3]})
-        elif filename.endswith('__pycache__'):
-            print('Py-Cache gefunden')
+    if filename.endswith(".py"):
+        if filename.startswith('test'):
+            try:
+                client.load_extension(f'cogs.{filename[:-3]}')
+            except Exception as e:
+                print("TestModul " + f'{filename}' + " ist fehlerhaft")
+            testmodule.append({filename[:-3]})
         else:
-            print(F'{filename}' + ' ist fehlerhaft')
+            if filename.endswith('.py'):
+                client.load_extension(f'cogs.{filename[:-3]}')
+                print(filename[:-3] + ' aktiviert')
+                modulliste.append({filename[:-3]})
+            elif filename.endswith('__pycache__'):
+                print('Py-Cache gefunden')
+            else:
+                print(F'{filename}' + ' ist fehlerhaft')
+    else:
+        Pass
+
 print('Module geladen')
 print(modulliste)
 

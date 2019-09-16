@@ -1,7 +1,7 @@
-import discord
-import urllib
 import json
+import urllib
 from urllib import request
+
 from discord.ext import commands
 
 url = "https://api.dawum.de/"
@@ -10,11 +10,11 @@ data = json.loads(response.read())
 print(data)
 
 
-class Moderation(commands.Cog):
+class Dawum(commands.Cog):
 
     def _init_(self, client):
         self.client = client
 
 
 def setup(client):
-    client.add_cog(Moderation(client))
+    client.add_cog(Dawum(client))

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.0" />
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.0">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/prefixes.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/prefixes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/dawum.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/test-dawum.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/test-dawum.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="package.json" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -31,7 +37,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Trollbot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -43,7 +49,11 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\cogs" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\ablage" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot" />
@@ -112,7 +122,13 @@
       <workItem from="1568316457949" duration="814000" />
       <workItem from="1568392121890" duration="278000" />
       <workItem from="1568398085101" duration="3282000" />
-      <workItem from="1568401994006" duration="10186000" />
+      <workItem from="1568401994006" duration="10430000" />
+      <workItem from="1568475714135" duration="8379000" />
+      <workItem from="1568489008840" duration="5276000" />
+      <workItem from="1568495167793" duration="21000" />
+      <workItem from="1568495205011" duration="659000" />
+      <workItem from="1568561225204" duration="3669000" />
+      <workItem from="1568643221350" duration="2836000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -142,7 +158,28 @@
       <option name="project" value="LOCAL" />
       <updated>1568414057399</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Pre-Version 1.1.0">
+      <created>1568414075537</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1568414075537</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Pre-Version 1.1.0">
+      <created>1568414088232</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1568414088232</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Pre-Version 1.1.0">
+      <created>1568414095112</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1568414095112</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -190,6 +227,6 @@
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1568413427488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1568645911869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
