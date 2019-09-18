@@ -1,19 +1,15 @@
-import json
 import os
-from _ast import Pass
-
 import discord
+import json
 from discord.ext import commands
-
+from _ast import Pass
 import SECRETS
-
 
 def get_prefix(client, message):
     with open('./data/prefixes.json', 'r') as prefix:
         prefixes = json.load(prefix)
 
     return prefixes[str(message.guild.id)]
-
 
 def botowner(ctx):
     return ctx.author.id == 137291894953607168
@@ -38,42 +34,6 @@ async def on_ready():
     print('Bot läuft auf', number, 'Servern')
 
 
-# Start-Prefix
-@client.event
-async def on_guild_join(guild):
-    with open('./data/prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes[str(guild.id)] = '!'
-
-    with open('./data/prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-
-@client.event
-async def on_guild_remove(guild):
-    with open('./data/prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes.pop[str(guild.id)] = '!'
-
-    with open('./data/prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-
-@client.command()
-async def newprefix(ctx, prefix):
-    with open('./data/prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes[str(ctx.guild.id)] = prefix
-
-    with open('./Data/prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-    await ctx.send(f'Prefix zu: {prefix} geändert')
-
-
 @client.command()
 @commands.check(botowner)
 async def load(ctx, extension):
@@ -94,6 +54,42 @@ async def reload(ctx, extension):
     client.reload_extension(f'cogs.{extension}')
     print(extension + ' neugeladen')
 
+# Start-Prefix
+@client.event
+async def on_guild_join(guild):
+    with open('./data/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes[str(guild.id)] = '!'
+
+    with open('./data/prefixes.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+
+
+@client.event
+async def on_guild_remove(guild):
+    with open('./data/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes.pop(str(guild.id))
+
+    with open('./data/prefixes.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+
+
+@client.command()
+async def newprefix(ctx, prefix):
+    with open('./data/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes[str(ctx.guild.id)] = prefix
+
+    with open('./Data/prefixes.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+
+    await ctx.send(f'Prefix zu: {prefix} geändert')
+
+# Prefix End
 
 @client.command()
 @commands.check(botowner)
