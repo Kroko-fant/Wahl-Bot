@@ -1,15 +1,20 @@
 import os
 import discord
 import json
+import time
 from discord.ext import commands
 from _ast import Pass
 import SECRETS
 
 def get_prefix(client, message):
-    with open('./data/prefixes.json', 'r') as prefix:
-        prefixes = json.load(prefix)
+    try:
+        with open('./data/prefixes.json', 'r') as prefix:
+            prefixes = json.load(prefix)
 
-    return prefixes[str(message.guild.id)]
+        return prefixes[str(message.guild.id)]
+    except KeyError:
+        return '!'
+
 
 def botowner(ctx):
     return ctx.author.id == 137291894953607168
@@ -17,7 +22,6 @@ def botowner(ctx):
 
 client = commands.Bot(command_prefix=get_prefix)
 modulliste = []
-testmodule = []
 server = client.guilds
 print('Module werden geladen')
 
@@ -33,82 +37,34 @@ async def on_ready():
         number += 1
     print('Bot läuft auf', number, 'Servern')
 
-
 @client.command()
 @commands.check(botowner)
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')
     print(extension + ' aktiviert')
 
-
 @client.command()
 @commands.check(botowner)
-async def unload(ctx, extension):
-    client.unload_extension(f'cogs.{extension}')
+async def unload(self, ctx, extension):
+    self.client.unload_extension(f'cogs.{extension}')
     print(extension + ' deaktiviert')
 
-
 @client.command()
 @commands.check(botowner)
-async def reload(ctx, extension):
+async def reload(self, ctx, extension):
     client.reload_extension(f'cogs.{extension}')
     print(extension + ' neugeladen')
-
-# Start-Prefix
-@client.event
-async def on_guild_join(guild):
-    with open('./data/prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes[str(guild.id)] = '!'
-
-    with open('./data/prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-
-@client.event
-async def on_guild_remove(guild):
-    with open('./data/prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes.pop(str(guild.id))
-
-    with open('./data/prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-
-@client.command()
-async def newprefix(ctx, prefix):
-    with open('./data/prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    prefixes[str(ctx.guild.id)] = prefix
-
-    with open('./Data/prefixes.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-    await ctx.send(f'Prefix zu: {prefix} geändert')
-
-# Prefix End
 
 @client.command()
 @commands.check(botowner)
 async def module(ctx):
     await ctx.send(modulliste)
 
-
-@client.command()
-@commands.check(botowner)
-async def restart(ctx):
-    await client.logout()
-    await client.run(SECRETS.TOKEN)
-
-
 @client.command()
 @commands.check(botowner)
 async def shutdown(ctx):
-    await client.logout()
     await ctx.send("Bot wird heruntergefahren...")
+    await client.logout()
 
 
 for filename in os.listdir('./cogs'):
@@ -118,7 +74,6 @@ for filename in os.listdir('./cogs'):
                 client.load_extension(f'cogs.{filename[:-3]}')
             except Exception as e:
                 print("TestModul " + f'{filename}' + " ist fehlerhaft")
-            testmodule.append({filename[:-3]})
         else:
             if filename.endswith('.py'):
                 client.load_extension(f'cogs.{filename[:-3]}')

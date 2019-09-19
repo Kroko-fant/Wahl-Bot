@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.1">
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SECRETS.py" beforeDir="false" afterPath="$PROJECT_DIR$/SECRETS.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/verify.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/verify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/verified.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/verified.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/purge.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/purge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/lastmsg.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/lastmsg.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/prefixes.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/prefixes.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,14 +50,14 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\cogs" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\ablage" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -132,7 +132,9 @@
       <workItem from="1568643221350" duration="6344000" />
       <workItem from="1568653004550" duration="3762000" />
       <workItem from="1568820920608" duration="3639000" />
-      <workItem from="1568838023933" duration="5087000" />
+      <workItem from="1568838023933" duration="5486000" />
+      <workItem from="1568891795364" duration="118000" />
+      <workItem from="1568891929436" duration="5016000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -190,7 +192,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568646099368</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Pre-Version 1.1.2">
+      <created>1568846785150</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1568846785150</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Pre-Version 1.1.2">
+      <created>1568846806752</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1568846806752</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -234,11 +250,12 @@
     <MESSAGE value="Pre-Version 1.0.2" />
     <MESSAGE value="Pre-Version 1.1.0" />
     <MESSAGE value="Pre-Version 1.1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.1.1" />
+    <MESSAGE value="Pre-Version 1.1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.1.2" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1568842253476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1568899791011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

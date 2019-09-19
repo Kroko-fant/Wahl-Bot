@@ -1,13 +1,14 @@
 from discord.ext import commands
 
 
+def botowner(ctx):
+    return ctx.author.id == 137291894953607168
+
+
 class Basic(commands.Cog):
 
     def _init_(self, client):
         self.client = client
-
-    # Events
-    # @commands.Cog.listener()
 
     # Commands
     @commands.command()

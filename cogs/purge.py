@@ -55,6 +55,17 @@ class Purge(commands.Cog):
         else:
             Pass
 
+    @commands.command()
+    @commands.check(botowner)
+    async def purge(self, ctx, amount=90):
+        if amount >= 90:
+            ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!")
+
+        elif 90 > amount > 0:
+            ctx.send("Die eingegebene Tageszahl ist zu klein!")
+        else:
+            ctx.send("Bitte gebe eine natürliche Zahl größer als 90 ein")
+
 
 def setup(client):
     client.add_cog(Purge(client))
