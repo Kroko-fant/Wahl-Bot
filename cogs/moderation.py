@@ -10,6 +10,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=5):
+        amount = amount + 1
         await ctx.channel.purge(limit=amount)
 
     @commands.command()

@@ -19,6 +19,13 @@ async def unverifiziert(ctx):
             return True
 
 
+def user(member):
+    if not member.bot:
+        return True
+    else:
+        return False
+
+
 class Verify(commands.Cog):
 
     def _init_(self, client):
@@ -27,6 +34,7 @@ class Verify(commands.Cog):
     @commands.command()
     @commands.check(unverifiziert)
     async def verify(self, ctx):
+        # USERID in Verify
         with open('./data/verified.json', 'r') as f:
             verified = json.load(f)
 
@@ -34,6 +42,15 @@ class Verify(commands.Cog):
 
         with open('./data/verified.json', 'w') as f:
             json.dump(verified, f, indent=4)
+        await ctx.send('Verifiziert')
+
+        # Rolle geben
+        with open('./data/verify-role.json', 'r') as f:
+            verified = json.load(f)
+
+        Rolle = verified[str(ctx.author.guild)]
+
+        await ctx.author.add_roles(Rolle, reason="Verify", atomic=True)
         await ctx.send('Verifiziert')
 
 

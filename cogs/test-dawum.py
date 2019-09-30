@@ -18,3 +18,11 @@ class Dawum(commands.Cog):
 
 def setup(client):
     client.add_cog(Dawum(client))
+
+
+Event = True
+
+if Event:
+    print("Die Server werden gewartet!")
+else:
+    pass

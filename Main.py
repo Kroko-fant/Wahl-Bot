@@ -8,8 +8,8 @@ import SECRETS
 
 def get_prefix(client, message):
     try:
-        with open('./data/prefixes.json', 'r') as prefix:
-            prefixes = json.load(prefix)
+        with open('./data/prefixes.json', 'r') as f:
+            prefixes = json.load(f)
 
         return prefixes[str(message.guild.id)]
     except KeyError:
@@ -40,20 +40,23 @@ async def on_ready():
 @client.command()
 @commands.check(botowner)
 async def load(ctx, extension):
-    client.load_extension(f'cogs.{extension}')
-    print(extension + ' aktiviert')
+    e = extension.lower()
+    client.load_extension(f'cogs.{e}')
+    print(e + ' aktiviert')
 
 @client.command()
 @commands.check(botowner)
-async def unload(self, ctx, extension):
-    self.client.unload_extension(f'cogs.{extension}')
-    print(extension + ' deaktiviert')
+async def unload(ctx, extension):
+    e = extension.lower()
+    self.client.unload_extension(f'cogs.{e}')
+    print(e + ' deaktiviert')
 
 @client.command()
 @commands.check(botowner)
-async def reload(self, ctx, extension):
-    client.reload_extension(f'cogs.{extension}')
-    print(extension + ' neugeladen')
+async def reload(ctx, extension):
+    e = extension.lower()
+    client.reload_extension(f'cogs.{e}')
+    print(e + ' neugeladen')
 
 @client.command()
 @commands.check(botowner)
