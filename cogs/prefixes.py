@@ -35,7 +35,7 @@ class Prefixes(commands.Cog):
 
         prefixes[str(ctx.guild.id)] = prefix
 
-        with open('./Data/prefixes.json', 'w') as f:
+        with open('./data/prefixes.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
         await ctx.send(f'Prefix zu: {prefix} geändert')

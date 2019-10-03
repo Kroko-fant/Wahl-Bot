@@ -4,20 +4,16 @@ import json
 import time
 from discord.ext import commands
 from _ast import Pass
+from botdata import botparameters as bp
 import SECRETS
 
 def get_prefix(client, message):
     try:
         with open('./data/prefixes.json', 'r') as f:
             prefixes = json.load(f)
-
         return prefixes[str(message.guild.id)]
     except KeyError:
         return '!'
-
-
-def botowner(ctx):
-    return ctx.author.id == 137291894953607168
 
 
 client = commands.Bot(command_prefix=get_prefix)
@@ -38,33 +34,33 @@ async def on_ready():
     print('Bot läuft auf', number, 'Servern')
 
 @client.command()
-@commands.check(botowner)
+@commands.check(bp.botowner)
 async def load(ctx, extension):
     e = extension.lower()
     client.load_extension(f'cogs.{e}')
     print(e + ' aktiviert')
 
 @client.command()
-@commands.check(botowner)
+@commands.check(bp.botowner)
 async def unload(ctx, extension):
     e = extension.lower()
     self.client.unload_extension(f'cogs.{e}')
     print(e + ' deaktiviert')
 
 @client.command()
-@commands.check(botowner)
+@commands.check(bp.botowner)
 async def reload(ctx, extension):
     e = extension.lower()
     client.reload_extension(f'cogs.{e}')
     print(e + ' neugeladen')
 
 @client.command()
-@commands.check(botowner)
+@commands.check(bp.botowner)
 async def module(ctx):
     await ctx.send(modulliste)
 
 @client.command()
-@commands.check(botowner)
+@commands.check(bp.botowner)
 async def shutdown(ctx):
     await ctx.send("Bot wird heruntergefahren...")
     await client.logout()

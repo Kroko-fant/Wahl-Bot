@@ -1,26 +1,9 @@
 import json
 from _ast import Pass
-from datetime import datetime
 
 from discord.ext import commands
 
-today = datetime.today()
-datum = today.strftime("%d/%m/%Y")
-
-
-def zeitspanneberechnen(altesdatum):
-    return datum - altesdatum
-
-
-def user(member):
-    if not member.bot:
-        return True
-    else:
-        return False
-
-
-def botowner(ctx):
-    return ctx.author.id == 137291894953607168
+from botdata import botparameters as bp
 
 
 class Purge(commands.Cog):
@@ -31,11 +14,11 @@ class Purge(commands.Cog):
     # Events
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        if user(member):
+        if bp.user(member):
             with open('./data/lastmsg.json', 'r') as f:
                 members = json.load(f)
 
-            members[str(member.id)] = str(today)
+            members[str(member.id)] = str(b.today)
 
             with open('./data/lastmsg.json', 'w') as f:
                 json.dump(members, f, indent=4)
@@ -44,11 +27,11 @@ class Purge(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
-        if user(ctx.author):
+        if bp.user(ctx.author):
             with open('./data/lastmsg.json', 'r') as f:
                 members = json.load(f)
 
-            members[str(ctx.author.id)] = str(datum)
+            members[str(ctx.author.id)] = str(bp.datum)
 
             with open('./data/lastmsg.json', 'w') as f:
                 json.dump(members, f, indent=4)
@@ -56,7 +39,7 @@ class Purge(commands.Cog):
             Pass
 
     @commands.command()
-    @commands.check(botowner)
+    @commands.check(bp.botowner)
     async def purge(self, ctx, amount=90):
         if amount >= 90:
             ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!")

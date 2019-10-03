@@ -1,16 +1,9 @@
-import discord
+import json
+
 from discord.ext import commands
 
-
-def botowner(ctx):
-    return ctx.author.id == 137291894953607168
-
-
-def user(member):
-    if not member.bot:
-        return True
-    else:
-        return False
+from botdata import botparameters as b
+from botdata import botparameters as bp
 
 
 class Basic(commands.Cog):
@@ -25,7 +18,19 @@ class Basic(commands.Cog):
 
     @commands.command()
     async def version(self, ctx):
-        await ctx.send("Der Bot läuft auf Pre-Version 1.1.3 ." + "Die API läuft auf Version" + discord.version_info)
+        await ctx.send("Der Bot läuft auf " + bp.version + ". Die API läuft auf Version " + bp.apiversion())
+
+    @commands.command()
+    async def bug(self, ctx, *, bug):
+        with open('./botdata/bugs.json', 'r') as f:
+            bugs = json.load(f)
+            bugtext = str(ctx.author.id), bug
+        bugs[str(b.today)] = bugtext
+
+        with open('./botdata/bugs.json', 'w') as f:
+            json.dump(bugs, f, indent=4)
+
+        await ctx.send('Danke <@' + str(ctx.author.id) + '> für das einreichen deines Bugs, wir melden uns zurück.')
 
 
 def setup(client):

@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/prefixes.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/prefixes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/purge.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/purge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/test-dawum.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/test-dawum.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/testsonntagsfrage.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testsonntagsfrage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/verify.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/verify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/lastmsg.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/lastmsg.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,14 +53,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\botdata" />
       <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\cogs" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\ablage" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -140,6 +149,10 @@
       <workItem from="1569813408090" duration="2874000" />
       <workItem from="1569874477785" duration="62000" />
       <workItem from="1569874575043" duration="19000" />
+      <workItem from="1569905993721" duration="244000" />
+      <workItem from="1570045257501" duration="2206000" />
+      <workItem from="1570101180506" duration="7029000" />
+      <workItem from="1570113566476" duration="3767000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -225,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569816253723</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Pre-Version 1.1.3">
+      <created>1569906087471</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1569906087471</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -276,6 +296,6 @@
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1569816228460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1570119498642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
