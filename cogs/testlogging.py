@@ -6,9 +6,6 @@ class Logging(commands.cog):
     def _init_(self, client):
         self.client = client
 
-        @commands.Cog.listener()
-        async def
-
 
 def setup(client):
-    client.addcog(Logging(client))
+    client.add_cog(Logging(client))
