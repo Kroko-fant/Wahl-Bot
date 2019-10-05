@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.5">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/botdata/botparameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/botdata/botparameters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/botdata/bugs.json" beforeDir="false" afterPath="$PROJECT_DIR$/botdata/bugs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/testlogging.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testlogging.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/lastmsg.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/lastmsg.json" afterDir="false" />
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.1.5a">
+      <change beforePath="$PROJECT_DIR$/cogs/purge.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/purge.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,6 +146,7 @@
       <workItem from="1570101180506" duration="7029000" />
       <workItem from="1570113566476" duration="6433000" />
       <workItem from="1570212502702" duration="6312000" />
+      <workItem from="1570277050277" duration="246000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -257,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570225536415</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Pre-Version 1.1.5a">
+      <created>1570277226769</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1570277226769</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -305,7 +308,8 @@
     <MESSAGE value="Pre-Version 1.1.3" />
     <MESSAGE value="Pre-Version 1.1.4" />
     <MESSAGE value="Pre-Version 1.1.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.1.5" />
+    <MESSAGE value="Pre-Version 1.1.5a" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.1.5a" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

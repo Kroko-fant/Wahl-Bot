@@ -18,7 +18,7 @@ class Purge(commands.Cog):
             with open('./data/lastmsg.json', 'r') as f:
                 members = json.load(f)
 
-            members[str(member.id)] = str(b.today)
+            members[str(member.id)] = str(bp.today)
 
             with open('./data/lastmsg.json', 'w') as f:
                 json.dump(members, f, indent=4)
