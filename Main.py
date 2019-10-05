@@ -1,13 +1,15 @@
-import os
-import discord
 import json
-import time
-from discord.ext import commands
+import os
 from _ast import Pass
-from botdata import botparameters as bp
-import SECRETS
 
-def get_prefix(client, message):
+import discord
+from discord.ext import commands
+
+import SECRETS
+from botdata import botparameters as bp
+
+
+def get_prefix(message):
     try:
         with open('./data/prefixes.json', 'r') as f:
             prefixes = json.load(f)
@@ -33,6 +35,7 @@ async def on_ready():
         number += 1
     print('Bot läuft auf', number, 'Servern')
 
+
 @client.command()
 @commands.check(bp.botowner)
 async def load(ctx, extension):
@@ -40,12 +43,14 @@ async def load(ctx, extension):
     client.load_extension(f'cogs.{e}')
     print(e + ' aktiviert')
 
+
 @client.command()
 @commands.check(bp.botowner)
 async def unload(ctx, extension):
     e = extension.lower()
-    self.client.unload_extension(f'cogs.{e}')
+    client.unload_extension(f'cogs.{e}')
     print(e + ' deaktiviert')
+
 
 @client.command()
 @commands.check(bp.botowner)
@@ -54,10 +59,12 @@ async def reload(ctx, extension):
     client.reload_extension(f'cogs.{e}')
     print(e + ' neugeladen')
 
+
 @client.command()
 @commands.check(bp.botowner)
 async def module(ctx):
     await ctx.send(modulliste)
+
 
 @client.command()
 @commands.check(bp.botowner)
