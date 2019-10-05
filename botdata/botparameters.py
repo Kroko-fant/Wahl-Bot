@@ -2,7 +2,7 @@ import datetime
 
 import discord
 
-version = "Pre Version 1.1.4"
+version = "Pre Version 1.1.6b"
 today = datetime.datetime.today()
 datum = today.strftime("%d/%m/%Y")
 
