@@ -2,6 +2,8 @@ import json
 
 from discord.ext import commands
 
+from botdata import botparameters as bp
+
 
 class Prefixes(commands.Cog):
 
@@ -30,6 +32,7 @@ class Prefixes(commands.Cog):
 
     @commands.command()
     async def newprefix(self, ctx, prefix):
+        await bp.delete_cmd(ctx)
         with open('./data/prefixes.json', 'r') as f:
             prefixes = json.load(f)
 

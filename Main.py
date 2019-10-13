@@ -9,7 +9,7 @@ import SECRETS
 from botdata import botparameters as bp
 
 
-def get_prefix(message):
+def get_prefix(client, message):
     try:
         with open('./data/prefixes.json', 'r') as f:
             prefixes = json.load(f)
@@ -39,6 +39,7 @@ async def on_ready():
 @client.command()
 @commands.check(bp.botowner)
 async def load(ctx, extension):
+    await bp.delete_cmd(ctx)
     e = extension.lower()
     client.load_extension(f'cogs.{e}')
     print(e + ' aktiviert')
@@ -47,6 +48,7 @@ async def load(ctx, extension):
 @client.command()
 @commands.check(bp.botowner)
 async def unload(ctx, extension):
+    await bp.delete_cmd(ctx)
     e = extension.lower()
     client.unload_extension(f'cogs.{e}')
     print(e + ' deaktiviert')
@@ -55,6 +57,7 @@ async def unload(ctx, extension):
 @client.command()
 @commands.check(bp.botowner)
 async def reload(ctx, extension):
+    await bp.delete_cmd(ctx)
     e = extension.lower()
     client.reload_extension(f'cogs.{e}')
     print(e + ' neugeladen')
@@ -63,12 +66,14 @@ async def reload(ctx, extension):
 @client.command()
 @commands.check(bp.botowner)
 async def module(ctx):
+    await bp.delete_cmd(ctx)
     await ctx.send(modulliste)
 
 
 @client.command()
 @commands.check(bp.botowner)
 async def shutdown(ctx):
+    await bp.delete_cmd(ctx)
     await ctx.send("Bot wird heruntergefahren...")
     await client.logout()
 

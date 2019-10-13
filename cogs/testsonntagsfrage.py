@@ -12,6 +12,7 @@ class Sontagsumfrage(commands.cog):
     @commands.check(bp.verifiziert)
     @commands.command()
     async def vote(self, ctx):
+        await bp.delete_cmd(ctx)
         await ctx.send("Dein Vote ist eingegangen!")
 
 

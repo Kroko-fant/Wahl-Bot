@@ -41,6 +41,7 @@ class Purge(commands.Cog):
     @commands.command()
     @commands.check(bp.botowner)
     async def purge(self, ctx, amount=90):
+        await bp.delete_cmd(ctx)
         if amount >= 90:
             ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!")
 

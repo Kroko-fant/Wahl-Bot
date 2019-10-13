@@ -2,11 +2,11 @@ import datetime
 
 import discord
 
-version = "Pre Version 1.1.6b"
 today = datetime.datetime.today()
 datum = today.strftime("%d/%m/%Y")
 
 
+# Personen
 def botowner(ctx):
     return ctx.author.id == 137291894953607168
 
@@ -18,10 +18,16 @@ def user(member):
         return False
 
 
+# Versionen
 def apiversion():
     return discord.__version__
 
 
+def version():
+    return "Pre Version 1.1.7"
+
+
+# Userstatus
 async def verifiziert(ctx):
     with open('./data/verified.json', 'r') as f:
         trueuserid = str(ctx.author.id) + '": true'
@@ -30,3 +36,18 @@ async def verifiziert(ctx):
             return True
         else:
             return False
+
+
+async def unverifiziert(ctx):
+    with open('./data/verified.json', 'r') as f:
+        trueuserid = str(ctx.author.id) + '": true'
+        data = f.read()
+        if trueuserid in data:
+            return False
+        else:
+            return True
+
+
+# Tasks
+async def delete_cmd(ctx):
+    await ctx.channel.purge(limit=1)

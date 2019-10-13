@@ -1,5 +1,10 @@
+from ast import Pass
+
 import discord
 from discord.ext import commands
+
+from botdata import blacklist as bl
+from botdata import botparameters as bp
 
 
 class Moderation(commands.Cog):
@@ -16,14 +21,27 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
+        await bp.delete_cmd(ctx)
         await member.kick(reason=reason)
-        await ctx.channel.purge(limit=1)
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
+        await bp.delete_cmd(ctx)
         await member.ban(reason=reason)
-        await ctx.channel.purge(limit=1)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        member = message.author
+        if bp.user(member):
+            if any([curse in message.content.lower() for curse in bl.blacklist]):
+                await message.delete()
+                await message.channel.send(f"{message.author.mention}, du meintest wohl https://discord.gg/HFQX3Gz")
+                return True
+            else:
+                Pass
+        else:
+            Pass
 
 
 def setup(client):

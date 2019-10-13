@@ -2,6 +2,8 @@ import random
 
 from discord.ext import commands
 
+from botdata import botparameters as bp
+
 
 class Fun(commands.Cog):
 
@@ -10,6 +12,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def coinflip(self, ctx):
+        await bp.delete_cmd(ctx)
         flip = random.randint(0, 1)
         if flip == 1:
             await ctx.send("Du hast **Kopf** geworfen!")
@@ -20,12 +23,14 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def randomnumber(self, ctx, int2=100):
+        await bp.delete_cmd(ctx)
         randomnumber = "Die zufällige Zahl zwischen **0** und **" + str(int2) + "** ist: **" + \
                        str(random.randint(0, int2)) + "**"
         await ctx.send(randomnumber)
 
     @commands.command()
     async def card(self, ctx):
+        await bp.delete_cmd(ctx)
         karten = [":diamonds: 7", ":diamonds: 8", ":diamonds: 9", ":diamonds: 10", ":diamonds: Bube",
                   ":diamonds: Dame", ":diamonds: Koenig", ":diamonds: Ass", ":hearts: 7", ":hearts: 8",
                   ":hearts: 9", ":hearts: 10", ":hearts: Bube", ":hearts: Dame", ":hearts: Koenig", ":hearts: Ass",

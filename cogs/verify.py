@@ -2,21 +2,7 @@ import json
 
 from discord.ext import commands
 
-
-async def unverifiziert(ctx):
-    with open('./data/verified.json', 'r') as f:
-        trueuserid = str(ctx.author.id) + '": true'
-        falseuserid = str(ctx.author.id) + '": false'
-        data = f.read()
-        if trueuserid in data:
-            await ctx.send("Du bist bereits verifiziert!")
-            return False
-        elif falseuserid in data:
-            await ctx.send("Du bist gesperrt!")
-            return False
-        else:
-            await ctx.send("Verifiziere...")
-            return True
+from botdata import botparameters as bp
 
 
 class Verify(commands.Cog):
@@ -25,26 +11,31 @@ class Verify(commands.Cog):
         self.client = client
 
     @commands.command()
-    @commands.check(unverifiziert)
     async def verify(self, ctx):
-        # USERID in Verify
-        with open('./data/verified.json', 'r') as f:
-            verified = json.load(f)
+        await bp.delete_cmd(ctx)
+        if bp.unverifiziert(ctx):
+            # USERID in Verify
+            with open('./data/verified.json', 'r') as f:
+                verified = json.load(f)
 
-        verified[str(ctx.author.id)] = True
+            verified[str(ctx.author.id)] = True
 
-        with open('./data/verified.json', 'w') as f:
-            json.dump(verified, f, indent=4)
-        await ctx.send('Verifiziert')
+            with open('./data/verified.json', 'w') as f:
+                json.dump(verified, f, indent=4)
+            await ctx.send('Verifiziert')
 
-        # Rolle geben
-        with open('./data/verify-role.json', 'r') as f:
-            verified = json.load(f)
+            # Rolle geben
+            with open('./data/verify-role.json', 'r') as f:
+                verified = json.load(f)
 
-        rolle = verified[str(ctx.author.guild)]
+            rolle = verified[str(ctx.author.guild)]
 
-        await ctx.author.add_roles(rolle, reason="Verify", atomic=True)
-        await ctx.send('Verifiziert')
+            await ctx.author.add_roles(rolle, reason="Verify", atomic=True)
+            await ctx.send('Verifiziert')
+        elif bp.verifiziert(ctx):
+            await ctx.send("Du bist bereits verifiziert!")
+        else:
+            await ctx.send("Du konntest nicht verifiziert werden! Wende dich an das Team oder versuche es nochmal!")
 
 
 def setup(client):
