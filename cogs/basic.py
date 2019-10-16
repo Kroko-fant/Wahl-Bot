@@ -13,13 +13,9 @@ class Basic(commands.Cog):
 
     # Commands
     @commands.command()
-    async def ping(self, ctx):
-        await bp.delete_cmd(ctx)
-        await ctx.send(f'Pong! {round(self.client.latency * 1000)} ms')
-
-    @commands.command()
     async def version(self, ctx):
-        await ctx.send("Der Bot läuft auf ", bp.version, ". Die API läuft auf Version ", bp.apiversion())
+        versiontext = "Der Bot läuft auf" + bp.version() + ". Die API läuft auf Version " + bp.apiversion()
+        await ctx.send(versiontext)
 
     @commands.command()
     async def bug(self, ctx, *, bugt):

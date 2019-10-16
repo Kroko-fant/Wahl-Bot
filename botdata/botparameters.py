@@ -1,4 +1,5 @@
 import datetime
+import json
 
 import discord
 
@@ -20,11 +21,13 @@ def user(member):
 
 # Versionen
 def apiversion():
-    return discord.__version__
+    apiversionstr = discord.__version__
+    return apiversionstr
 
 
 def version():
-    return "Pre Version 1.1.7"
+    versionstr = "Pre Version 1.1.7"
+    return versionstr
 
 
 # Userstatus
@@ -51,3 +54,13 @@ async def unverifiziert(ctx):
 # Tasks
 async def delete_cmd(ctx):
     await ctx.channel.purge(limit=1)
+
+
+def update_member(member):
+    with open('./data/lastmsg.json', 'r') as f:
+        members = json.load(f)
+
+    members[str(member.id)] = str(datum)
+
+    with open('./data/lastmsg.json', 'w') as f:
+        json.dump(members, f, indent=4)

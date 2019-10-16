@@ -35,6 +35,10 @@ async def on_ready():
         number += 1
     print('Bot läuft auf', number, 'Servern')
 
+@client.command()
+async def ping(ctx):
+    await bp.delete_cmd(ctx)
+    await ctx.send(f'Pong! Meine Latenz sind aktuell {round(client.latency * 1000)} ms.')
 
 @client.command()
 @commands.check(bp.botowner)

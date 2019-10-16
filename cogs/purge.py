@@ -12,32 +12,45 @@ class Purge(commands.Cog):
         self.client = client
 
     # Events
+    # Member join => wird erstellt
     @commands.Cog.listener()
     async def on_member_join(self, member):
+        if bp.user(member):
+            bp.update_member(member)
+        else:
+            Pass
+
+    # Member schreibt nachricht
+    @commands.Cog.listener()
+    async def on_message(self, ctx):
+        if bp.user(ctx.author):
+            bp.update_member(ctx.author)
+        else:
+            Pass
+
+    # Member joint Voice
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        if bp.user(member):
+            bp.update_member(member)
+        else:
+            Pass
+
+    # Member verlässt Server
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
         if bp.user(member):
             with open('./data/lastmsg.json', 'r') as f:
                 members = json.load(f)
 
-            members[str(member.id)] = str(bp.today)
+            members.pop[str(member.id)]
 
             with open('./data/lastmsg.json', 'w') as f:
                 json.dump(members, f, indent=4)
         else:
             Pass
 
-    @commands.Cog.listener()
-    async def on_message(self, ctx):
-        if bp.user(ctx.author):
-            with open('./data/lastmsg.json', 'r') as f:
-                members = json.load(f)
-
-            members[str(ctx.author.id)] = str(bp.datum)
-
-            with open('./data/lastmsg.json', 'w') as f:
-                json.dump(members, f, indent=4)
-        else:
-            Pass
-
+    # Member purgen
     @commands.command()
     @commands.check(bp.botowner)
     async def purge(self, ctx, amount=90):
