@@ -40,12 +40,13 @@ class Purge(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         if bp.user(member):
-            with open('./data/lastmsg.json', 'r') as f:
+            lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
+            with open(lastmember, 'r') as f:
                 members = json.load(f)
 
-            members.pop[str(member.id)]
+            await members.pop[str(member.id)]
 
-            with open('./data/lastmsg.json', 'w') as f:
+            with open(lastmember, 'w') as f:
                 json.dump(members, f, indent=4)
         else:
             Pass

@@ -26,13 +26,14 @@ def apiversion():
 
 
 def version():
-    versionstr = "Pre Version 1.1.8"
+    versionstr = "Pre Version 1.2.0"
     return versionstr
 
 
 # Userstatus
 async def verifiziert(ctx):
-    with open('./data/verified.json', 'r') as f:
+    verifydir = './data/servers/' + str(ctx.guild.id) + '/verified.json'
+    with open(verifydir, 'r') as f:
         trueuserid = str(ctx.author.id) + '": true'
         data = f.read()
         if trueuserid in data:
@@ -42,7 +43,8 @@ async def verifiziert(ctx):
 
 
 async def unverifiziert(ctx):
-    with open('./data/verified.json', 'r') as f:
+    verifydir = './data/servers/' + str(ctx.guild.id) + '/verified.json'
+    with open(verifydir, 'r') as f:
         trueuserid = str(ctx.author.id) + '": true'
         data = f.read()
         if trueuserid in data:
@@ -57,10 +59,11 @@ async def delete_cmd(ctx):
 
 
 def update_member(member):
-    with open('./data/lastmsg.json', 'r') as f:
+    lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
+    with open(lastmember, 'r') as f:
         members = json.load(f)
 
     members[str(member.id)] = str(datum)
 
-    with open('./data/lastmsg.json', 'w') as f:
+    with open(lastmember, 'w') as f:
         json.dump(members, f, indent=4)

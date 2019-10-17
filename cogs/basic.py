@@ -14,6 +14,7 @@ class Basic(commands.Cog):
     # Commands
     @commands.command()
     async def version(self, ctx):
+        await bp.delete_cmd(ctx)
         versiontext = "Der Bot läuft auf" + bp.version() + ". Die API läuft auf Version " + bp.apiversion()
         await ctx.send(versiontext)
 
@@ -39,7 +40,8 @@ class Basic(commands.Cog):
         with open('./botdata/feedback.json', 'w') as f:
             json.dump(feedbacks, f, indent=4)
 
-        await ctx.send('Danke <@' + str(ctx.author.id) + '> für das einreichen deines Bugs, wir melden uns zurück.')
+        await ctx.send(
+            'Danke <@' + str(ctx.author.id) + '> für das einreichen deines Feedbacks, wir melden uns zurück.')
 
     @commands.command()
     async def about(self, ctx):
