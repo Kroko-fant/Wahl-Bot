@@ -29,6 +29,10 @@ class Autosetup(commands.Cog):
         except FileExistsError:
             Pass
         try:
+            asr.reactionserstellen(ctx.guild)
+        except FileExistsError:
+            Pass
+        try:
             asr.prefixzuweisen(ctx.guild)
         except FileExistsError:
             Pass
@@ -39,6 +43,7 @@ class Autosetup(commands.Cog):
         asr.newserv(guild)
         asr.verifyerstellen(guild)
         asr.lastdataerstellen(guild)
+        asr.reactionserstellen(guild)
         asr.prefixzuweisen(guild)
 
     @commands.Cog.listener()

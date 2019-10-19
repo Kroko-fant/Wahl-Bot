@@ -20,7 +20,6 @@ def jsonerstellen(data, newdir):
                           indent=4, sort_keys=True,
                           separators=(',', ': '), ensure_ascii=False)
         outfile.write(to_unicode(str_))
-
     # Read JSON file
     with open(newdir) as data_file:
         data_loaded = json.load(data_file)
@@ -30,6 +29,13 @@ def verifyerstellen(guild):
     data = {
     }
     newdir = './data/servers/' + str(guild.id) + '/verified.json'
+    jsonerstellen(data, newdir)
+
+
+def reactionserstellen(guild):
+    data = {
+    }
+    newdir = './data/servers/' + str(guild.id) + '/reactions.json'
     jsonerstellen(data, newdir)
 
 
