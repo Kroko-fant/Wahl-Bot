@@ -11,6 +11,7 @@ class Prefixes(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def newprefix(self, ctx, prefix):
         await bp.delete_cmd(ctx)
         with open('./data/prefixes.json', 'r') as f:

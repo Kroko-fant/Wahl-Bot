@@ -9,6 +9,7 @@ class Reactions(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
+    @commands.has_permissions(administrator=True)
     async def on_raw_reaction_add(self, payload):
         message = payload.message_id
         guild = payload.guild_id
@@ -17,6 +18,7 @@ class Reactions(commands.Cog):
         print('reaction erfasst""')
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def addreactionmsg(self, ctx, msgid):
         guild = ctx.guild
         with open('./data/reactionmsg.json', 'r') as f:

@@ -13,6 +13,7 @@ class Themen(commands.Cog):
 
     # kategorie setzen
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def category(self, ctx, category):
         guild = ctx.guild
         with open('./data/topiccategorys.json', 'r') as f:
@@ -25,6 +26,7 @@ class Themen(commands.Cog):
 
     # thema erstellen channel setzen
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def topiccreate(self, ctx, newtopicchannel):
         guild = ctx.guild
         with open('./data/newtopicchannel.json', 'r') as f:

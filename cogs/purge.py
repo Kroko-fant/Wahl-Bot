@@ -53,7 +53,7 @@ class Purge(commands.Cog):
 
     # Member purgen
     @commands.command()
-    @commands.check(bp.botowner)
+    @commands.has_permissions(administrator=True)
     async def purge(self, ctx, amount=90):
         await bp.delete_cmd(ctx)
         if amount >= 90:

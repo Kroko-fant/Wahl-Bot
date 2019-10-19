@@ -14,6 +14,7 @@ class Autosetup(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def fixserver(self, ctx):
         await bp.delete_cmd(ctx)
         try:

@@ -26,7 +26,7 @@ def apiversion():
 
 
 def version():
-    versionstr = "Pre Version 1.2.0"
+    versionstr = "Pre Version 1.2.1b"
     return versionstr
 
 
