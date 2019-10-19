@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.2.1">
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Pre-Version 1.2.1b">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/autosetup.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/autosetup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/botdata/blacklist.py" beforeDir="false" afterPath="$PROJECT_DIR$/botdata/blacklist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/botdata/botparameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/botdata/botparameters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/fun.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/fun.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/moderation.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/moderation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/money.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/money.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/prefixes.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/prefixes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/purge.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/purge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/test-dawum.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/test-dawum.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/testlogging.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testlogging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/testreact.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testreact.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/testsonntagsfrage.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testsonntagsfrage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/themen.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/themen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/verify.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/verify.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/newtopicchannel.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/newtopicchannel.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/prefixes.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/prefixes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/reactionmsg.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/reactionchannel.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/servers/401704542174969867/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/401704542174969867/lastdata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/612711527258259456/lastdata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/reactionmsg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/reactions.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/612711527258259456/reactions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/topiccategorys.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/topiccategorys.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +189,9 @@
       <workItem from="1571435912198" duration="601000" />
       <workItem from="1571438224056" duration="31000" />
       <workItem from="1571478525937" duration="10077000" />
-      <workItem from="1571490164285" duration="2511000" />
+      <workItem from="1571490164285" duration="5908000" />
+      <workItem from="1571511303074" duration="465000" />
+      <workItem from="1571512299979" duration="14382000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -322,7 +340,21 @@
       <option name="project" value="LOCAL" />
       <updated>1571487492001</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Pre-Version 1.2.1b">
+      <created>1571493376373</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1571493376373</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Pre-Version 1.2.1b">
+      <created>1571493384001</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1571493384001</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,11 +397,12 @@
     <MESSAGE value="Pre-Version 1.1.8" />
     <MESSAGE value="Pre-Version 1.2.0" />
     <MESSAGE value="Pre-Version 1.2.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.2.1" />
+    <MESSAGE value="Pre-Version 1.2.1b" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pre-Version 1.2.1b" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1571493338194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1571527004580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

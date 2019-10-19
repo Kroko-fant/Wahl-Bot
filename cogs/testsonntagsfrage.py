@@ -6,7 +6,7 @@ votes = 0
 
 
 class Sontagsumfrage(commands.cog):
-    def _init_(self, client):
+    def __init__(self, client):
         self.client = client
 
     @commands.check(bp.verifiziert)

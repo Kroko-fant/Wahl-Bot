@@ -3,7 +3,7 @@ from discord.ext import commands
 
 class Logging(commands.cog):
 
-    def _init_(self, client):
+    def __init__(self, client):
         self.client = client
 
 

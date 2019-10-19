@@ -15,7 +15,7 @@ class Basic(commands.Cog):
     @commands.command()
     async def version(self, ctx):
         await bp.delete_cmd(ctx)
-        versiontext = "Der Bot läuft auf" + bp.version() + ". Die API läuft auf Version " + bp.apiversion()
+        versiontext = "Der Bot läuft auf " + bp.version() + ". Die API läuft auf Version " + bp.apiversion()
         await ctx.send(versiontext)
 
     @commands.command()

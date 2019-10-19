@@ -1,1 +1,1 @@
-blacklist = ["discord.gg/", "discordapp.com/"]
+blacklist = []

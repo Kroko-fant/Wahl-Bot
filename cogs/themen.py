@@ -8,7 +8,7 @@ from botdata import botparameters as bp
 
 class Themen(commands.Cog):
 
-    def _init_(self, client):
+    def __init__(self, client):
         self.client = client
 
     # kategorie setzen
@@ -23,6 +23,8 @@ class Themen(commands.Cog):
 
         with open('./data/topiccategorys.json', 'w') as f:
             json.dump(categorys, f, indent=4)
+        await bp.delete_cmd(ctx)
+        await ctx.send("Kategorie " + category + " ist jetzt die Kategorie für neue Themen.")
 
     # thema erstellen channel setzen
     @commands.command()
@@ -36,6 +38,8 @@ class Themen(commands.Cog):
 
         with open('./data/newtopicchannel.json', 'w') as f:
             json.dump(topiccreate, f, indent=4)
+        await bp.delete_cmd(ctx)
+        await ctx.send("Channel <#" + newtopicchannel + "> ist jetzt der Channel für die Themenerstellung.")
 
     # wenn message im Topic Channel
     @commands.Cog.listener()
