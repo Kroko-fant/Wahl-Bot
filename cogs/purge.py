@@ -1,4 +1,3 @@
-import json
 from _ast import Pass
 
 from discord.ext import commands
@@ -37,19 +36,19 @@ class Purge(commands.Cog):
             Pass
 
     # Member verlässt Server
-    @commands.Cog.listener()
-    async def on_member_remove(self, member):
-        if bp.user(member):
-            lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
-            with open(lastmember, 'r') as f:
-                members = json.load(f)
+    # @commands.Cog.listener()
+    # async def on_member_remove(self, member):
+    #    if bp.user(member):
+    #        lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
+    #        with open(lastmember, 'r') as f:
+    #            members = json.load(f)
 
-            await members.pop[str(member.id)]
+    #        members.pop[str(member.id)]
 
-            with open(lastmember, 'w') as f:
-                json.dump(members, f, indent=4)
-        else:
-            Pass
+    #        with open(lastmember, 'w') as f:
+    #            json.dump(members, f, indent=4)
+    #    else:
+    #        Pass
 
     # Member purgen
     @commands.command()

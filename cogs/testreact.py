@@ -5,7 +5,7 @@ from discord.ext import commands
 from botdata import botparameters as bp
 
 
-class Reactions(commands.Cog):
+# class Reactions(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -57,7 +57,6 @@ class Reactions(commands.Cog):
             json.dump(reacts, f, indent=4)
         await bp.delete_cmd(ctx)
         await ctx.send("Channel <#" + rchannelid + "> ist jetzt der Channel für Reaction-Roles.")
-
 
 def setup(client):
     client.add_cog(Reactions(client))
