@@ -8,7 +8,7 @@ from botdata import botparameters as bp
 
 class Basic(commands.Cog):
 
-    def _init_(self, client):
+    def __init__(self, client):
         self.client = client
 
     # Commands
@@ -54,6 +54,13 @@ class Basic(commands.Cog):
         )
         embed.set_footer(text='2019')
         await ctx.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.guild is None:
+            channel = self.client.get_channel(int(635544300834258995))
+            content = "**" + str(message.author) + '** sagt: "' + str(message.content) + '"'
+            await channel.send(content)
 
 
 def setup(client):

@@ -21,9 +21,9 @@ class Purge(commands.Cog):
 
     # Member schreibt nachricht
     @commands.Cog.listener()
-    async def on_message(self, ctx):
-        if bp.user(ctx.author):
-            bp.update_member(ctx.author)
+    async def on_message(self, message):
+        if bp.user(message.author) and message.guild is not None:
+            bp.update_member(message.author)
         else:
             Pass
 

@@ -10,11 +10,14 @@ from botdata import botparameters as bp
 
 
 def get_prefix(client, message):
-    try:
-        with open('./data/prefixes.json', 'r') as f:
-            prefixes = json.load(f)
-        return prefixes[str(message.guild.id)]
-    except KeyError:
+    if message.guild is not None:
+        try:
+            with open('./data/prefixes.json', 'r') as f:
+                prefixes = json.load(f)
+            return prefixes[str(message.guild.id)]
+        except KeyError:
+            return '!'
+    else:
         return '!'
 
 

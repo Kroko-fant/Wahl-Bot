@@ -14,7 +14,7 @@ from botdata import botparameters as bp
     async def on_raw_reaction_add(self, payload):
         guild_id = int(payload.guild_id)
         guild = self.client.get_guild(guild_id)
-        user_id = payload.user_id
+
         channel_id = payload.channel_id
         emoji = payload.emoji
         with open('./data/reactionchannel.json', 'r') as f:
@@ -25,10 +25,10 @@ from botdata import botparameters as bp
             addreactdir = './data/servers/' + str(guild_id) + '/reactions.json'
             with open(addreactdir, 'r') as f:
                 reactions = json.load(f)
-            member = guild.get_member(user_id)
+            user = guild.get_member(payload.user_id)
             rawroleid = (str(reactions[str(emoji)]))
             role = guild.get_role(int(rawroleid))
-            await member.add_roles(role, atomic=True)
+            await user.add_roles(role)
 
     @commands.command()
     @commands.has_permissions(administrator=True)

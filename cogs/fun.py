@@ -8,7 +8,7 @@ from botdata import botparameters as bp
 
 class Fun(commands.Cog):
 
-    def _init_(self, client):
+    def __init__(self, client):
         self.client = client
 
     @commands.command()
