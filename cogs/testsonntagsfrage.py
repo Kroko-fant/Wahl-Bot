@@ -5,7 +5,7 @@ from botdata import botparameters as bp
 votes = 0
 
 
-class Sontagsumfrage(commands.cog):
+# class Sontagsumfrage(commands.cog):
     def __init__(self, client):
         self.client = client
 

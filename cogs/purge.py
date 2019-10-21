@@ -1,4 +1,4 @@
-from _ast import Pass
+from ast import Pass
 
 from discord.ext import commands
 
