@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.0.1a">
-      <change beforePath="$PROJECT_DIR$/.idea/Wahl-Bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Wahl-Bot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/logging.py" afterDir="false" />
-    </list>
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.0.1b" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +182,7 @@
       <workItem from="1571778379920" duration="762000" />
       <workItem from="1571779207084" duration="62000" />
       <workItem from="1571779412295" duration="14000" />
-      <workItem from="1571779446806" duration="2766000" />
+      <workItem from="1571779446806" duration="3156000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -377,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571783920270</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Version Beta 1.0.1b">
+      <created>1571784154262</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1571784154262</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +427,8 @@
     <MESSAGE value="Pre-Version 1.2.2" />
     <MESSAGE value="Pre-Version 1.2.3" />
     <MESSAGE value="Version Beta 1.0.1a" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.0.1a" />
+    <MESSAGE value="Version Beta 1.0.1b" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.0.1b" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
