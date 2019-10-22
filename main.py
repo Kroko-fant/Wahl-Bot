@@ -58,6 +58,7 @@ async def load(ctx, extension):
     await bp.delete_cmd(ctx)
     e = extension.lower()
     client.load_extension(f'cogs.{e}')
+    await ctx.send(e + "aktiviert")
     print(e + ' aktiviert')
     await ctx.send(e + ' aktiviert')
 
@@ -68,6 +69,7 @@ async def unload(ctx, extension):
     await bp.delete_cmd(ctx)
     e = extension.lower()
     client.unload_extension(f'cogs.{e}')
+    await ctx.send(e + "deaktiviert")
     print(e + ' deaktiviert')
     await ctx.send(e + ' deaktiviert')
 

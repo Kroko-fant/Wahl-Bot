@@ -1,7 +1,4 @@
-from discord.ext import commands
-
-
-class Money(commands.Cog):
+# class Money(commands.Cog):
 
     def __init__(self, client):
         self.client = client

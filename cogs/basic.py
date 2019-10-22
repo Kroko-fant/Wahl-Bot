@@ -40,8 +40,8 @@ class Basic(commands.Cog):
         with open('./botdata/feedback.json', 'w') as f:
             json.dump(feedbacks, f, indent=4)
 
-        await ctx.send(
-            'Danke <@' + str(ctx.author.id) + '> für das einreichen deines Feedbacks, wir melden uns zurück.')
+        await ctx.send('Danke <@' + str(ctx.author.id) +
+                       '> für das einreichen deines Feedbacks, wir melden uns zurück.')
 
     @commands.command()
     async def about(self, ctx):
