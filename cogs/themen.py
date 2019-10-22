@@ -68,6 +68,5 @@ class Themen(commands.Cog):
             Pass
 
 
-
 def setup(client):
     client.add_cog(Themen(client))

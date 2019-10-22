@@ -24,6 +24,7 @@ class Prefixes(commands.Cog):
 
         await ctx.send(f'Prefix zu:** {prefix} **geändert')
 
+    # unnötig
     @commands.command()
     async def prefix(self, ctx):
         await bp.delete_cmd(ctx)

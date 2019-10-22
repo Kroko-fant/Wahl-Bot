@@ -1,6 +1,7 @@
 import json
+import logging
 import os
-from _ast import Pass
+from ast import Pass
 
 import discord
 from discord.ext import commands
@@ -21,8 +22,14 @@ def get_prefix(client, message):
         return '!'
 
 
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
 client = commands.Bot(command_prefix=get_prefix)
 modulliste = []
+testmodulliste = []
 server = client.guilds
 print('Module werden geladen')
 
@@ -38,10 +45,12 @@ async def on_ready():
         number += 1
     print('Bot läuft auf', number, 'Servern')
 
+
 @client.command()
 async def ping(ctx):
     await bp.delete_cmd(ctx)
     await ctx.send(f'Pong! Meine Latenz sind aktuell {round(client.latency * 1000)} ms.')
+
 
 @client.command()
 @commands.check(bp.botowner)
@@ -50,6 +59,7 @@ async def load(ctx, extension):
     e = extension.lower()
     client.load_extension(f'cogs.{e}')
     print(e + ' aktiviert')
+    await ctx.send(e + ' aktiviert')
 
 
 @client.command()
@@ -59,6 +69,7 @@ async def unload(ctx, extension):
     e = extension.lower()
     client.unload_extension(f'cogs.{e}')
     print(e + ' deaktiviert')
+    await ctx.send(e + ' deaktiviert')
 
 
 @client.command()
@@ -79,6 +90,13 @@ async def module(ctx):
 
 @client.command()
 @commands.check(bp.botowner)
+async def testmodule(ctx):
+    await bp.delete_cmd(ctx)
+    await ctx.send(modulliste)
+
+
+@client.command()
+@commands.check(bp.botowner)
 async def shutdown(ctx):
     await bp.delete_cmd(ctx)
     await ctx.send("Bot wird heruntergefahren...")
@@ -88,10 +106,7 @@ async def shutdown(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith(".py"):
         if filename.startswith('test'):
-            try:
-                client.load_extension(f'cogs.{filename[:-3]}')
-            except Exception as e:
-                print("TestModul " + f'{filename}' + " ist fehlerhaft")
+            testmodulliste.append({filename[:-3]})
         else:
             if filename.endswith('.py'):
                 client.load_extension(f'cogs.{filename[:-3]}')
