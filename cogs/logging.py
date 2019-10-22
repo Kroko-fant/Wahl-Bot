@@ -100,12 +100,13 @@ class Logging(commands.Cog):
                 msg = payload.message_id
                 content = payload.cached_message.content
                 user = payload.cached_message.author
+                channel = payload.channel_id
                 with open('./data/logchannel.json', 'r') as f:
                     logs = json.load(f)
                 logchannelid = logs[str(guild)]
                 logch = self.client.get_channel(int(logchannelid))
                 await logch.send(':recycle: **Nachricht:** "' + str(content) + '" von User: ' + str(user) + ' (' +
-                                 str(user.id) + ") gelöscht.")
+                                 str(user.id) + ") in Channel " + str(channel) + " gelöscht.")
         except Exception:
             Pass
 
