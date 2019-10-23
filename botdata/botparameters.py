@@ -26,7 +26,7 @@ def apiversion():
 
 
 def version():
-    versionstr = "Version Beta 1.0.1c"
+    versionstr = "Version Beta 1.0.2"
     return versionstr
 
 
