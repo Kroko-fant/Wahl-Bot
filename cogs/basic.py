@@ -48,11 +48,11 @@ class Basic(commands.Cog):
         await bp.delete_cmd(ctx)
         embed = discord.Embed(
             title='Über den Bot!',
-            description='Bot programmiert von Krokofant#0909.'
-                        'Bei Bugs bitte Bug mit !bug <bug> einreichen.'
-                        'Feedback mit !feedback <feedback> einreichen.'
+            description='Bot programmiert von Krokofant#0909. '
+                        'Bei Bugs bitte Bug mit !bug <bug> einreichen. '
+                        'Feedback mit !feedback <feedback> einreichen. '
         )
-        embed.set_footer(text='2019')
+        embed.set_footer(text='UltimateBot 2019')
         await ctx.send(embed=embed)
 
     @commands.Cog.listener()
