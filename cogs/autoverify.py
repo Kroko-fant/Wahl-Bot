@@ -1,5 +1,4 @@
 import json
-from ast import Pass
 
 from discord.ext import commands
 
@@ -21,20 +20,18 @@ class Autoverify(commands.Cog):
 
         with open('./data/mainrole.json', 'w') as f:
             json.dump(roles, f, indent=4)
+        await ctx.send("Main-Rolle gesetzt.")
         await bp.delete_cmd(ctx)
 
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.guild is not None:
-
-            member = message.author
+            guild = message.guild
+            member = message.guild.get_member(int(message.author.id))
             with open('./data/mainrole.json', 'r') as f:
                 roles = json.load(f)
-            role = message.guild.get_role(roles[str(message.guild.id)])
-            try:
-                await member.addroles(role, reason="verify")
-            except Exception:
-                Pass
+            role = guild.get_role(roles[str(guild.id)])
+            await member.add_roles(role, reason="verify")
 
 
 def setup(client):
