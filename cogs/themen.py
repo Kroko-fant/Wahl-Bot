@@ -59,6 +59,7 @@ class Themen(commands.Cog):
                             titel = message.content
                             reasonfc = "Neuer Channel von User " + str(message.author)
                             if str(message.channel.category.id) == str(categoryy):
+                                await bp.delete_cmd(message)
                                 await guild.create_text_channel(titel, category=message.channel.category, position=0,
                                                                 topic=titel,
                                                                 reason=reasonfc)
@@ -66,7 +67,8 @@ class Themen(commands.Cog):
                             Pass
                 except Exception:
                     Pass
-                await bp.delete_cmd(message)
+
+                print("1")
             else:
                 await bp.delete_cmd(message)
                 errorct01embed = discord.Embed(title="Error #CT01",
