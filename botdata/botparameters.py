@@ -5,11 +5,16 @@ import discord
 
 today = datetime.datetime.today()
 datum = today.strftime("%d/%m/%Y")
+deltime = 30
 
 
 # Personen
 def botowner(ctx):
     return ctx.author.id == 137291894953607168
+
+
+def ultimatebotid():
+    return 612702321985585172
 
 
 def user(member):
@@ -23,11 +28,6 @@ def user(member):
 def apiversion():
     apiversionstr = discord.__version__
     return apiversionstr
-
-
-def version():
-    versionstr = "Version Beta 1.0.2b"
-    return versionstr
 
 
 # Userstatus

@@ -1,6 +1,7 @@
 import json
 from ast import Pass
 
+import discord
 from discord.ext import commands
 
 from botdata import botparameters as bp
@@ -14,7 +15,7 @@ class Themen(commands.Cog):
     # kategorie setzen
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def category(self, ctx, category):
+    async def setcategory(self, ctx, category):
         guild = ctx.guild
         with open('./data/topiccategorys.json', 'r') as f:
             categorys = json.load(f)
@@ -44,27 +45,41 @@ class Themen(commands.Cog):
     # wenn message im Topic Channel
     @commands.Cog.listener()
     async def on_message(self, message):
-        try:
-            guild = message.guild
-            with open('./data/newtopicchannel.json', 'r') as f:
-                topiccreate = json.load(f)
-                if topiccreate[str(guild.id)] == str(message.channel.id):
-                    # neuer channel erstellen
-                    with open('./data/topiccategorys.json', 'r') as f:
-                        categorys = json.load(f)
-                    categoryy = message.channel.category.id
-                    titel = message.content
-                    print(categoryy)
-                    print(message.channel.category)
-                    reasonfc = "Neuer Channel von User " + str(message.author)
-                    if str(message.channel.category.id) == str(categoryy):
-                        await guild.create_text_channel(titel, category=message.channel.category, position=0,
-                                                        topic=titel,
-                                                        reason=reasonfc)
-                        await bp.delete_cmd(message)
-                else:
+        if bp.user(message.author):
+            if len(str(message.content)) <= 100:
+                try:
+                    guild = message.guild
+                    with open('./data/newtopicchannel.json', 'r') as f:
+                        topiccreate = json.load(f)
+                        if topiccreate[str(guild.id)] == str(message.channel.id):
+                            # neuer channel erstellen
+                            with open('./data/topiccategorys.json', 'r') as f:
+                                categorys = json.load(f)
+                            categoryy = message.channel.category.id
+                            titel = message.content
+                            reasonfc = "Neuer Channel von User " + str(message.author)
+                            if str(message.channel.category.id) == str(categoryy):
+                                await guild.create_text_channel(titel, category=message.channel.category, position=0,
+                                                                topic=titel,
+                                                                reason=reasonfc)
+                        else:
+                            Pass
+                except Exception:
                     Pass
-        except Exception:
+                await bp.delete_cmd(message)
+            else:
+                await bp.delete_cmd(message)
+                errorct01embed = discord.Embed(title="Error #CT01",
+                                               description="Zu Langer Titel! Dein Titel beim Thema erstellen "
+                                                           "ist zu lang! (>100 Zeichen)",
+                                               color=0xff0000)
+                await message.channel.send(embed=errorct01embed, delete_after=bp.deltime)
+        elif not bp.user(message.author):
+            if bp.ultimatebotid():
+                Pass
+            else:
+                await bp.delete_cmd(message)
+        else:
             Pass
 
 
