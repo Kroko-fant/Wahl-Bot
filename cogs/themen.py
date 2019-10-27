@@ -66,9 +66,10 @@ class Themen(commands.Cog):
                                     await message.guild.create_text_channel(titel, category=message.channel.category,
                                                                             position=0, topic=titel, reason=reasonfc)
                                     createdchannel01embed = discord.Embed(title="Erfolgreich erstellt",
-                                                                          description="Channel erfolgreich erstellt. Bitte "
-                                                                                      "füge eine Themenbeschreibung in "
-                                                                                      "deinen Kanal ein",
+                                                                          description="Channel erfolgreich erstellt. "
+                                                                                      "Bitte füge eine "
+                                                                                      "Themenbeschreibung in deinen "
+                                                                                      "Kanal ein",
                                                                           color=0xff0000)
                                     await message.channel.send(embed=createdchannel01embed, delete_after=bp.deltime)
                             except KeyError:  # Konnte Kategorie nicht finden
@@ -76,7 +77,7 @@ class Themen(commands.Cog):
                                 errorct03embed = discord.Embed(title="Error #CT03",
                                                                description="Konnte keine Kategorie für ein neues Thema "
                                                                            "finden. Bitte kontaktiere einen Admin und "
-                                                                           "bitte ihn eine Kategorie mit !setcategory "
+                                                                           "bitte ihn eine Kategorie mit setcategory "
                                                                            "zu setzen.", color=0xff0000)
                                 await message.channel.send(embed=errorct03embed, delete_after=bp.deltime)
 

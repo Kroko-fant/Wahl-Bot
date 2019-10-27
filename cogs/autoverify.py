@@ -1,4 +1,5 @@
 import json
+from ast import Pass
 
 from discord.ext import commands
 
@@ -26,16 +27,16 @@ class Autoverify(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.guild is not None:
-            # try:
-            guild = message.guild
-            member = message.guild.get_member(int(message.author.id))
-            with open('./data/mainrole.json', 'r') as f:
-                roles = json.load(f)
-            roleid = (roles[str(guild.id)])
-            role = guild.get_role(roleid)
-            await member.add_roles(role, reason="verify")
-        # except KeyError:
-        #  Pass
+            try:
+                guild = message.guild
+                member = message.guild.get_member(int(message.author.id))
+                with open('./data/mainrole.json', 'r') as f:
+                    roles = json.load(f)
+                roleid = (roles[str(guild.id)])
+                role = guild.get_role(roleid)
+                await member.add_roles(role, reason="verify")
+            except KeyError:
+                Pass
 
 
 def setup(client):

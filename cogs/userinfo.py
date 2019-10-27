@@ -38,7 +38,7 @@ class Userinfo(commands.Cog):
     async def userinfo_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             errorcu01embed = discord.Embed(title="Error #CU01",
-                                           description="Fehlende NutzerID! Syntax: !userinfo <userid>", color=0xff0000)
+                                           description="Fehlende NutzerID! Syntax: userinfo <userid>", color=0xff0000)
             await ctx.send(embed=errorcu01embed)
 
 
