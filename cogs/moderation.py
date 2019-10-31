@@ -60,7 +60,8 @@ class Moderation(commands.Cog):
         if bp.user(member):
             if any([curse in message.content.lower() for curse in bl.blacklist]):
                 await message.delete()
-                await message.channel.send(f"{message.author.mention}, du meintest wohl https://discord.gg/HFQX3Gz")
+                await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von "
+                                           f"Discord-Links")
                 return True
             else:
                 Pass
