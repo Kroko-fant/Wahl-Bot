@@ -16,7 +16,7 @@ class Basic(commands.Cog):
     async def version(self, ctx):
         await bp.delete_cmd(ctx)
         versiontext = "Der Bot läuft auf " + "Version Beta 1.0.4" + ". Die API läuft auf Version " + bp.apiversion()
-        await ctx.send(versiontext)
+        await ctx.send(versiontext, delete_after=bp.deltime)
 
     @commands.command()
     async def bug(self, ctx, *, bugt):
@@ -28,7 +28,8 @@ class Basic(commands.Cog):
         with open('./botdata/bugs.json', 'w') as f:
             json.dump(bugs, f, indent=4)
 
-        await ctx.send('Danke <@' + str(ctx.author.id) + '> für das einreichen deines Bugs, wir melden uns zurück.')
+        await ctx.send('Danke <@' + str(ctx.author.id) + '> für das einreichen deines Bugs, wir melden uns zurück.',
+                       delete_after=bp.deltime)
 
     @commands.command()
     async def feedback(self, ctx, *, feedbackt):
@@ -41,7 +42,7 @@ class Basic(commands.Cog):
             json.dump(feedbacks, f, indent=4)
 
         await ctx.send('Danke <@' + str(ctx.author.id) +
-                       '> für das einreichen deines Feedbacks, wir melden uns zurück.')
+                       '> für das einreichen deines Feedbacks, wir melden uns zurück.', delete_after=bp.deltime)
 
     @commands.command()
     async def about(self, ctx):
@@ -53,7 +54,7 @@ class Basic(commands.Cog):
                         'Feedback mit !feedback <feedback> einreichen. '
         )
         embed.set_footer(text='UltimateBot 2019')
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, delete_after=bp.deltime)
 
     @commands.Cog.listener()
     async def on_message(self, message):

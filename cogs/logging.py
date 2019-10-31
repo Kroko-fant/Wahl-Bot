@@ -24,7 +24,7 @@ class Logging(commands.Cog):
         with open('./data/logchannel.json', 'w') as f:
             json.dump(logs, f, indent=4)
         await bp.delete_cmd(ctx)
-        await ctx.send("Channel <#" + lchannelid + "> ist jetzt der Channel für den Log.")
+        await ctx.send("Channel <#" + lchannelid + "> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
 
     # Memberjoin
     @commands.Cog.listener()

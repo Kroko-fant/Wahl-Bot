@@ -21,7 +21,7 @@ class Autoverify(commands.Cog):
 
         with open('./data/mainrole.json', 'w') as f:
             json.dump(roles, f, indent=4)
-        await ctx.send("Main-Rolle gesetzt.")
+        await ctx.send("Main-Rolle gesetzt.", delete_after=bp.deltime)
         await bp.delete_cmd(ctx)
 
     @commands.Cog.listener()

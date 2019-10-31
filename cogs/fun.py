@@ -1,5 +1,4 @@
 import random
-from ast import Pass
 
 from discord.ext import commands
 
@@ -20,7 +19,7 @@ class Fun(commands.Cog):
         elif flip == 0:
             await ctx.send("Du hast **Zahl** geworfen!")
         else:
-            await ctx.send("Irgendwie hat das nicht ganz geklappt...")
+            await ctx.send("Irgendwie hat das nicht ganz geklappt...", delete_after=bp.deltime)
 
     @commands.command()
     async def randomnumber(self, ctx, int2=100):
@@ -40,17 +39,6 @@ class Fun(commands.Cog):
                   ":clubs: Bube", ":clubs: Dame", ":clubs: Koenig", ":clubs: Ass", ]
         gezogene_karte = "Du hast folgende Karte gezogen: **" + karten[random.randint(0, 31)] + "**"
         await ctx.send(gezogene_karte)
-
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        member = message.author
-        if bp.user(member):
-            if message.content.lower() == "gott":
-                await message.channel.send("Nein Multi du bist nicht gemeint ;)")
-            else:
-                Pass
-        else:
-            Pass
 
 
 def setup(client):

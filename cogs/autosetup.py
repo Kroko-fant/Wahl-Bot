@@ -37,7 +37,7 @@ class Autosetup(commands.Cog):
             asr.prefixzuweisen(ctx.guild)
         except FileExistsError:
             Pass
-        await ctx.send("Alle Probleme behoben.")
+        await ctx.send("Alle Probleme behoben.", delete_after=bp.deltime)
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):

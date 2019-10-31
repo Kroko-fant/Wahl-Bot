@@ -56,12 +56,12 @@ class Purge(commands.Cog):
     async def purge(self, ctx, amount=90):
         await bp.delete_cmd(ctx)
         if amount >= 90:
-            ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!")
+            ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!", delete_after=bp.deltime)
 
         elif 90 > amount > 0:
-            ctx.send("Die eingegebene Tageszahl ist zu klein!")
+            ctx.send("Die eingegebene Tageszahl ist zu klein!", delete_after=bp.deltime)
         else:
-            ctx.send("Bitte gebe eine natürliche Zahl größer als 90 ein")
+            ctx.send("Bitte gebe eine natürliche Zahl größer als 90 ein", delete_after=bp.deltime)
 
 
 def setup(client):

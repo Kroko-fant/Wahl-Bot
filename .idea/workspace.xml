@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.0.4">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.0.4b">
+      <change beforePath="$PROJECT_DIR$/cogs/autosetup.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/autosetup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/autoverify.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/autoverify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/fun.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/fun.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/prefixes.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/prefixes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/purge.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/purge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/themen.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/themen.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -198,7 +203,7 @@
       <workItem from="1572209995421" duration="1278000" />
       <workItem from="1572212037582" duration="2534000" />
       <workItem from="1572296376892" duration="1431000" />
-      <workItem from="1572541863452" duration="9073000" />
+      <workItem from="1572541863452" duration="9836000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -452,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572138186571</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Version Beta 1.0.4b">
+      <created>1572562462632</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1572562462632</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +515,8 @@
     <MESSAGE value="Version Beta 1.0.2" />
     <MESSAGE value="Version Beta 1.0.3" />
     <MESSAGE value="Version Beta 1.0.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.0.4" />
+    <MESSAGE value="Version Beta 1.0.4b" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.0.4b" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

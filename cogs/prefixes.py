@@ -22,7 +22,7 @@ class Prefixes(commands.Cog):
         with open('./data/prefixes.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
-        await ctx.send(f'Prefix zu:** {prefix} **geändert')
+        await ctx.send(f'Prefix zu:** {prefix} **geändert', delete_after=bp.deltime)
 
     # unnötig
     @commands.command()
@@ -33,7 +33,7 @@ class Prefixes(commands.Cog):
                 prefixes = json.load(f)
             await ctx.send("Dieser Server hat den Prefix: **" + prefixes[str(ctx.guild.id)] + "**")
         except KeyError:
-            await ctx.send("Dieser Server hat den Prefix: **!**")
+            await ctx.send("Dieser Server hat den Prefix: **!**", delete_after=bp.deltime)
 
 
 def setup(client):
