@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.0.5">
+    <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.0.6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/autoverify.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/autoverify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/servers/275305547916378113/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/275305547916378113/lastdata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/mainrole.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/roles/mainrole.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/prefixes.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/prefixes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/spacerone.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/roles/spacerone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/spacertwo.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/roles/spacertwo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/verify-role.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/roles/verify-role.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,15 +71,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data\roles" />
       <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
       <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\botdata" />
       <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot" />
       <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\cogs" />
-      <recent name="X:\dokumente\JL\Discord\Prog\Wahl-Bot\ablage" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="X:\dokumente\JL\Prog\Privat\DiscordPY\Wahl-Bot\data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -198,7 +216,8 @@
       <workItem from="1572209995421" duration="1278000" />
       <workItem from="1572212037582" duration="2534000" />
       <workItem from="1572296376892" duration="1431000" />
-      <workItem from="1572541863452" duration="12766000" />
+      <workItem from="1572541863452" duration="13385000" />
+      <workItem from="1572608116984" duration="6968000" />
     </task>
     <task id="LOCAL-00001" summary="Pre-Version 1.0">
       <created>1567689328964</created>
@@ -473,7 +492,21 @@
       <option name="project" value="LOCAL" />
       <updated>1572564734592</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Version Beta 1.0.6">
+      <created>1572566456726</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1572566456726</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Version Beta 1.0.6">
+      <created>1572566518240</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1572566518240</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -526,11 +559,12 @@
     <MESSAGE value="Version Beta 1.0.4" />
     <MESSAGE value="Version Beta 1.0.4b" />
     <MESSAGE value="Version Beta 1.0.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.0.5" />
+    <MESSAGE value="Version Beta 1.0.6" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.0.6" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1572566345787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="Main Coverage Results" MODIFIED="1572615653515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
