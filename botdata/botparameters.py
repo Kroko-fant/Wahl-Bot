@@ -58,7 +58,7 @@ async def delete_cmd(ctx):
     await ctx.channel.purge(limit=1)
 
 
-def update_member(member):
+async def update_member(member):
     lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
     with open(lastmember, 'r') as f:
         members = json.load(f)

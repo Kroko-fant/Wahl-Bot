@@ -15,7 +15,7 @@ class Purge(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         if bp.user(member):
-            bp.update_member(member)
+            await bp.update_member(member)
         else:
             Pass
 
@@ -23,7 +23,7 @@ class Purge(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if bp.user(message.author) and message.guild is not None:
-            bp.update_member(message.author)
+            await bp.update_member(message.author)
         else:
             Pass
 
@@ -31,7 +31,7 @@ class Purge(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if bp.user(member):
-            bp.update_member(member)
+            await bp.update_member(member)
         else:
             Pass
 

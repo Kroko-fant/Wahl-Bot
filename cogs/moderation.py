@@ -75,7 +75,6 @@ class Moderation(commands.Cog):
         bans = await guild.bans()
         counter = len(bans)
         x = 0
-
         while x < counter:
             await guild.unban(bans[x][1], reason="Unbanall")
             x = x + 1

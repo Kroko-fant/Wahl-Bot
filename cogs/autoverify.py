@@ -61,7 +61,7 @@ class Autoverify(commands.Cog):
         with open('./data/roles/spacerthree.json', 'w') as f:
             json.dump(roles, f, indent=4)
         await bp.delete_cmd(ctx)
-        await ctx.send("Spacer 2 Rolle gesetzt.", delete_after=bp.deltime)
+        await ctx.send("Spacer 3 Rolle gesetzt.", delete_after=bp.deltime)
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -87,6 +87,7 @@ class Autoverify(commands.Cog):
                 roleid = (roles[str(guild.id)])
                 role = guild.get_role(roleid)
                 await member.add_roles(role, reason="verify")
+                # Spacer 3 setzen
                 with open('./data/roles/spacerthree.json', 'r') as f:
                     roles = json.load(f)
                 roleid = (roles[str(guild.id)])
