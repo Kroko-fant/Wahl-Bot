@@ -35,6 +35,23 @@ class Prefixes(commands.Cog):
         except KeyError:
             await ctx.send("Dieser Server hat den Prefix: **!**", delete_after=bp.deltime)
 
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.guild is None:
+            channel = self.client.get_channel(int(635544300834258995))
+            content = "**" + str(message.author) + '** sagt: "' + str(message.content) + '"'
+            await channel.send(content)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        print(message.content)
+        if "prefix" in str(message.content):
+            print(True)
+            channel = message.channel
+            with open('./data/prefixes.json', 'r') as f:
+                prefixes = json.load(f)
+            await channel.send("Dieser Server hat den Prefix: **" + prefixes[str(message.guild.id)] + "**")
+
 
 def setup(client):
     client.add_cog(Prefixes(client))
