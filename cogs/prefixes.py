@@ -45,7 +45,7 @@ class Prefixes(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         print(message.content)
-        if "prefix" in str(message.content):
+        if "prefix" in str(message.content) and bp.user(message.author):
             print(True)
             channel = message.channel
             with open('./data/prefixes.json', 'r') as f:
