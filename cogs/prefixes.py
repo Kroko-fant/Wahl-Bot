@@ -24,29 +24,9 @@ class Prefixes(commands.Cog):
 
         await ctx.send(f'Prefix zu:** {prefix} **geändert', delete_after=bp.deltime)
 
-    # unnötig
-    @commands.command()
-    async def prefix(self, ctx):
-        await bp.delete_cmd(ctx)
-        try:
-            with open('./data/prefixes.json', 'r') as f:
-                prefixes = json.load(f)
-            await ctx.send("Dieser Server hat den Prefix: **" + prefixes[str(ctx.guild.id)] + "**")
-        except KeyError:
-            await ctx.send("Dieser Server hat den Prefix: **!**", delete_after=bp.deltime)
-
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.guild is None:
-            channel = self.client.get_channel(int(635544300834258995))
-            content = "**" + str(message.author) + '** sagt: "' + str(message.content) + '"'
-            await channel.send(content)
-
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        print(message.content)
         if "prefix" in str(message.content).lower() and bp.user(message.author):
-            print(True)
             channel = message.channel
             with open('./data/prefixes.json', 'r') as f:
                 prefixes = json.load(f)

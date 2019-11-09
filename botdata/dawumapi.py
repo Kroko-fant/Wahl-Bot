@@ -4,11 +4,15 @@ from urllib import request
 
 import discord
 
-url = "https://api.dawum.de/"
-response = urllib.request.urlopen(url)
-data = json.loads(response.read())
+with urllib.request.urlopen("https://api.dawum.de/") as response:
+    data = json.loads(response.read())
 lastupdate = data['Database']['Last_Update']
-print(lastupdate)
+
+
+async def update_data():
+    with urllib.request.urlopen("https://api.dawum.de/") as response:
+        global data
+        data = json.loads(response.read())
 
 
 # Bundesländer
@@ -113,7 +117,7 @@ def umfrage_ausgeben(userinput):
     institut = data['Institutes'][data['Surveys'][umfragenid]['Institute_ID']]['Name']
     time = data['Surveys'][umfragenid]['Date']
 
-    output = 'von **' + str(institut) + '** am ' + str(time) + "*\n"
+    output = 'von **' + str(institut) + '** am ' + str(time) + "\n"
 
     for elements in data['Surveys'][umfragenid]['Results']:
         element = data['Parties'][elements]['Shortcut']
@@ -123,7 +127,6 @@ def umfrage_ausgeben(userinput):
 
     wahlembed = discord.Embed(title=str(parlament), description=output,
                               color=12370112)
-    wahlembed.set_footer(text="UmfragenId: " + str(umfragenid) + "\n Daten aus der Dawum APi: ",
-                         url="https://api.dawum.de/")
+    wahlembed.set_footer(text="UmfragenId: " + str(umfragenid) + "\n Daten aus der Dawum APi: " + "https://dawum.de/")
 
     return wahlembed

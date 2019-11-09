@@ -29,14 +29,36 @@ def verifyerstellen(guild):
     data = {
     }
     newdir = './data/servers/' + str(guild.id) + '/verified.json'
-    jsonerstellen(data, newdir)
+    try:
+        with open(newdir) as f:
+            return False
+    except FileNotFoundError:
+        jsonerstellen(data, newdir)
+        return True
 
 
 def reactionserstellen(guild):
     data = {
     }
     newdir = './data/servers/' + str(guild.id) + '/reactions.json'
-    jsonerstellen(data, newdir)
+    try:
+        with open(newdir) as f:
+            return False
+    except FileNotFoundError:
+        jsonerstellen(data, newdir)
+        return True
+
+
+def sperrenerstellen(guild):
+    data = {
+    }
+    newdir = './data/servers/' + str(guild.id) + '/sperren.json'
+    try:
+        with open(newdir) as f:
+            return False
+    except FileNotFoundError:
+        jsonerstellen(data, newdir)
+        return True
 
 
 def prefixzuweisen(guild):

@@ -80,6 +80,11 @@ class Moderation(commands.Cog):
             x = x + 1
         await bp.delete_cmd(message)
 
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
+    async def block(self, message):
+        await bp.delete_cmd(message)
+
 
 def setup(client):
     client.add_cog(Moderation(client))

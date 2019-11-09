@@ -6,6 +6,7 @@ import discord
 today = datetime.datetime.today()
 datum = today.strftime("%d/%m/%Y")
 deltime = 30
+deltime2 = 60
 
 
 # Personen

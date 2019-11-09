@@ -1,6 +1,5 @@
 import json
 import shutil
-from ast import Pass
 
 from discord.ext import commands
 
@@ -19,24 +18,30 @@ class Autosetup(commands.Cog):
         await bp.delete_cmd(ctx)
         try:
             asr.newserv(ctx.guild)
+            await ctx.send("Serververzeichnis wurde erstellt :new:", delete_after=bp.deltime2)
         except FileExistsError:
-            Pass
-        try:
-            asr.verifyerstellen(ctx.guild)
-        except FileExistsError:
-            Pass
-        try:
-            asr.lastdataerstellen(ctx.guild)
-        except FileExistsError:
-            Pass
-        try:
-            asr.reactionserstellen(ctx.guild)
-        except FileExistsError:
-            Pass
-        try:
-            asr.prefixzuweisen(ctx.guild)
-        except FileExistsError:
-            Pass
+            await ctx.send("Serververzeichnis bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+        if asr.verifyerstellen(ctx.guild):
+            await ctx.send("Datei Verify wurde erstellt :new:", delete_after=bp.deltime2)
+        else:
+            await ctx.send("Datei Verify bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+        if asr.lastdataerstellen(ctx.guild):
+            await ctx.send("Datei Lastdata wurde erstellt :new:", delete_after=bp.deltime2)
+        else:
+            await ctx.send("Datei Lastdata bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+        if asr.reactionserstellen(ctx.guild):
+            await ctx.send("Datei Reactions wurde erstellt :new:", delete_after=bp.deltime2)
+        else:
+            await ctx.send("Datei Reactions bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+        if asr.prefixzuweisen(ctx.guild):
+            await ctx.send("Prefix wurde erstellt :new:", delete_after=bp.deltime2)
+        else:
+            await ctx.send("Prefix zurückgesetzt :arrow_right_hook:", delete_after=bp.deltime2)
+        if asr.sperrenerstellen(ctx.guild):
+            await ctx.send("Datei Sperren wurde erstellt :new:", delete_after=bp.deltime2)
+        else:
+            await ctx.send("Datei Sperren bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+
         await ctx.send("Alle Probleme behoben.", delete_after=bp.deltime)
 
     @commands.Cog.listener()
@@ -61,6 +66,39 @@ class Autosetup(commands.Cog):
 
         with open('./data/prefixes.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if bp.botowner(message) and message.content == "admin.fixserver":
+            channel = message.channel
+            await bp.delete_cmd(message)
+            try:
+                asr.newserv(message.guild)
+                await channel.send("Serververzeichnis wurde erstellt :new:", delete_after=bp.deltime2)
+            except FileExistsError:
+                await channel.send("Serververzeichnis bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+            if asr.verifyerstellen(message.guild):
+                await channel.send("Datei Verify wurde erstellt :new:", delete_after=bp.deltime2)
+            else:
+                await channel.send("Datei Verify bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+            if asr.lastdataerstellen(message.guild):
+                await channel.send("Datei Lastdata wurde erstellt :new:", delete_after=bp.deltime2)
+            else:
+                await channel.send("Datei Lastdata bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+            if asr.reactionserstellen(message.guild):
+                await channel.send("Datei Reactions wurde erstellt :new:", delete_after=bp.deltime2)
+            else:
+                await channel.send("Datei Reactions bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+            if asr.prefixzuweisen(message.guild):
+                await channel.send("Prefix wurde erstellt :new:", delete_after=bp.deltime2)
+            else:
+                await channel.send("Prefix zurückgesetzt :arrow_right_hook:", delete_after=bp.deltime2)
+            if asr.sperrenerstellen(message.guild):
+                await channel.send("Datei Sperren wurde erstellt :new:", delete_after=bp.deltime2)
+            else:
+                await channel.send("Datei Sperren bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
+
+            await channel.send("Alle Probleme behoben.", delete_after=bp.deltime)
 
 
 def setup(client):
