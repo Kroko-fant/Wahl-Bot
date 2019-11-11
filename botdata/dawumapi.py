@@ -4,15 +4,17 @@ from urllib import request
 
 import discord
 
-with urllib.request.urlopen("https://api.dawum.de/") as response:
-    data = json.loads(response.read())
+response = urllib.request.urlopen("https://api.dawum.de/")
+data = json.loads(response.read())
 lastupdate = data['Database']['Last_Update']
 
 
-async def update_data():
-    with urllib.request.urlopen("https://api.dawum.de/") as response:
-        global data
-        data = json.loads(response.read())
+def update_data():
+    global data
+    data = {}
+    responsenew = urllib.request.urlopen("https://api.dawum.de/")
+    data = json.loads(responsenew.read())
+    print("data updated")
 
 
 # Bundesländer

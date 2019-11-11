@@ -26,7 +26,8 @@ class Prefixes(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if "prefix" in str(message.content).lower() and bp.user(message.author):
+        msg = str(message.content).lower()
+        if "prefix" in msg and bp.user(message.author) and "bot" in msg:
             channel = message.channel
             with open('./data/prefixes.json', 'r') as f:
                 prefixes = json.load(f)
