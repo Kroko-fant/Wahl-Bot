@@ -52,6 +52,14 @@ class Fun(commands.Cog):
             content = content[10:]
             await bp.delete_cmd(message)
             await message.channel.send(f'{message.author} sagt {content}')
+        elif ((message.content.startswith('java.System.out.println("') or
+               (message.content.startswith('java.System.out.print("')) and message.content.count('"') == 2
+               and message.content.endswith('");'))) and bp.user(message.author) \
+                and not any([curse in message.content.lower() for curse in bl.blacklist]):
+            content = message.content[:-2]
+            content = content[24:]
+            await bp.delete_cmd(message)
+            await message.channel.send(f'{message.author} sagt {content}')
 
 
 def setup(client):
