@@ -40,6 +40,16 @@ class Fun(commands.Cog):
         gezogene_karte = "Du hast folgende Karte gezogen: **" + karten[random.randint(0, 31)] + "**"
         await ctx.send(gezogene_karte)
 
+    @commands.command()
+    async def on_message(self, message):
+        if (message.content.startswith("print('") and message.count("'") == 2 and
+            message.endswith("')")) or (message.content.startswith('print("') and message.count('")') == 2
+                                        and message.endswith("'")):
+            content = message.content[:-2]
+            content = content[:7]
+            await bp.delete_cmd(message)
+            await message.send(f'{message.author} sagt {content}')
+
 
 def setup(client):
     client.add_cog(Fun(client))
