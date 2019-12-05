@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.1.1">
-      <change beforePath="$PROJECT_DIR$/.idea/Wahl-Bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Wahl-Bot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/fun.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/fun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/shutthebox.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/shutthebox.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/shutthebox.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testshutthebox.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/612711527258259456/lastdata.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,21 +274,7 @@
       <workItem from="1574861226006" duration="88000" />
       <workItem from="1575522581626" duration="984000" />
       <workItem from="1575523702102" duration="21000" />
-      <workItem from="1575530285955" duration="610000" />
-    </task>
-    <task id="LOCAL-00001" summary="Pre-Version 1.0">
-      <created>1567689328964</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1567689328964</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Pre-Version 1.0.1">
-      <created>1567707125593</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1567707125594</updated>
+      <workItem from="1575530285955" duration="2926000" />
     </task>
     <task id="LOCAL-00003" summary="Pre-Version 1.0.2">
       <created>1567952809832</created>
@@ -621,7 +605,21 @@
       <option name="project" value="LOCAL" />
       <updated>1573434343018</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Version Beta 1.1.1">
+      <created>1575530923349</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1575530923351</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Version Beta 1.1.1">
+      <created>1575531031027</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1575531031027</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -685,37 +683,37 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1573142280522" />
-    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1575530921733">
+    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1575531029870">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1575530921733" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1573142960711">
+    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1575531029870" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1575533259380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1573142960711" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1573142960711">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1575533259380" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1575533259380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1573142960711" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1573142960711">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1575533259380" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1575533259380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1573142960711" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1573142960711">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1575533259380" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1575533259380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1573142960711" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1575530987075">
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1575533259380" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1575531091794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1575530987075" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1575530286301">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1575531091794" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1575533276216">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1575530286301" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1575533276216" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="main Coverage Results" MODIFIED="1573142282124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/WahlBot$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1573503875978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1575533093125" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
