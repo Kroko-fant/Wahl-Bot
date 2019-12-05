@@ -4,8 +4,6 @@
     <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.1.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/fun.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/fun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/shutthebox.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testshutthebox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/612711527258259456/lastdata.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,13 +273,7 @@
       <workItem from="1575522581626" duration="984000" />
       <workItem from="1575523702102" duration="21000" />
       <workItem from="1575530285955" duration="2926000" />
-    </task>
-    <task id="LOCAL-00003" summary="Pre-Version 1.0.2">
-      <created>1567952809832</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1567952809832</updated>
+      <workItem from="1575533275882" duration="825000" />
     </task>
     <task id="LOCAL-00004" summary="Pre-Version 1.1.0">
       <created>1568414057399</created>
@@ -619,7 +611,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575531031027</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Version Beta 1.1.1">
+      <created>1575533302768</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1575533302770</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,10 +682,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1573142280522" />
-    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1575531029870">
+    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1575534307064">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1575531029870" />
+    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1575534307064" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1575533259380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -703,10 +702,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1575533259380" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1575531091794">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1575533308763">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1575531091794" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1575533308763" />
     <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1575533276216">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

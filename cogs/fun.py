@@ -2,6 +2,7 @@ import random
 
 from discord.ext import commands
 
+from botdata import blacklist as bl
 from botdata import botparameters as bp
 
 
@@ -42,10 +43,11 @@ class Fun(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if bp.user(message.author) and ((message.content.startswith("py.print('") and message.content.count("'") == 2
-                                         and message.content.endswith("')")) or
-                                        (message.content.startswith('py.print("') and message.content.count('"') == 2
-                                         and message.content.endswith('")'))):
+        if ((message.content.startswith("py.print('") and message.content.count("'") == 2
+             and message.content.endswith("')")) or
+            (message.content.startswith('py.print("') and message.content.count('"') == 2
+             and message.content.endswith('")'))) and bp.user(message.author) \
+                and not any([curse in message.content.lower() for curse in bl.blacklist]):
             content = message.content[:-2]
             content = content[10:]
             await bp.delete_cmd(message)
