@@ -51,7 +51,7 @@ class Fun(commands.Cog):
             content = message.content[:-2]
             content = content[10:]
             await bp.delete_cmd(message)
-            await message.channel.send(f'{message.author} sagt {content}')
+            await message.channel.send(f'**{message.author}** sagt "{content}" in Python.')
         elif ((message.content.startswith('java.System.out.println("') or
                (message.content.startswith('java.System.out.print("')) and message.content.count('"') == 2
                and message.content.endswith('");'))) and bp.user(message.author) \
@@ -59,7 +59,7 @@ class Fun(commands.Cog):
             content = message.content[:-2]
             content = content[24:]
             await bp.delete_cmd(message)
-            await message.channel.send(f'{message.author} sagt {content}')
+            await message.channel.send(f'**{message.author}** sagt "{content}" in Java.')
 
 
 def setup(client):
