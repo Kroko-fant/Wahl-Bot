@@ -1,4 +1,3 @@
-
 import random as r
 
 import discord
@@ -26,12 +25,15 @@ class Shutthebox(commands.Cog):
         boxes = [True, True, True, True, True, True, True, True]
         runde = 0
 
+        def wuerfeln(spieler, dice1, dice2):
+            return f'{spieler} hat folgende Zahlen gewürfelt: {dice1}, {dice2}'
+
         def dice():
             return r.randint(1, 6)
 
         def boxesmsg():
+            boxesmsggg = ""
             for var in boxes:
-                boxesmsggg = ""
                 if boxes[var]:
                     boxesmsggg = boxesmsggg + ":white_checkmark:\t"
                 else:
@@ -39,6 +41,12 @@ class Shutthebox(commands.Cog):
                 if var * 2 == len(boxes):
                     boxesmsggg = boxesmsggg + "\n\n"
             return boxesmsggg
+
+        def wait_for_player(player):
+            box = await self.client.wait_for('message', timeout=60)
+            if str(box).isnumeric():
+
+        # TODO
 
         def close_boxes(box1, box2, summe, player):
             if box1 or box2 == 0:
@@ -75,13 +83,14 @@ class Shutthebox(commands.Cog):
                                '> hat die Herausforderung angenommen! \n Challenge startet!'.format(msg1))
 
             await channel.send(boxesmsg())
-            # würfeln
-            spieler1dices1 = dice()
-            spieler1dices2 = dice()
-            await ctx.send(
-                f'{player1}hat folgende zwei Zahlen gewürfelt: **{spieler1dices1}** und **{spieler1dices2}**')
-
             while runde <= 8:
+                wait_for_player(player1)
+                dice1 = dice()
+                dice2 = dice()
+                wuerfeln(player1, dice1, dice2)
+                box1 = wait_for_player(player1)
+                box2 = wait_for_player(player1)
+                if 0 < box1 < 0
 
         else:
             errorsb02embed = discord.Embed(title="Error #SB02",
