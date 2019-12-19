@@ -32,7 +32,6 @@ class Dawum(commands.Cog):
     @commands.check(bp.botowner)
     async def update(self, ctx):
         dwa.update_data()
-        self.client.clear()
         await ctx.send(dwa.lastupdate)
 
     @poll.error
