@@ -4,7 +4,6 @@ import discord
 from discord.ext import commands
 
 from botdata import botparameters as bp
-from main import get_prefix
 
 
 class Logging(commands.Cog):
@@ -33,7 +32,7 @@ class Logging(commands.Cog):
     async def setlogchannel_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             errorlg01embed = discord.Embed(title="Error #LG01",
-                                           description=f'Fehlendes Argument! Syntax: {get_prefix(self.client, ctx)}'
+                                           description=f'Fehlendes Argument! Syntax: !setlogchannel <channel>'
                                                        f' <channelid>', color=0xff0000)
             await ctx.send(embed=errorlg01embed)
 

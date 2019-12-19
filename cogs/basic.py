@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 
 from botdata import botparameters as bp
-from main import get_prefix
 
 
 class Basic(commands.Cog):
@@ -16,7 +15,7 @@ class Basic(commands.Cog):
     async def version(self, ctx):
         """Zeigt die aktuelle Version des Bots und die aktuelle Version der API an."""
         await bp.delete_cmd(ctx)
-        versiontext = "Der Bot läuft auf " + "Version Beta 1.1.3b" + ". Die API läuft auf Version " + bp.apiversion()
+        versiontext = "Der Bot läuft auf " + "Version Beta 1.1.3c" + ". Die API läuft auf Version " + bp.apiversion()
         await ctx.send(versiontext, delete_after=bp.deltime)
 
     # Lässt den User einen Bug einreichen.
@@ -36,15 +35,15 @@ class Basic(commands.Cog):
     async def bug_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             errorba02embed = discord.Embed(title="Error #BA02",
-                                           description=f'Fehlender Bug! Syntax: {get_prefix(self.client, ctx)}bug'
+                                           description=f'Fehlender Bug! Syntax: !bug'
                                                        f' <userid>', color=0xff0000)
             await ctx.send(embed=errorba02embed)
 
     # Feedback einreichen
     @commands.command()
     async def feedback(self, ctx, *, feedbackt):
-        f""""Hinterlasse mit !feedback dein Feedback zum Bot. Das Tem bemüht sich dieses zu bearbeiten.
-        Syntax: {get_prefix(self.client, ctx)}feedback <dein_feedback> """
+        """"Hinterlasse mit !feedback dein Feedback zum Bot. Das Tem bemüht sich dieses zu bearbeiten.
+        Syntax: !feedback <dein_feedback> """
         channel = self.client.get_channel(int(643540415919816717))
         content = "**Feedback von " + str(ctx.author) + ":** " + feedbackt
         if content.lower() is "<dein_feedback>":
@@ -60,7 +59,7 @@ class Basic(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             errorba01embed = discord.Embed(title="Error #BA01",
                                            description=f'Fehlendes Feedback! Syntax: '
-                                                       f'{get_prefix(self.client, ctx)}feedback <userid>',
+                                                       f'!feedback <userid>',
                                            color=0xff0000)
             await ctx.send(embed=errorba01embed)
 
@@ -81,8 +80,9 @@ class Basic(commands.Cog):
     async def on_message(self, message):
         if message.guild is None:
             channel = self.client.get_channel(int(635544300834258995))
-            content = "**" + str(message.author) + '** sagt: "' + str(message.content) + '"'
-            await channel.send(content)
+            if channel != None:
+                content = "**" + str(message.author) + '** sagt: "' + str(message.content) + '"'
+                await channel.send(content)
 
 
 def setup(client):
