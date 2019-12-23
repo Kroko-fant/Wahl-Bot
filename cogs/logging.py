@@ -129,8 +129,8 @@ class Logging(commands.Cog):
                         str(before.channel) + "** verlassen.")
                 elif before.channel is not None and after.channel is not None:
                     await logch.send(
-                        ":mega: **" + str(member) + " (" + str(member.id) + ")** hat den Voice Channel von **" +
-                        str(before.channel) + "** zu **" + str(after.channel) + "** gewechselt.")
+                        f":mega: **{str(member)} ({str(member.id)} )** hat den Voice Channel von ** "
+                        f"{str(before.channel)} ** zu ** {str(after.channel)}** gewechselt.")
             else:
                 Pass
         except Exception:

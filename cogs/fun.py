@@ -1,5 +1,6 @@
 import random
 
+import discord
 from discord.ext import commands
 
 from botdata import blacklist as bl
@@ -41,8 +42,25 @@ class Fun(commands.Cog):
         gezogene_karte = "Du hast folgende Karte gezogen: **" + karten[random.randint(0, 31)] + "**"
         await ctx.send(gezogene_karte)
 
+    @commands.command()
+    async def sayinxyz(self, ctx):
+        await bp.delete_cmd(ctx)
+        sayinxyzembed = discord.Embed(
+            title='Sayxyz Help',
+            description='Um eine Nachricht in einer bestimmten Programmiersprache zu sagen, muss die Korrekte Syntax '
+                        'des Statements eingehalten werden. Dafür wird die Sprache vor dem Command aufgerufen mit '
+                        '<sprache>.<befehl> '
+                        '\nBsp.: python.print("Hello World")\n'
+                        'Folgende Sprachen sind verfügbar:\n'
+                        'Python: py     Java: java.     JavaScript: js.     C#: c#\n'
+                        'C++: c++       GO: go.     PHP: php.'
+        )
+
+        await ctx.send(embed=sayinxyzembed)
+
     @commands.Cog.listener()
     async def on_message(self, message):
+        # Python
         if ((message.content.startswith("py.print('") and message.content.count("'") == 2
              and message.content.endswith("')")) or
             (message.content.startswith('py.print("') and message.content.count('"') == 2
@@ -52,14 +70,71 @@ class Fun(commands.Cog):
             content = content[10:]
             await bp.delete_cmd(message)
             await message.channel.send(f'**{message.author}** sagt "{content}" in Python.')
-        elif ((message.content.startswith('java.System.out.println("') or
-               (message.content.startswith('java.System.out.print("')) and message.content.count('"') == 2
-               and message.content.endswith('");'))) and bp.user(message.author) \
+        # Java
+        elif (message.content.startswith('java.System.out.println("') or
+              message.content.startswith('java.System.out.print("')) and message.content.count('"') == 2 and \
+                message.content.endswith('");') and bp.user(message.author) \
                 and not any([curse in message.content.lower() for curse in bl.blacklist]):
-            content = message.content[:-2]
-            content = content[24:]
+            content = message.content[:-3]
+            if message.content.startswith('java.System.out.println("'):
+                content = content[25:]
+            else:
+                content = content[23:]
             await bp.delete_cmd(message)
             await message.channel.send(f'**{message.author}** sagt "{content}" in Java.')
+        # C#
+        elif ((message.content.startswith('c#.Console.Write("') or
+               (message.content.startswith('c#.Console.WriteLine("'))) and message.content.count('"') == 2
+              and message.content.endswith('");')) and bp.user(message.author) \
+                and not any([curse in message.content.lower() for curse in bl.blacklist]):
+            content = message.content[:-3]
+            if content.startswith('c#.Console.WriteLine'):
+                content = content[22:]
+            else:
+                print(content)
+                content = content[18:]
+            await bp.delete_cmd(message)
+            await message.channel.send(f'**{message.author}** sagt "{content}" in C#.')
+        # Java Script
+        elif ((message.content.startswith('js.console.log("') or
+               (message.content.startswith('js.alert("'))) and message.content.count('"') == 2
+              and message.content.endswith('");')) and bp.user(message.author) \
+                and not any([curse in message.content.lower() for curse in bl.blacklist]):
+            content = message.content[:-3]
+            if content.startswith('js.console.log("'):
+                content = content[16:]
+            else:
+                print(content)
+                content = content[10:]
+            await bp.delete_cmd(message)
+            await message.channel.send(f'**{message.author}** sagt "{content}" in JavaScript.')
+        # Go
+        if (message.content.startswith('go.fmt.Println("') or message.content.startswith('go.fmt.Print("')) \
+                and message.content.count('"') == 2 and message.content.endswith('")') and bp.user(message.author) \
+                and not any([curse in message.content.lower() for curse in bl.blacklist]):
+            content = message.content[:-2]
+            if message.content.startswith('go.fmt.Println("'):
+                content = content[16:]
+            else:
+                content = content[14:]
+            await bp.delete_cmd(message)
+            await message.channel.send(f'**{message.author}** sagt "{content}" in GO.')
+        # C++
+        elif message.content.startswith('c++.cout << "') and message.content.count('"') == 2 and \
+                message.content.endswith('";') and bp.user(message.author) \
+                and not any([curse in message.content.lower() for curse in bl.blacklist]):
+            content = message.content[:-3]
+            content = content[13:]
+            await bp.delete_cmd(message)
+            await message.channel.send(f'**{message.author}** sagt "{content}" in C++.')
+        # PHP
+        elif message.content.startswith('php.echo "') and message.content.count('"') == 2 and \
+                message.content.endswith('";') and bp.user(message.author) \
+                and not any([curse in message.content.lower() for curse in bl.blacklist]):
+            content = message.content[:-3]
+            content = content[10:]
+            await bp.delete_cmd(message)
+            await message.channel.send(f'**{message.author}** sagt "{content}" in PHP.')
 
 
 def setup(client):
