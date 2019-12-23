@@ -30,7 +30,7 @@ class Dawum(commands.Cog):
 
     @commands.command()
     @commands.check(bp.botowner)
-    async def lastupdate(self, ctx):
+    async def update(self, ctx):
         dwa.update_data()
         await ctx.send(dwa.lastupdate)
 

@@ -1,6 +1,6 @@
 import json
-from ast import Pass
 
+import discord
 from discord.ext import commands
 
 from botdata import botparameters as bp
@@ -15,6 +15,8 @@ class Logging(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setlogchannel(self, ctx, lchannelid):
+        """Zum Setzen des Channels wird die Channelid als Argument benötigt.
+        Syntax: !setlogchannel <channelid>"""
         guild = ctx.guild
         with open('./data/logchannel.json', 'r') as f:
             logs = json.load(f)
@@ -25,6 +27,14 @@ class Logging(commands.Cog):
             json.dump(logs, f, indent=4)
         await bp.delete_cmd(ctx)
         await ctx.send("Channel <#" + lchannelid + "> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
+
+    @setlogchannel.error
+    async def setlogchannel_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            errorlg01embed = discord.Embed(title="Error #LG01",
+                                           description=f'Fehlendes Argument! Syntax: !setlogchannel <channel>'
+                                                       f' <channelid>', color=0xff0000)
+            await ctx.send(embed=errorlg01embed)
 
     # Memberjoin
     @commands.Cog.listener()
@@ -39,9 +49,9 @@ class Logging(commands.Cog):
                 await logch.send(
                     ":inbox_tray: **" + str(member) + "(" + str(member.id) + ")** ist dem Sever beigetreten.")
             else:
-                Pass
+                pass
         except Exception:
-            Pass
+            pass
 
     # Memberleave
     @commands.Cog.listener()
@@ -56,9 +66,9 @@ class Logging(commands.Cog):
                 await logch.send(
                     ":outbox_tray: **" + str(member) + " (" + str(member.id) + ")** hat den Server verlassen.")
             else:
-                Pass
+                pass
         except Exception:
-            Pass
+            pass
 
     # Member wird gebannt
     @commands.Cog.listener()
@@ -71,9 +81,9 @@ class Logging(commands.Cog):
                 logch = self.client.get_channel(int(logchannelid))
                 await logch.send(":no_entry_sign: **" + str(user) + " (" + str(user.id) + ")** wurde gebannt.")
             else:
-                Pass
+                pass
         except Exception:
-            Pass
+            pass
 
     # Member wird entbannt
     @commands.Cog.listener()
@@ -86,16 +96,15 @@ class Logging(commands.Cog):
                 logch = self.client.get_channel(int(logchannelid))
                 await logch.send(":white_check_mark: **" + str(user) + " (" + str(user.id) + ")** wurde entgebannt.")
             else:
-                Pass
+                pass
         except Exception:
-            Pass
+            pass
 
     # Nachricht löschen
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
         try:
             if payload.guild_id is not None:
-                ch = payload.channel_id
                 guild = payload.guild_id
                 msg = payload.message_id
                 content = payload.cached_message.content
@@ -105,11 +114,18 @@ class Logging(commands.Cog):
                     logs = json.load(f)
                 logchannelid = logs[str(guild)]
                 logch = self.client.get_channel(int(logchannelid))
-                await logch.send(':recycle: **Nachricht:** "' + str(content) + '" von User: ' + str(user) + ' (' +
-                                 str(user.id) + ") in Channel " + str(channel) + " gelöscht.")
+                if (len(content) > 1800):
+                    await logch.send(':recycle: **Nachricht:**')
+                    await logch.send(str(content).replace("@", "👤"))
+                    await logch.send('von User: ' + str(user) + ' (' + str(user.id) + ") in Channel: " + str(channel) +
+                                     " gelöscht.")
+                else:
+                    await logch.send(':recycle: **Nachricht: **' + str(content).replace("@", "👤") + 'von User: ' +
+                                     str(user) + ' (' + str(user.id) + ") in Channel: " + str(channel) + " gelöscht.")
         except Exception:
-            Pass
+            pass
 
+    # Voice-Änderungen
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         try:
@@ -132,9 +148,9 @@ class Logging(commands.Cog):
                         f":mega: **{str(member)} ({str(member.id)} )** hat den Voice Channel von ** "
                         f"{str(before.channel)} ** zu ** {str(after.channel)}** gewechselt.")
             else:
-                Pass
+                pass
         except Exception:
-            Pass
+            pass
 
 
 def setup(client):
