@@ -12,6 +12,9 @@ class Dawum(commands.Cog):
 
     @commands.command()
     async def poll(self, ctx, pollinput):
+        """Gebe die aktuelle Wahlumfrage des Bundestags, oder eines Landtages aus.
+        Syntax: !poll <ländercode>
+        Der Ländercode ist optional. Alle Ländercodes sind intuitiv. Bundesländer ausschreiben möglich."""
         if pollinput is None:
             pollinput = 0
             dawumoutput = dwa.umfrage_ausgeben(pollinput)
@@ -35,7 +38,7 @@ class Dawum(commands.Cog):
         await ctx.send(dwa.lastupdate)
 
     @poll.error
-    async def userinfo_error(self, ctx, error):
+    async def poll_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await bp.delete_cmd(ctx)
             await ctx.send(embed=dwa.umfrage_ausgeben('0'))

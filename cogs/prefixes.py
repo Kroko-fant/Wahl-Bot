@@ -12,7 +12,10 @@ class Prefixes(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def newprefix(self, ctx, prefix):
+    async def newprefix(self, ctx, prefix='!'):
+        """Weißt einen neuen Prefix zu.
+        Syntax: {prefix} newprefix <prefix>
+        Wird kein prefix angegeben wird ! gesetzt."""
         await bp.delete_cmd(ctx)
         with open('./data/prefixes.json', 'r') as f:
             prefixes = json.load(f)
@@ -25,13 +28,11 @@ class Prefixes(commands.Cog):
         await ctx.send(f'Prefix zu:** {prefix} **geändert', delete_after=bp.deltime)
 
     @commands.Cog.listener()
-    async def on_message(self, message):
-        msg = str(message.content).lower()
-        if "prefix" in msg and bp.user(message.author) and "bot" in msg:
-            channel = message.channel
+    async def on_message(self, ctx):
+        if "prefix" in str(ctx.content).lower() and bp.user(ctx.author) and "bot" in str(ctx.content).lower():
             with open('./data/prefixes.json', 'r') as f:
                 prefixes = json.load(f)
-            await channel.send("Dieser Server hat den Prefix: **" + prefixes[str(message.guild.id)] + "**")
+            await ctx.send("Dieser Server hat den Prefix: **" + prefixes[str(ctx.guild.id)] + "**")
 
 
 def setup(client):

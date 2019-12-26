@@ -9,6 +9,7 @@ class Userinfo(commands.Cog):
 
     @commands.command()
     async def userinfo(self, ctx, member: discord.Member):
+        """Zeigt Informationen über einen User an."""
         roles = [role for role in member.roles]
 
         userinfoembed = discord.Embed(colour=member.color, timestamp=ctx.message.created_at)
@@ -19,17 +20,13 @@ class Userinfo(commands.Cog):
 
         userinfoembed.add_field(name='ID:', value=str(member.id))
         userinfoembed.add_field(name='Name:', value=str(member.display_name))
-
         userinfoembed.add_field(name='Status:', value=str(member.status))
         userinfoembed.add_field(name='Aktivität:', value=str(member.activity.name))
-
         userinfoembed.add_field(name='Account erstellt:',
                                 value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
         userinfoembed.add_field(name='Beigetreten:', value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
-
         userinfoembed.add_field(name=f'Rollen ({len(roles)})', value='  '.join([role.mention for role in roles]))
         userinfoembed.add_field(name='Höchste Rolle:', value=str(member.top_role.mention))
-
         userinfoembed.add_field(name='Bot?', value=str(member.bot))
 
         await ctx.send(embed=userinfoembed)

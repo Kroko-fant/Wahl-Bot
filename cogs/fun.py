@@ -14,6 +14,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def coinflip(self, ctx):
+        """Werfe eine Münze und erhalte kopf oder Zahl."""
         await bp.delete_cmd(ctx)
         flip = random.randint(0, 1)
         if flip == 1:
@@ -25,13 +26,15 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def randomnumber(self, ctx, int2=100):
+        """Gebe eine zufällige Zahl zwischen 0 und x ein.
+        Syntax: {prefix}randomnumber <x>
+        Hat x keinen Wert bekommt x automatisch 100 zugewiesen."""
         await bp.delete_cmd(ctx)
-        randomnumber = "Die zufällige Zahl zwischen **0** und **" + str(int2) + "** ist: **" + \
-                       str(random.randint(0, int2)) + "**"
-        await ctx.send(randomnumber)
+        await ctx.send(f"Die zufällige Zahl zwischen **0** und **{str(int2)}** ist: **{str(random.randint(0, int2))}**")
 
     @commands.command()
     async def card(self, ctx):
+        """Ziehe eine Karte"""
         await bp.delete_cmd(ctx)
         karten = [":diamonds: 7", ":diamonds: 8", ":diamonds: 9", ":diamonds: 10", ":diamonds: Bube",
                   ":diamonds: Dame", ":diamonds: Koenig", ":diamonds: Ass", ":hearts: 7", ":hearts: 8",
@@ -39,23 +42,22 @@ class Fun(commands.Cog):
                   ":spades: 7", ":spades: 8", ":spades: 9", ":spades: 10", ":spades: Bube", ":spades: Dame",
                   ":spades: Koenig", ":spades: Ass", ":clubs: 7", ":clubs: 8", ":clubs: 9", ":clubs: 10",
                   ":clubs: Bube", ":clubs: Dame", ":clubs: Koenig", ":clubs: Ass", ]
-        gezogene_karte = "Du hast folgende Karte gezogen: **" + karten[random.randint(0, 31)] + "**"
-        await ctx.send(gezogene_karte)
+        await ctx.send(f"Du hast folgende Karte gezogen: **{karten[random.randint(0, 31)]}**")
 
     @commands.command()
     async def sayinxyz(self, ctx):
+        """Sage etwas in einer Programmiersprache."""
         await bp.delete_cmd(ctx)
         sayinxyzembed = discord.Embed(
             title='Sayxyz Help',
             description='Um eine Nachricht in einer bestimmten Programmiersprache zu sagen, muss die Korrekte Syntax '
                         'des Statements eingehalten werden. Dafür wird die Sprache vor dem Command aufgerufen mit '
-                        '<sprache>.<befehl> '
+                        '<sprachkürzel>.<befehl> \n'
                         '\nBsp.: python.print("Hello World")\n'
                         'Folgende Sprachen sind verfügbar:\n'
-                        'Python: py     Java: java.     JavaScript: js.     C#: c#\n'
-                        'C++: c++       GO: go.     PHP: php.'
+                        'Python: py\t\tJava: java.\t\tJavaScript: js.\t\tC#: c#\n'
+                        'C++: c++\t\tGO: go.\t\tPHP: php.'
         )
-
         await ctx.send(embed=sayinxyzembed)
 
     @commands.Cog.listener()

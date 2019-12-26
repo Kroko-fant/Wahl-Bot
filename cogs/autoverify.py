@@ -1,5 +1,4 @@
 import json
-from ast import Pass
 
 from discord.ext import commands
 
@@ -14,6 +13,7 @@ class Autoverify(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setmainrole(self, ctx, roleid):
+        """Setze die Hauptrolle, welche  beim Verifizierprozess vergeben werden soll."""
         with open('./data/roles/mainrole.json', 'r') as f:
             roles = json.load(f)
 
@@ -27,6 +27,7 @@ class Autoverify(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setspacerone(self, ctx, roleid):
+        """Setze die Spacerrolle 1, welche jeder User beim Verifizierungsprozess bekommen soll."""
         with open('./data/roles/spacerone.json', 'r') as f:
             roles = json.load(f)
 
@@ -35,11 +36,12 @@ class Autoverify(commands.Cog):
         with open('./data/roles/spacerone.json', 'w') as f:
             json.dump(roles, f, indent=4)
         await bp.delete_cmd(ctx)
-        await ctx.send("Spacer 1 -Rolle gesetzt.", delete_after=bp.deltime)
+        await ctx.send("Spacer 1 Rolle gesetzt.", delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setspacertwo(self, ctx, roleid):
+        """Setze die Spacerrolle 2, welche jeder User beim Verifizierungsprozess bekommen soll."""
         with open('./data/roles/spacertwo.json', 'r') as f:
             roles = json.load(f)
 
@@ -53,6 +55,7 @@ class Autoverify(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setspacerthree(self, ctx, roleid):
+        """Setze die Spacerrolle 3, welche jeder User beim Verifizierungsprozess bekommen soll."""
         with open('./data/roles/spacerthree.json', 'r') as f:
             roles = json.load(f)
 
@@ -94,7 +97,7 @@ class Autoverify(commands.Cog):
                 role = guild.get_role(roleid)
                 await member.add_roles(role, reason="verify")
             except KeyError:
-                Pass
+                pass
 
 
 def setup(client):

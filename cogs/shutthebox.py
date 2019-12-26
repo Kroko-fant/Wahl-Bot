@@ -11,7 +11,6 @@ class Shutthebox(commands.Cog):
 
     @commands.command()
     async def challenge(self, ctx, playerid):
-        channel = ctx.channel
         player1 = ctx.author
         player2 = self.client.get_user(int(playerid))
         playerpkt = [0, 0]
@@ -69,11 +68,11 @@ class Shutthebox(commands.Cog):
             return sumtemp
 
         if player1.id is not player2.id:
-            await ctx.send("Hey <@" + str(playerid) + '> du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" '
-                                                      'um die Challegenge zu akzeptieren')
+            await ctx.send(f'Hey <@{str(playerid)}> du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" um die'
+                           f' Challegenge zu akzeptieren')
             msg1 = await self.client.wait_for('message', check=lambda message: message.author == player2, timeout=60)
-            await channel.send('Spieler <@' + str(player2.id) +
-                               '> hat die Herausforderung angenommen! \n Challenge startet!'.format(msg1))
+            await ctx.send('Spieler <@' + str(player2.id) +
+                           '> hat die Herausforderung angenommen! \n Challenge startet!'.format(msg1))
             # Runde starten
             while runde <= 8:
                 await boxesmsg(runde, boxes)
@@ -131,7 +130,7 @@ class Shutthebox(commands.Cog):
         else:
             errorsb02embed = discord.Embed(title="Error #SB02",
                                            description="Du kannst dich nicht selbst herausfordern", color=0xff0000)
-            await channel.send(embed=errorsb02embed)
+            await ctx.send(embed=errorsb02embed)
 
     @challenge.error
     async def challenge_error(self, ctx, error):

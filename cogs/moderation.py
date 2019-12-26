@@ -1,4 +1,5 @@
-from ast import Pass
+import json
+import time
 
 import discord
 from discord.ext import commands
@@ -12,19 +13,63 @@ class Moderation(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    async def update_member(self, member):
+        if bp.user(member):
+            lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
+            with open(lastmember, 'r') as f:
+                members = json.load(f)
+
+            members[str(member.id)] = time.time() / 8640
+
+            with open(lastmember, 'w') as f:
+                json.dump(members, f, indent=4)
+
+    async def delete_member_from_purge(self, member):
+        # TODO: Mitglieder wieder aus purge löschen
+        print("Unfinished")
+
+    @commands.command()
+    async def verify(self, ctx):
+        """Verifiziere deinen Account im Bot. Hat ansonsten keine weiteren Funktionen bisher."""
+        await bp.delete_cmd(ctx)
+        if await bp.unverifiziert(ctx):
+            # USERID in Verify
+            verifydir = './data/servers/' + str(ctx.guild.id) + '/verified.json'
+            with open(verifydir, 'r') as f:
+                verified = json.load(f)
+
+            verified[str(ctx.author.id)] = True
+
+            with open(verifydir, 'w') as f:
+                json.dump(verified, f, indent=4)
+            await ctx.send('Verifiziert')
+
+            # Rolle geben
+            with open(verifydir, 'r') as f:
+                verified = json.load(f)
+
+            await ctx.author.add_roles(verified[str(ctx.guild.id)], reason="Verify", atomic=True)
+            await ctx.send('Verifiziert')
+        elif await bp.verifiziert(ctx):
+            await ctx.send("Du bist bereits verifiziert!")
+        else:
+            await ctx.send("Du konntest nicht verifiziert werden! Wende dich an das Team oder versuche es nochmal!")
+
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=10):
-        amount = amount + 1
-        await ctx.channel.purge(limit=amount)
+        """"Löscht den gewählten Amount an Nachrichten Standardmenge: 10"""
+        await ctx.channel.purge(limit=amount + 1)
         await ctx.send("Es wurden **" + str(amount) + "** Nachrichten gelöscht.", delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
+        """Kickt den User vom Server
+        Syntax: {prefix}kick <@user>"""
         await bp.delete_cmd(ctx)
         await member.kick(reason=reason)
-        await ctx.send("User **" + str(member) + "** wurde gekickt.", delete_after=bp.deltime)
+        await ctx.send(f"User **{str(member)}** wurde gekickt.", delete_after=bp.deltime)
 
     @kick.error
     async def kick_error(self, ctx, error):
@@ -37,9 +82,11 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
+        """Ban den User vom Server
+        Syntax: {prefix}ban <@user>"""
         await bp.delete_cmd(ctx)
         await member.ban(reason=reason)
-        await ctx.send("User **" + str(member) + "** wurde gebannt.", delete_after=bp.deltime)
+        await ctx.send(f"User **{str(member)}** wurde gebannt.", delete_after=bp.deltime)
 
     @ban.error
     async def ban_error(self, ctx, error):
@@ -49,13 +96,182 @@ class Moderation(commands.Cog):
                                            color=0xff0000)
             await ctx.send(embed=errorcm02embed, delete_after=bp.deltime)
         elif isinstance(error, commands.BadArgument):
-            errorcm03embed = discord.Embed(title="Error #CM03",
-                                           description="Nutzer konnte nicht gefunden werden!",
+            errorcm03embed = discord.Embed(title="Error #CM03", description="Nutzer konnte nicht gefunden werden!",
                                            color=0xff0000)
             await ctx.send(embed=errorcm03embed, delete_after=bp.deltime)
 
+    # @commands.command()
+    # @commands.has_permissions(ban_members=True)
+    # async def block(self, message):
+    #  """Blockt den User vom Server
+    # Syntax: {prefix}block <@user>"""
+    # await bp.delete_cmd(message)
+    # TODO
+
+    # Member purgen
+    @commands.command()
+    @commands.check(bp.botowner)
+    async def purge(self, ctx, amount=90):
+        """Kickt User, welche zu lange nicht auf dem Server aktiv waren."""
+        await bp.delete_cmd(ctx)
+        if amount >= 90:
+            ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!", delete_after=bp.deltime)
+
+        elif 90 > amount > 0:
+            ctx.send("Die eingegebene Tageszahl ist zu klein!", delete_after=bp.deltime)
+        else:
+            ctx.send("Bitte gebe eine natürliche Zahl größer als 90 ein", delete_after=bp.deltime)
+        # TODO: PURGE
+
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def unbanall(self, ctx):
+        """Entbannt ALLE User. Dies kann nicht rückgängig gemacht werden."""
+        await bp.delete_cmd(ctx)
+        bans = await ctx.guild.bans()
+        await ctx.send(f"Es wurden {len(bans)} User zum entbannen gefunden. Gebe Okay zum entbannen ein.",
+                       delete_after=len(bans) + 20)
+        await self.client.wait_for('message', check=lambda message: message.content.lower() == "Okay", timeout=60)
+        await ctx.send(f"Starte Unban.\n Dies kann etwas dauern.\n Geschätzte Zeit: {len(bans) / 6.5} Sekunden")
+        start = time.time()
+        x = 0
+        while x < len(bans):
+            await ctx.guild.unban(bans[x][1], reason="Unbanall")
+            x = x + 1
+        ende = time.time()
+        await ctx.send(
+            f"Alle User erfolgreich entbannt.\nUserzahl: {len(bans)}\n"
+            f"Zeit: {'{:5.3f}'.format(ende - start)}\nBans/Sekunde: {len(bans) / (ende - start)}")
+
+    # LogChannel setzen
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def setlogchannel(self, ctx, lchannelid):
+        """Zum Setzen des Channels wird die Channelid als Argument benötigt.
+        Syntax: !setlogchannel <channelid>"""
+        with open('./data/logchannel.json', 'r') as f:
+            logs = json.load(f)
+
+        logs[str(ctx.guild.id)] = str(lchannelid)
+
+        with open('./data/logchannel.json', 'w') as f:
+            json.dump(logs, f, indent=4)
+        await bp.delete_cmd(ctx)
+        await ctx.send(f"Channel <#{lchannelid}> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
+
+    @setlogchannel.error
+    async def setlogchannel_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            errorcm03embed = discord.Embed(title="Error #CM03",
+                                           description=f'Fehlendes Argument! Syntax: !setlogchannel <channel>'
+                                                       f' <channelid>', color=0xff0000)
+            await ctx.send(embed=errorcm03embed)
+
+    # Memberjoin
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        await self.update_member(member)
+        try:
+            if bp.user(member):
+                with open('./data/logchannel.json', 'r') as f:
+                    logs = json.load(f)
+                logch = self.client.get_channel(int(logs[str(member.guild.id)]))
+                await logch.send(f":inbox_tray: **{str(member)} ({str(member.id)})** ist dem Sever beigetreten.")
+            else:
+                pass
+        except Exception:
+            pass
+
+    # Memberleave
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        try:
+            if bp.user(member):
+                with open('./data/logchannel.json', 'r') as f:
+                    logs = json.load(f)
+                logch = self.client.get_channel(int(logs[str(member.guild.id)]))
+                await logch.send(f":outbox_tray: **{str(member)} ({str(member.id)})** hat den Server verlassen.")
+            else:
+                pass
+        except Exception:
+            pass
+
+    # Member wird gebannt
+    @commands.Cog.listener()
+    async def on_member_ban(self, guild, user):
+        try:
+            if bp.user(user):
+                with open('./data/logchannel.json', 'r') as f:
+                    logs = json.load(f)
+                logch = self.client.get_channel(int(logs[str(guild.id)]))
+                await logch.send(f":no_entry_sign: **{str(user)} ({str(user.id)})** wurde gebannt.")
+            else:
+                pass
+        except Exception:
+            pass
+
+    # Member wird entbannt
+    @commands.Cog.listener()
+    async def on_member_unban(self, guild, user):
+        try:
+            if bp.user(user):
+                with open('./data/logchannel.json', 'r') as f:
+                    logs = json.load(f)
+                logch = self.client.get_channel(int(logs[str(guild.id)]))
+                await logch.send(f":white_check_mark: **{str(user)} ({str(user.id)})** wurde entgebannt.")
+            else:
+                pass
+        except Exception:
+            pass
+
+    # Nachricht löschen
+    @commands.Cog.listener()
+    async def on_raw_message_delete(self, payload):
+        try:
+            if payload.guild_id is not None:
+                content = payload.cached_message.content
+                user = payload.cached_message.author
+                channel = payload.channel_id
+                with open('./data/logchannel.json', 'r') as f:
+                    logs = json.load(f)
+                logch = self.client.get_channel(int(logs[str(payload.guild_id)]))
+                if len(content) > 1800:
+                    await logch.send(':recycle: **Nachricht:**')
+                    await logch.send(str(content).replace("@", "👤"))
+                    await logch.send(f'von User: {str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
+                else:
+                    await logch.send(f':recycle: **Nachricht: **{str(content).replace("@", "👤")}von User: '
+                                     f'{str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
+        except Exception:
+            pass
+
+    # Voice-Änderungen
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        await self.update_member(member)
+        try:
+            if bp.user(member) and member.guild is not None:
+                with open('./data/logchannel.json', 'r') as f:
+                    logs = json.load(f)
+                logch = self.client.get_channel(int(logs[str(member.guild.id)]))
+                if before.channel is None:
+                    await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
+                                     f"**{str(before.channel)}** verlassen.")
+                elif before.channel is not None and after.channel is None:
+                    await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
+                                     f"**{str(before.channel)}** verlassen.")
+                elif before.channel is not None and after.channel is not None:
+                    await logch.send(f":mega: **{str(member)} ({str(member.id)} )** hat den Voice Channel von ** "
+                                     f"{str(before.channel)} ** zu ** {str(after.channel)}** gewechselt.")
+            else:
+                pass
+        except Exception:
+            pass
+
+    # Linkblocker
     @commands.Cog.listener()
     async def on_message(self, message):
+        await self.update_member(message.author)
         member = message.author
         if bp.user(member):
             if any([curse in message.content.lower() for curse in bl.blacklist]):
@@ -64,26 +280,9 @@ class Moderation(commands.Cog):
                                            f"Discord-Links")
                 return True
             else:
-                Pass
+                pass
         else:
-            Pass
-
-    @commands.command()
-    @commands.check(bp.botowner)
-    async def unbanall(self, message):
-        guild = message.guild
-        bans = await guild.bans()
-        counter = len(bans)
-        x = 0
-        while x < counter:
-            await guild.unban(bans[x][1], reason="Unbanall")
-            x = x + 1
-        await bp.delete_cmd(message)
-
-    @commands.command()
-    @commands.has_permissions(ban_members=True)
-    async def block(self, message):
-        await bp.delete_cmd(message)
+            pass
 
 
 def setup(client):

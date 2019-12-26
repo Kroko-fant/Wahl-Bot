@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-from ast import Pass
 
 import discord
 from discord.ext import commands
@@ -28,9 +27,6 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w'
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 client = commands.Bot(command_prefix=get_prefix)
-modulliste = []
-testmodulliste = []
-server = client.guilds
 print('Module werden geladen')
 
 
@@ -43,7 +39,7 @@ async def on_ready():
     number = 0
     for s in range(len(client.guilds)):
         number += 1
-    print('Bot läuft auf', number, 'Servern')
+    print(f'Bot läuft auf {number} Servern')
 
 
 @client.command()
@@ -56,54 +52,39 @@ async def ping(ctx):
 @commands.check(bp.botowner)
 async def load(ctx, extension):
     await bp.delete_cmd(ctx)
-    e = extension.lower()
-    client.load_extension(f'cogs.{e}')
-    await ctx.send(e + "aktiviert")
-    print(e + ' aktiviert')
+    client.load_extension(f'cogs.{extension.lower()}')
+    await ctx.send(f":green_circle: {extension} aktiviert")
+    print(f'{extension} aktiviert')
 
 
 @client.command()
 @commands.check(bp.botowner)
 async def unload(ctx, extension):
     await bp.delete_cmd(ctx)
-    e = extension.lower()
-    client.unload_extension(f'cogs.{e}')
-    print(e + ' deaktiviert')
-    await ctx.send(e + ' deaktiviert')
+    client.unload_extension(f'cogs.{extension.lower()}')
+    print(f'{extension} deaktiviert')
+    await ctx.send(f':red_circle: {extension} deaktiviert')
 
 
 @client.command()
 @commands.check(bp.botowner)
 async def reload(ctx, extension):
     await bp.delete_cmd(ctx)
-    e = extension.lower()
-    client.reload_extension(f'cogs.{e}')
-    print(e + ' neugeladen')
-    await ctx.send(e + ' neugeladen')
-
-
-@client.command()
-@commands.check(bp.botowner)
-async def module(ctx):
-    await bp.delete_cmd(ctx)
-    await ctx.send(modulliste)
-
-
-@client.command()
-@commands.check(bp.botowner)
-async def testmodule(ctx):
-    await bp.delete_cmd(ctx)
-    await ctx.send(modulliste)
+    client.reload_extension(f'cogs.{extension.lower()}')
+    print(f'{extension} neugeladen')
+    await ctx.send(f':white_circle: {extension} neugeladen')
 
 
 @client.command()
 @commands.check(bp.botowner)
 async def shutdown(ctx):
+    """Fährt den Bot herunter. Danach muss man ihn auf dem Server in der Console neustarten lol."""
     await bp.delete_cmd(ctx)
     await ctx.send("Bot wird heruntergefahren...")
     await client.logout()
 
 
+# Module beim Botstart laden
 for filename in os.listdir('./cogs'):
     if filename.endswith(".py"):
         if filename.startswith('test'):
@@ -112,17 +93,14 @@ for filename in os.listdir('./cogs'):
             if filename.endswith('.py'):
                 client.load_extension(f'cogs.{filename[:-3]}')
                 print(filename[:-3] + ' aktiviert')
-                modulliste.append({filename[:-3]})
             elif filename.endswith('__pycache__'):
                 print('Py-Cache gefunden')
             else:
                 print(F'{filename}' + ' ist fehlerhaft')
     else:
-        Pass
+        pass
 
 print('Module geladen')
-print(modulliste)
-
 print("Botstart abgeschlossen!")
 
 client.run(SECRETS.TOKEN)

@@ -1,10 +1,5 @@
-import datetime
-import json
-
 import discord
 
-today = datetime.datetime.today()
-datum = today.strftime("%d/%m/%Y")
 deltime = 30
 deltime2 = 60
 
@@ -57,14 +52,3 @@ async def unverifiziert(ctx):
 # Tasks
 async def delete_cmd(ctx):
     await ctx.channel.purge(limit=1)
-
-
-async def update_member(member):
-    lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
-    with open(lastmember, 'r') as f:
-        members = json.load(f)
-
-    members[str(member.id)] = str(datum)
-
-    with open(lastmember, 'w') as f:
-        json.dump(members, f, indent=4)
