@@ -12,16 +12,6 @@ class Dawum(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    response = urllib.request.urlopen("https://api.dawum.de/")
-    data = json.loads(response.read())
-    lastupdate = data['Database']['Last_Update']
-
-    async def update_data(self):
-        global data
-        data = {}
-        responsenew = urllib.request.urlopen("https://api.dawum.de/")
-        data = json.loads(responsenew.read())
-
     # Bundesländer
     async def search_parliament(self, shortcode):
         if any([code in shortcode.lower() for code in ['bt', 'bundestag']]):
@@ -102,27 +92,22 @@ class Dawum(commands.Cog):
         else:
             return 'Error'
 
-    async def search_newest_poll(self, shortcode):
-        if shortcode.isdigit():
-            parlament = int(shortcode)
-        else:
-            parlament = await self.search_parliament(shortcode)
-        newest = max((k for k, v in data['Surveys'].items() if v['Parliament_ID'] == str(parlament)), key=int)
-        return newest
-
     async def umfrage_ausgeben(self, userinput):
+        response = urllib.request.urlopen("https://api.dawum.de/")
+        data = json.loads(response.read())
         if userinput.isdigit() and int(userinput) > 100:
             umfragenid = userinput
         elif userinput.isdigit() and int(userinput) < 100:
-            umfragenid = await self.search_newest_poll(userinput)
+            umfragenid = max((k for k, v in data['Surveys'].items() if v['Parliament_ID'] == userinput), key=int)
         else:
-            umfragenid = await self.search_newest_poll(userinput)
+            parlament = await self.search_parliament(userinput)
+            umfragenid = max((k for k, v in data['Surveys'].items() if v['Parliament_ID'] == str(parlament)), key=int)
 
         parlament = data['Parliaments'][data['Surveys'][umfragenid]['Parliament_ID']]['Name']
         institut = data['Institutes'][data['Surveys'][umfragenid]['Institute_ID']]['Name']
         time = data['Surveys'][umfragenid]['Date']
 
-        output = f'von **{str(institut)}** am {str(time)}\n'
+        output = 'von **' + str(institut) + '** am ' + str(time) + "\n"
 
         for elements in data['Surveys'][umfragenid]['Results']:
             element = data['Parties'][elements]['Shortcut']
@@ -143,8 +128,9 @@ class Dawum(commands.Cog):
         Syntax: !poll <ländercode>
         Der Ländercode ist optional. Alle Ländercodes sind intuitiv. Bundesländer ausschreiben möglich."""
         if pollinput is None:
+            dawumoutput = await self.umfrage_ausgeben("0")
             await bp.delete_cmd(ctx)
-            await ctx.send(embed=await self.umfrage_ausgeben("0"))
+            await ctx.send(embed=dawumoutput)
         elif pollinput == "help":
             await bp.delete_cmd(ctx)
             wahlhelfembed = discord.Embed(title=str("Hilfe zum Befehl !poll"),
@@ -152,14 +138,9 @@ class Dawum(commands.Cog):
                                                       "Länderkürzel, Namen o.ä. zugelassen", color=12370112)
             await ctx.send(embed=wahlhelfembed, delete_after=bp.deltime)
         else:
+            dawumoutput = await self.umfrage_ausgeben(pollinput)
             await bp.delete_cmd(ctx)
-            await ctx.send(embed=await self.umfrage_ausgeben(pollinput))
-
-    @commands.command()
-    @commands.check(bp.botowner)
-    async def update(self, ctx):
-        await self.update_data()
-        await ctx.send(self.lastupdate)
+            await ctx.send(embed=dawumoutput)
 
     @poll.error
     async def poll_error(self, ctx, error):
