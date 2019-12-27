@@ -13,7 +13,7 @@ class Autoverify(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setmainrole(self, ctx, roleid):
-        """Setze die Hauptrolle, welche  beim Verifizierprozess vergeben werden soll."""
+        """Setze die Rolle die neue User bekommen"""
         with open('./data/roles/mainrole.json', 'r') as f:
             roles = json.load(f)
 
@@ -27,7 +27,7 @@ class Autoverify(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setspacerone(self, ctx, roleid):
-        """Setze die Spacerrolle 1, welche jeder User beim Verifizierungsprozess bekommen soll."""
+        """Setze die Spacerrolle 1, welche jeder User bekommen soll."""
         with open('./data/roles/spacerone.json', 'r') as f:
             roles = json.load(f)
 
@@ -41,7 +41,7 @@ class Autoverify(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setspacertwo(self, ctx, roleid):
-        """Setze die Spacerrolle 2, welche jeder User beim Verifizierungsprozess bekommen soll."""
+        """Setze die Spacerrolle 2, welche jeder User bekommen soll."""
         with open('./data/roles/spacertwo.json', 'r') as f:
             roles = json.load(f)
 
@@ -55,7 +55,7 @@ class Autoverify(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setspacerthree(self, ctx, roleid):
-        """Setze die Spacerrolle 3, welche jeder User beim Verifizierungsprozess bekommen soll."""
+        """Setze die Spacerrolle 3, welche jeder User bekommen soll."""
         with open('./data/roles/spacerthree.json', 'r') as f:
             roles = json.load(f)
 

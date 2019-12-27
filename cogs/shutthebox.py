@@ -3,6 +3,8 @@ import random as r
 import discord
 from discord.ext import commands
 
+from botdata import botparameters as bp
+
 
 class Shutthebox(commands.Cog):
 
@@ -10,9 +12,10 @@ class Shutthebox(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def challenge(self, ctx, playerid):
+    @commands.check(bp.user)
+    async def challenge(self, ctx, opponent: discord.Member):
         player1 = ctx.author
-        player2 = self.client.get_user(int(playerid))
+        player2 = opponent
         playerpkt = [0, 0]
         boxes = [0, 0, 0, 0, 0, 0, 0, 0]
         runde = 1
@@ -67,10 +70,12 @@ class Shutthebox(commands.Cog):
                     sumtemp = sumtemp + box + 1
             return sumtemp
 
-        if player1.id is not player2.id:
-            await ctx.send(f'Hey <@{str(playerid)}> du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" um die'
+        if player1.id is not player2.id and bp.user(player2):
+            await ctx.send(f'Hey <@{str(player2)}> du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" um die'
                            f' Challegenge zu akzeptieren')
-            msg1 = await self.client.wait_for('message', check=lambda message: message.author == player2, timeout=60)
+            msg1 = await self.client.wait_for(
+                'message', check=lambda message: message.author == player2 and message.content.lower() == "accept",
+                timeout=60)
             await ctx.send('Spieler <@' + str(player2.id) +
                            '> hat die Herausforderung angenommen! \n Challenge startet!'.format(msg1))
             # Runde starten
@@ -127,10 +132,14 @@ class Shutthebox(commands.Cog):
 
                 runde += 1
             await spielstand_ausgeben()
-        else:
+        elif player1 == player2:
             errorsb02embed = discord.Embed(title="Error #SB02",
                                            description="Du kannst dich nicht selbst herausfordern", color=0xff0000)
             await ctx.send(embed=errorsb02embed)
+        elif not bp.user(player2):
+            errorsb03embed = discord.Embed(title="Error #SB03",
+                                           description="Du kannst keine Bots herausfordern", color=0xff0000)
+            await ctx.send(embed=errorsb03embed)
 
     @challenge.error
     async def challenge_error(self, ctx, error):

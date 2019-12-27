@@ -8,29 +8,32 @@ from botdata import blacklist as bl
 from botdata import botparameters as bp
 
 
+async def delete_member_from_purge(member):
+    # TODO: Mitglieder wieder aus purge löschen
+    print("Unfinished")
+
+
+async def update_member(member):
+    if bp.user(member):
+        lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
+        with open(lastmember, 'r') as f:
+            members = json.load(f)
+
+        members[str(member.id)] = int(round(time.time() / 8640, 0))
+
+        with open(lastmember, 'w') as f:
+            json.dump(members, f, indent=4)
+
+
 class Moderation(commands.Cog):
 
     def __init__(self, client):
         self.client = client
 
-    async def update_member(self, member):
-        if bp.user(member):
-            lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
-            with open(lastmember, 'r') as f:
-                members = json.load(f)
-
-            members[str(member.id)] = time.time() / 8640
-
-            with open(lastmember, 'w') as f:
-                json.dump(members, f, indent=4)
-
-    async def delete_member_from_purge(self, member):
-        # TODO: Mitglieder wieder aus purge löschen
-        print("Unfinished")
-
     @commands.command()
     async def verify(self, ctx):
-        """Verifiziere deinen Account im Bot. Hat ansonsten keine weiteren Funktionen bisher."""
+        """Verifiziere deinen Account im Bot.
+        Hat ansonsten keine weiteren Funktionen bisher."""
         await bp.delete_cmd(ctx)
         if await bp.unverifiziert(ctx):
             # USERID in Verify
@@ -58,7 +61,8 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=10):
-        """"Löscht den gewählten Amount an Nachrichten Standardmenge: 10"""
+        """Löscht den gewählten Amount an Nachrichten
+        Standardmenge: 10"""
         await ctx.channel.purge(limit=amount + 1)
         await ctx.send("Es wurden **" + str(amount) + "** Nachrichten gelöscht.", delete_after=bp.deltime)
 
@@ -129,25 +133,30 @@ class Moderation(commands.Cog):
         """Entbannt ALLE User. Dies kann nicht rückgängig gemacht werden."""
         await bp.delete_cmd(ctx)
         bans = await ctx.guild.bans()
-        await ctx.send(f"Es wurden {len(bans)} User zum entbannen gefunden. Gebe Okay zum entbannen ein.",
-                       delete_after=len(bans) + 20)
-        await self.client.wait_for('message', check=lambda message: message.content.lower() == "Okay", timeout=60)
-        await ctx.send(f"Starte Unban.\n Dies kann etwas dauern.\n Geschätzte Zeit: {len(bans) / 6.5} Sekunden")
-        start = time.time()
-        x = 0
-        while x < len(bans):
-            await ctx.guild.unban(bans[x][1], reason="Unbanall")
-            x = x + 1
-        ende = time.time()
-        await ctx.send(
-            f"Alle User erfolgreich entbannt.\nUserzahl: {len(bans)}\n"
-            f"Zeit: {'{:5.3f}'.format(ende - start)}\nBans/Sekunde: {len(bans) / (ende - start)}")
+        if len(bans) > 0:
+            await ctx.send(f"Es wurden **{len(bans)}** User zum entbannen gefunden. Gebe Okay zum entbannen ein.",
+                           delete_after=len(bans) + 20)
+            await self.client.wait_for('message', check=lambda message: message.content.lower() == "okay", timeout=60)
+            await ctx.send(
+                f"Starte Unban.\n Dies kann etwas dauern.\n Geschätzte Zeit: **{round(len(bans) / 6.5)}** Sekunden")
+            start = time.time()
+            x = 0
+            while x < len(bans):
+                await ctx.guild.unban(bans[x][1], reason="Unbanall")
+                x = x + 1
+            ende = time.time()
+            await ctx.send(
+                f"Alle User erfolgreich entbannt. :white_check_mark:\nUserzahl: **{len(bans)}**\n"
+                f"Zeit: **{'{:5.3f}'.format(ende - start)}**\nBans/Sekunde: **{round(len(bans) / (ende - start))}**")
+        else:
+            await ctx.send(f'Es wurden 0 User zum entbannen gefunden.')
 
     # LogChannel setzen
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setlogchannel(self, ctx, lchannelid):
-        """Zum Setzen des Channels wird die Channelid als Argument benötigt.
+        """Setze einen Logkanal
+        Zum Setzen des Channels wird die Channelid als Argument benötigt.
         Syntax: !setlogchannel <channelid>"""
         with open('./data/logchannel.json', 'r') as f:
             logs = json.load(f)
@@ -170,7 +179,7 @@ class Moderation(commands.Cog):
     # Memberjoin
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        await self.update_member(member)
+        await update_member(member)
         try:
             if bp.user(member):
                 with open('./data/logchannel.json', 'r') as f:
@@ -248,7 +257,7 @@ class Moderation(commands.Cog):
     # Voice-Änderungen
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        await self.update_member(member)
+        await update_member(member)
         try:
             if bp.user(member) and member.guild is not None:
                 with open('./data/logchannel.json', 'r') as f:
@@ -271,7 +280,7 @@ class Moderation(commands.Cog):
     # Linkblocker
     @commands.Cog.listener()
     async def on_message(self, message):
-        await self.update_member(message.author)
+        await update_member(message.author)
         member = message.author
         if bp.user(member):
             if any([curse in message.content.lower() for curse in bl.blacklist]):

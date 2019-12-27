@@ -108,8 +108,7 @@ class Autosetup(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def fixserver(self, channel):
-        f"""Dieser Command dient zum beheben von Problemen, die aus verschiedenen Grüden entstehen können. 
-            Dabei werden fehlende Dateien erstellt und der Prefix zurückgesetzt."""
+        """Fixt Probleme"""
         await fixstuff(channel)
 
     @commands.Cog.listener()

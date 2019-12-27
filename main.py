@@ -44,6 +44,7 @@ async def on_ready():
 
 @client.command()
 async def ping(ctx):
+    """Zeigt den aktuellen Ping"""
     await bp.delete_cmd(ctx)
     await ctx.send(f'Pong! Meine Latenz sind aktuell {round(client.latency * 1000)} ms.')
 
@@ -51,6 +52,7 @@ async def ping(ctx):
 @client.command()
 @commands.check(bp.botowner)
 async def load(ctx, extension):
+    """Lädt ein Modul in den Bot"""
     await bp.delete_cmd(ctx)
     client.load_extension(f'cogs.{extension.lower()}')
     await ctx.send(f":green_circle: {extension} aktiviert")
@@ -60,6 +62,7 @@ async def load(ctx, extension):
 @client.command()
 @commands.check(bp.botowner)
 async def unload(ctx, extension):
+    """Lädt ein Modul aus dem Bot"""
     await bp.delete_cmd(ctx)
     client.unload_extension(f'cogs.{extension.lower()}')
     print(f'{extension} deaktiviert')
@@ -69,6 +72,7 @@ async def unload(ctx, extension):
 @client.command()
 @commands.check(bp.botowner)
 async def reload(ctx, extension):
+    """Lädt ein Modul neu"""
     await bp.delete_cmd(ctx)
     client.reload_extension(f'cogs.{extension.lower()}')
     print(f'{extension} neugeladen')
@@ -78,7 +82,8 @@ async def reload(ctx, extension):
 @client.command()
 @commands.check(bp.botowner)
 async def shutdown(ctx):
-    """Fährt den Bot herunter. Danach muss man ihn auf dem Server in der Console neustarten lol."""
+    """Fährt den Bot herunter.
+    Danach muss man ihn auf dem Server in der Console neustarten lol."""
     await bp.delete_cmd(ctx)
     await ctx.send("Bot wird heruntergefahren...")
     await client.logout()
@@ -87,9 +92,7 @@ async def shutdown(ctx):
 # Module beim Botstart laden
 for filename in os.listdir('./cogs'):
     if filename.endswith(".py"):
-        if filename.startswith('test'):
-            testmodulliste.append({filename[:-3]})
-        else:
+        if not filename.startswith('test'):
             if filename.endswith('.py'):
                 client.load_extension(f'cogs.{filename[:-3]}')
                 print(filename[:-3] + ' aktiviert')

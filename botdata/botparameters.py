@@ -1,5 +1,3 @@
-import discord
-
 deltime = 30
 deltime2 = 60
 
@@ -18,12 +16,6 @@ def user(member):
         return True
     else:
         return False
-
-
-# Versionen
-def apiversion():
-    apiversionstr = discord.__version__
-    return apiversionstr
 
 
 # Userstatus

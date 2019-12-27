@@ -15,7 +15,7 @@ class Themen(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setcategory(self, ctx, category):
-        """"Setze eine Kategorie, in welcher neue Themen erstellt werden sollen."""
+        """"Setze eine Kategorie, in der neue Themen erstellt werden."""
         with open('./data/topiccategorys.json', 'r') as f:
             categorys = json.load(f)
 
@@ -30,7 +30,7 @@ class Themen(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def settopiccreate(self, ctx, newtopicchannel):
-        """Setze einen Kanal, in welchem neue Themen erstellt werden können."""
+        """Setze einen Kanal, in welchem neue Themen erstellt werden."""
         with open('./data/newtopicchannel.json', 'r') as f:
             topiccreate = json.load(f)
 
