@@ -1,3 +1,4 @@
+import asyncio
 import random as r
 
 import discord
@@ -70,7 +71,7 @@ class Shutthebox(commands.Cog):
             return sumtemp
 
         if player1.id is not player2.id and bp.user(player2):
-            await ctx.send(f'Hey @{str(player2)} du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" um die'
+            await ctx.send(f'Hey {player2.mention} du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" um die'
                            f' Challenge zu akzeptieren')
             msg1 = await self.client.wait_for(
                 'message', check=lambda message: message.author == player2 and message.content.lower() == "accept",
@@ -146,6 +147,11 @@ class Shutthebox(commands.Cog):
             errorsb01embed = discord.Embed(title="Error #SB01",
                                            description="Fehlende NutzerID! Syntax: challenge <userid>", color=0xff0000)
             await ctx.send(embed=errorsb01embed)
+
+        if isinstance(error, asyncio.TimeoutError):
+            await ctx.send("Game timed out after 60s! Try typing a little faster next time!")
+            self.running_games.remove(ctx.author.id)
+            return
 
 
 def setup(client):
