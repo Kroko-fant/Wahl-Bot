@@ -12,7 +12,6 @@ class Shutthebox(commands.Cog):
         self.client = client
 
     @commands.command()
-    @commands.check(bp.user)
     async def challenge(self, ctx, opponent: discord.Member):
         player1 = ctx.author
         player2 = opponent
@@ -71,8 +70,8 @@ class Shutthebox(commands.Cog):
             return sumtemp
 
         if player1.id is not player2.id and bp.user(player2):
-            await ctx.send(f'Hey <@{str(player2)}> du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" um die'
-                           f' Challegenge zu akzeptieren')
+            await ctx.send(f'Hey @{str(player2)} du wurdest herausgefordert zu ShuttheBox! Schreibe "accept" um die'
+                           f' Challenge zu akzeptieren')
             msg1 = await self.client.wait_for(
                 'message', check=lambda message: message.author == player2 and message.content.lower() == "accept",
                 timeout=60)
