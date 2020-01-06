@@ -74,9 +74,23 @@ async def unload(ctx, extension):
 async def reload(ctx, extension):
     """Lädt ein Modul neu"""
     await bp.delete_cmd(ctx)
-    client.reload_extension(f'cogs.{extension.lower()}')
-    print(f'{extension} neugeladen')
-    await ctx.send(f':white_circle: {extension} neugeladen')
+    if extension == "all":
+        for filename in os.listdir('./cogs'):
+            if filename.endswith(".py"):
+                if not filename.startswith('test'):
+                    if filename.endswith('.py'):
+                        try:
+                            client.reload_extension(f'cogs.{filename[:-3]}')
+                            await ctx.send(f':white_circle: {filename[:-3]} neugeladen')
+                        except Exception:
+                            await ctx.send(f':red_circle: {filename[:-3]} konnte nicht neugeladen werden')
+            elif filename.endswith('__pycache__'):
+                await ctx.send(f':whitecheckmark: Pycache vorhanden')
+            else:
+                await ctx.send(f"Fehlerhafte File auf dem Server gefunden! {filename}")
+    else:
+        client.reload_extension(f'cogs.{extension.lower()}')
+        await ctx.send(f':white_circle: {extension} neugeladen')
 
 
 @client.command()
@@ -96,12 +110,12 @@ for filename in os.listdir('./cogs'):
             if filename.endswith('.py'):
                 client.load_extension(f'cogs.{filename[:-3]}')
                 print(filename[:-3] + ' aktiviert')
-            elif filename.endswith('__pycache__'):
-                print('Py-Cache gefunden')
             else:
                 print(F'{filename}' + ' ist fehlerhaft')
+    elif filename.endswith('__pycache__'):
+        print('Py-Cache gefunden')
     else:
-        pass
+        print('\x1b[6;30;42m' + f"Fehlerhafte File auf dem Server gefunden! {filename}" + '\x1b[0m')
 
 print('Module geladen')
 print("Botstart abgeschlossen!")

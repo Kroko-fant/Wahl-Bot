@@ -8,27 +8,25 @@ from botdata import blacklist as bl
 from botdata import botparameters as bp
 
 
-async def delete_member_from_purge(member):
-    # TODO: Mitglieder wieder aus purge löschen
-    print("Unfinished")
-
-
-async def update_member(member):
-    if bp.user(member):
-        lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
-        with open(lastmember, 'r') as f:
-            members = json.load(f)
-
-        members[str(member.id)] = int(round(time.time() / 8640, 0))
-
-        with open(lastmember, 'w') as f:
-            json.dump(members, f, indent=4)
-
-
 class Moderation(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+
+    async def delete_member_from_purge(self, member):
+        # TODO: Mitglieder wieder aus purge löschen
+        print("Unfinished")
+
+    async def update_member(self, member):
+        if bp.user(member):
+            lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
+            with open(lastmember, 'r') as f:
+                members = json.load(f)
+
+            members[str(member.id)] = int(round(time.time() / 8640, 0))
+
+            with open(lastmember, 'w') as f:
+                json.dump(members, f, indent=4)
 
     @commands.command()
     async def verify(self, ctx):
@@ -179,7 +177,7 @@ class Moderation(commands.Cog):
     # Memberjoin
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        await update_member(member)
+        await self.update_member(member)
         try:
             if bp.user(member):
                 with open('./data/logchannel.json', 'r') as f:
@@ -257,7 +255,7 @@ class Moderation(commands.Cog):
     # Voice-Änderungen
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        await update_member(member)
+        await self.update_member(member)
         try:
             if bp.user(member) and member.guild is not None:
                 with open('./data/logchannel.json', 'r') as f:
@@ -280,7 +278,7 @@ class Moderation(commands.Cog):
     # Linkblocker
     @commands.Cog.listener()
     async def on_message(self, message):
-        await update_member(message.author)
+        await self.update_member(message.author)
         member = message.author
         if bp.user(member):
             if any([curse in message.content.lower() for curse in bl.blacklist]):

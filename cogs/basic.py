@@ -28,7 +28,7 @@ class Basic(commands.Cog):
             await ctx.send(f'Danke <@{str(ctx.author.id)}> für das einreichen deines Bugs, wir melden uns zurück.',
                            delete_after=bp.deltime)
         else:
-            await ctx.send("Dein Bugtest muss zwischen 100 und 1800 Zeichen lang sein.")
+            await ctx.send("Dein Bugtest muss zwischen 100 und 1800 Zeichen lang sein.", delete_after=bp.deltime)
 
     @bug.error
     async def userinfo_error(self, ctx, error):
