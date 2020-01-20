@@ -13,9 +13,9 @@ class Moderation(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    async def delete_member_from_purge(self, member):
-        # TODO: Mitglieder wieder aus purge löschen
-        print("Unfinished")
+    # async def delete_member_from_purge(self, member):
+    # TODO: Mitglieder wieder aus purge löschen
+    # print("Unfinished")
 
     async def update_member(self, member):
         if bp.user(member):
@@ -156,12 +156,12 @@ class Moderation(commands.Cog):
         """Setze einen Logkanal
         Zum Setzen des Channels wird die Channelid als Argument benötigt.
         Syntax: !setlogchannel <channelid>"""
-        with open('./data/logchannel.json', 'r') as f:
+        with open('./data/channel/logchannel.json', 'r') as f:
             logs = json.load(f)
 
         logs[str(ctx.guild.id)] = str(lchannelid)
 
-        with open('./data/logchannel.json', 'w') as f:
+        with open('./data/channel/logchannel.json', 'w') as f:
             json.dump(logs, f, indent=4)
         await bp.delete_cmd(ctx)
         await ctx.send(f"Channel <#{lchannelid}> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
@@ -180,7 +180,7 @@ class Moderation(commands.Cog):
         await self.update_member(member)
         try:
             if bp.user(member):
-                with open('./data/logchannel.json', 'r') as f:
+                with open('./data/channel/logchannel.json', 'r') as f:
                     logs = json.load(f)
                 logch = self.client.get_channel(int(logs[str(member.guild.id)]))
                 await logch.send(f":inbox_tray: **{str(member)} ({str(member.id)})** ist dem Sever beigetreten.")
@@ -194,7 +194,7 @@ class Moderation(commands.Cog):
     async def on_member_remove(self, member):
         try:
             if bp.user(member):
-                with open('./data/logchannel.json', 'r') as f:
+                with open('./data/channel/logchannel.json', 'r') as f:
                     logs = json.load(f)
                 logch = self.client.get_channel(int(logs[str(member.guild.id)]))
                 await logch.send(f":outbox_tray: **{str(member)} ({str(member.id)})** hat den Server verlassen.")
@@ -208,7 +208,7 @@ class Moderation(commands.Cog):
     async def on_member_ban(self, guild, user):
         try:
             if bp.user(user):
-                with open('./data/logchannel.json', 'r') as f:
+                with open('./data/channel/logchannel.json', 'r') as f:
                     logs = json.load(f)
                 logch = self.client.get_channel(int(logs[str(guild.id)]))
                 await logch.send(f":no_entry_sign: **{str(user)} ({str(user.id)})** wurde gebannt.")
@@ -222,7 +222,7 @@ class Moderation(commands.Cog):
     async def on_member_unban(self, guild, user):
         try:
             if bp.user(user):
-                with open('./data/logchannel.json', 'r') as f:
+                with open('./data/channel/logchannel.json', 'r') as f:
                     logs = json.load(f)
                 logch = self.client.get_channel(int(logs[str(guild.id)]))
                 await logch.send(f":white_check_mark: **{str(user)} ({str(user.id)})** wurde entgebannt.")
@@ -234,23 +234,20 @@ class Moderation(commands.Cog):
     # Nachricht löschen
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
-        try:
-            if payload.guild_id is not None:
-                content = payload.cached_message.content
-                user = payload.cached_message.author
-                channel = payload.channel_id
-                with open('./data/logchannel.json', 'r') as f:
-                    logs = json.load(f)
-                logch = self.client.get_channel(int(logs[str(payload.guild_id)]))
-                if len(content) > 1800:
-                    await logch.send(':recycle: **Nachricht:**')
-                    await logch.send(str(content).replace("@", "👤"))
-                    await logch.send(f'von User: {str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
-                else:
-                    await logch.send(f':recycle: **Nachricht: **{str(content).replace("@", "👤")}von User: '
-                                     f'{str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
-        except Exception:
-            pass
+        if payload.guild_id is not None:
+            content = payload.cached_message.content
+            user = payload.cached_message.author
+            channel = payload.channel_id
+            with open('./data/channel/logchannel.json', 'r') as f:
+                logs = json.load(f)
+            logch = self.client.get_channel(int(logs[str(payload.guild_id)]))
+            if len(content) > 1800:
+                await logch.send(':recycle: **Nachricht:**')
+                await logch.send(str(content).replace("@", "👤"))
+                await logch.send(f'von User: {str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
+            else:
+                await logch.send(f':recycle: **Nachricht: **{str(content).replace("@", "👤")}von User: '
+                                 f'{str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
 
     # Voice-Änderungen
     @commands.Cog.listener()
@@ -258,7 +255,7 @@ class Moderation(commands.Cog):
         await self.update_member(member)
         try:
             if bp.user(member) and member.guild is not None:
-                with open('./data/logchannel.json', 'r') as f:
+                with open('./data/channel/logchannel.json', 'r') as f:
                     logs = json.load(f)
                 logch = self.client.get_channel(int(logs[str(member.guild.id)]))
                 if before.channel is None:
