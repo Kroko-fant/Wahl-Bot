@@ -62,7 +62,7 @@ class Moderation(commands.Cog):
         """Löscht den gewählten Amount an Nachrichten
         Standardmenge: 10"""
         await ctx.channel.purge(limit=amount + 1)
-        await ctx.send("Es wurden **" + str(amount) + "** Nachrichten gelöscht.", delete_after=bp.deltime)
+        await ctx.send(f"Es wurden **{amount}** Nachrichten gelöscht.", delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
@@ -119,11 +119,13 @@ class Moderation(commands.Cog):
         if amount >= 90:
             ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!", delete_after=bp.deltime)
 
+            await self.client.wait_for('message', check=lambda message: message.content.lower() == "accept", timeout=60)
+
+
         elif 90 > amount > 0:
             ctx.send("Die eingegebene Tageszahl ist zu klein!", delete_after=bp.deltime)
         else:
             ctx.send("Bitte gebe eine natürliche Zahl größer als 90 ein", delete_after=bp.deltime)
-        # TODO: PURGE
 
     @commands.command()
     @commands.has_permissions(administrator=True)
@@ -156,15 +158,18 @@ class Moderation(commands.Cog):
         """Setze einen Logkanal
         Zum Setzen des Channels wird die Channelid als Argument benötigt.
         Syntax: !setlogchannel <channelid>"""
-        with open('./data/channel/logchannel.json', 'r') as f:
-            logs = json.load(f)
+        if ctx.guild.get_channel(lchannelid) is not None:
+            with open('./data/channel/logchannel.json', 'r') as f:
+                logs = json.load(f)
 
-        logs[str(ctx.guild.id)] = str(lchannelid)
+            logs[str(ctx.guild.id)] = str(lchannelid)
 
-        with open('./data/channel/logchannel.json', 'w') as f:
-            json.dump(logs, f, indent=4)
-        await bp.delete_cmd(ctx)
-        await ctx.send(f"Channel <#{lchannelid}> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
+            with open('./data/channel/logchannel.json', 'w') as f:
+                json.dump(logs, f, indent=4)
+            await bp.delete_cmd(ctx)
+            await ctx.send(f"Channel <#{lchannelid}> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
+        else:
+            pass  # TODO ERRORS
 
     @setlogchannel.error
     async def setlogchannel_error(self, ctx, error):

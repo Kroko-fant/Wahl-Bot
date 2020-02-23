@@ -14,111 +14,47 @@ class Dawum(commands.Cog):
 
     # Bundesländer
     async def search_parliament(self, shortcode):
-        if any([code in shortcode.lower() for code in ['bt', 'bundestag']]):
-            return 0
-        elif any([code in shortcode.lower() for code in ['bw', 'bawü', 'de-bw', 'baden', 'badenwüttenberg']]):
-            return 1
-        elif any([code in shortcode.lower() for code in ['by', 'bay', 'de-by', 'bayern']]):
-            return 2
-        elif any([code in shortcode.lower() for code in ['be', 'de-be', 'berlin', 'ber']]):
-            return 3
-        elif any([code in shortcode.lower() for code in ['bb', 'de-bb', 'brandenburg', 'brand']]):
-            return 4
-        elif any([code in shortcode.lower() for code in ['hb', 'de-hb', 'bremen']]):
-            return 5
-        elif any([code in shortcode.lower() for code in ['hh', 'de-hh', 'hamburg', 'ham']]):
-            return 6
-        elif any([code in shortcode.lower() for code in ['he', 'de-he', 'hessen']]):
-            return 7
-        elif any([code in shortcode.lower() for code in ['mv', 'de-mv', 'mecklemburg', 'vorpommern',
-                                                         'mecklenburg-vorpommern']]):
-            return 8
-        elif any([code in shortcode.lower() for code in ['ni', 'de-ni', 'nieder', 'nie', 'niedersachsen']]):
-            return 9
-        elif any([code in shortcode.lower() for code in ['nw', 'de-nw', 'nrw', 'nordrhein', 'westfalen',
-                                                         'nordreihn-westfalen']]):
-            return 10
-        elif any([code in shortcode.lower() for code in ['rp', 'de-rp', 'rheinland', 'pfalz', 'rheinland-pfalz']]):
-            return 11
-        elif any([code in shortcode.lower() for code in ['sl', 'de-sl', 'saarland', 'saar']]):
-            return 12
-        elif any([code in shortcode.lower() for code in ['st', 'de-st', 'sachsen-anhalt', 'anhalt']]):
-            return 14
-        elif any([code in shortcode.lower() for code in ['sn', 'de-sn', 'sachsen', 'sac']]):
-            return 13
-        elif any(
-                [code in shortcode.lower() for code in ['sh', 'de-sh', 'schleswig', 'holstein', 'schleswig-holstein']]):
-            return 15
-        elif any([code in shortcode.lower() for code in ['th', 'de-th', 'thüringen', 'thü']]):
-            return 16
-        elif any([code in shortcode.lower() for code in ['eu', 'europa']]):
-            return 17
-        else:
-            return 'Error'
+        parlamentcodes = {'bt': 0, 'bundestag': 0, 'bw': 1, 'bawü': 1, 'de-bw': 1, 'baden': 1, 'badenwüttenberg': 1,
+                          'by': 2, 'bay': 2, 'de-by': 2, 'bayern': 2, 'be': 3, 'de-be': 3, 'berlin': 3, 'ber': 3,
+                          'bb': 4, 'de-bb': 4, 'brandenburg': 4, 'brand': 4, 'hb': 5, 'de-hb': 5, 'bremen': 5, 'hh': 6,
+                          'de-hh': 6, 'hamburg': 6, 'ham': 6, 'he': 7, 'de-he': 7, 'hessen': 7, 'mv': 8, 'de-mv': 8,
+                          'mecklemburg': 8, 'vorpommern': 8, 'mecklenburg-vorpommern': 8, 'ni': 9, 'de-ni': 9, 'nie': 9,
+                          'nieder': 9, 'niedersachsen': 9, 'nw': 10, 'de-nw': 10, 'nrw': 10, 'nordrhein': 10,
+                          'westfalen': 10, 'nordreihn-westfalen': 10, 'rp': 11, 'de-rp': 11, 'rheinland-pfalz': 11,
+                          'rheinland': 11, 'pfalz': 11, 'sl': 12, 'de-sl': 12, 'saarland': 12, 'saar': 12, 'sn': 13,
+                          'de-sn': 13, 'sachsen': 13, 'sac': 13, 'st': 14, 'de-st': 14, 'sachsen-anhalt': 14,
+                          'anhalt': 14, 'sh': 15, 'de-sh': 15, 'schleswig-holstein': 15, 'schleswig': 15,
+                          'holstein': 15, 'th': 16, 'de-th': 16, 'thüringen': 16, 'thü': 16, 'eu': 17, 'europa': 17}
+        return str(parlamentcodes.get(shortcode.lower(), 'Error'))
 
     async def search_party(self, shortcode):
-        if shortcode.lower() == 'sonstige':
-            return 0
-        elif shortcode.lower() == 'cducsu':
-            return 1
-        elif shortcode.lower() == 'spd':
-            return 2
-        elif shortcode.lower() == 'fdp':
-            return 3
-        elif shortcode.lower() == 'gruene':
-            return 4
-        elif shortcode.lower() == 'linke':
-            return 5
-        elif shortcode.lower() == 'piraten':
-            return 6
-        elif shortcode.lower() == 'afd':
-            return 7
-        elif shortcode.lower() == 'fw':
-            return 8
-        elif shortcode.lower() == 'ssw':
-            return 10
-        elif shortcode.lower() == 'diepartei':
-            return 13
-        elif shortcode.lower() == 'bvb':
-            return 14
-        elif shortcode.lower() == 'tierschutz':
-            return 15
-        elif shortcode.lower() == 'biw':
-            return 16
-        elif shortcode.lower() == 'cdu':
-            return 101
-        elif shortcode.lower() == 'csu':
-            return 102
-        else:
-            return 'Error'
+        partycodes = {'sonstige': 0, 'cducsu': 1, 'spd': 2, 'fdp': 3, 'gruene': 4, 'linke': 5, 'piraten': 6, 'afd': 7,
+                      'fw': 8, 'ssw': 10, 'bp': 11, 'diepartei': 13, 'bvb': 14, 'tierschutz': 15, 'biw': 16, 'cdu': 101,
+                      'csu': 102}
+
+        return partycodes.get(shortcode.lower(), 'Error')
 
     async def umfrage_ausgeben(self, userinput):
-        response = urllib.request.urlopen("https://api.dawum.de/")
-        data = json.loads(response.read())
+        data = json.loads(urllib.request.urlopen("https://api.dawum.de/").read())
         if userinput.isdigit() and int(userinput) > 100:
             umfragenid = userinput
         elif userinput.isdigit() and int(userinput) < 100:
             umfragenid = max((k for k, v in data['Surveys'].items() if v['Parliament_ID'] == userinput), key=int)
         else:
             parlament = await self.search_parliament(userinput)
-            umfragenid = max((k for k, v in data['Surveys'].items() if v['Parliament_ID'] == str(parlament)), key=int)
+            umfragenid = max((k for k, v in data['Surveys'].items() if v['Parliament_ID'] == parlament), key=int)
 
-        parlament = data['Parliaments'][data['Surveys'][umfragenid]['Parliament_ID']]['Name']
-        institut = data['Institutes'][data['Surveys'][umfragenid]['Institute_ID']]['Name']
-        time = data['Surveys'][umfragenid]['Date']
-
-        output = 'von **' + str(institut) + '** am ' + str(time) + "\n"
+        output = f"von **{data['Institutes'][data['Surveys'][umfragenid]['Institute_ID']]['Name']}** am" \
+                 f" {data['Surveys'][umfragenid]['Date']}\n"
 
         for elements in data['Surveys'][umfragenid]['Results']:
-            element = data['Parties'][elements]['Shortcut']
-            if element != 'None':
-                output = str(output) + "\n**" + str(element) + "**: " + \
-                         str(data['Surveys'][umfragenid]['Results'][elements]) + " %"
+            if data['Parties'][elements]['Shortcut'] != 'None':
+                output += f"\n** {data['Parties'][elements]['Shortcut']}**: " \
+                          f"{data['Surveys'][umfragenid]['Results'][elements]} %"
 
-        wahlembed = discord.Embed(title=str(parlament), description=output,
-                                  color=12370112)
-        wahlembed.set_footer(
-            text="UmfragenId: " + str(umfragenid) + "\n Daten aus der Dawum APi: " + "https://dawum.de/")
+        wahlembed = discord.Embed(title=data['Parliaments'][data['Surveys'][umfragenid]['Parliament_ID']]['Name'],
+                                  description=output, color=12370112)
+        wahlembed.set_footer(text=f"UmfragenId: {umfragenid}\n Daten aus der Dawum APi: https://dawum.de/")
 
         return wahlembed
 
@@ -133,7 +69,7 @@ class Dawum(commands.Cog):
             await ctx.send(embed=dawumoutput)
         elif pollinput == "help":
             await bp.delete_cmd(ctx)
-            wahlhelfembed = discord.Embed(title=str("Hilfe zum Befehl !poll"),
+            wahlhelfembed = discord.Embed(title="Hilfe zum Befehl !poll",
                                           description="Verwendung: !poll oder !poll <Argument>. Als Argumente sind "
                                                       "Länderkürzel, Namen o.ä. zugelassen", color=12370112)
             await ctx.send(embed=wahlhelfembed, delete_after=bp.deltime)

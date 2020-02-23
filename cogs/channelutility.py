@@ -41,7 +41,8 @@ class ChannelUtility(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def setaddreactchannel(self, ctx, addreactchannel, *emojis):
-        """Setze einen Kanal, in welchem neue Themen erstellt werden."""
+        """Setze einen Kanal, in welchem immer mit einer Liste von Emojis
+        Benutzung: !setaddreactchannel <channel> <emoji-liste>"""
         # emojis checken
         with open('./data/channel/addreactchannel.json', 'r') as f:
             topiccreate = json.load(f)
