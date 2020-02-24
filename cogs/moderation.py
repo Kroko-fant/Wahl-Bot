@@ -121,7 +121,6 @@ class Moderation(commands.Cog):
 
             await self.client.wait_for('message', check=lambda message: message.content.lower() == "accept", timeout=60)
 
-
         elif 90 > amount > 0:
             ctx.send("Die eingegebene Tageszahl ist zu klein!", delete_after=bp.deltime)
         else:

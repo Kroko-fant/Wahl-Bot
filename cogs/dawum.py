@@ -54,7 +54,7 @@ class Dawum(commands.Cog):
                 except KeyError:
                     pass
             if score > 0:
-                output += f"\n** {party}**: {score / count} %"
+                output += f"\n** {party}**: {round(score / count, 2)} %"
 
         wahlembed = discord.Embed(title=data['Parliaments'][data['Surveys'][str(newids[0])]['Parliament_ID']]['Name'],
                                   description=output, color=12370112)
@@ -66,24 +66,28 @@ class Dawum(commands.Cog):
     @commands.command(aliases=["umfrage"])
     async def poll(self, ctx, parla="bt", count=1):
         """Gebe die aktuelle Wahlumfrage aus.
-        Syntax: !poll <ländercode>
-        Der Ländercode ist optional. Alle Ländercodes sind intuitiv. Bundesländer ausschreiben möglich."""
+        Syntax: !poll <ländercode> <Umfragenzahl>
+        Der Ländercode ist optional. Alle Ländercodes sind intuitiv. Umfragenzahl"""
+        await bp.delete_cmd(ctx)
+        if count > 25:
+            errorda01embed = discord.Embed(title="Error #DA01", color=0xff0000,
+                                           description="Fehlendes Feedback! Syntax: !poll <ländercode> <Umfragenzahl>")
+            await ctx.send(embed=errorda01embed)
+            return
         if parla.lower() == "help":
-            await bp.delete_cmd(ctx)
             wahlhelfembed = discord.Embed(description="Verwendung: !poll oder !poll <ländercode> <range>. Länderkürzel "
                                                       "der deutschen Bundesländer, Bundestag oder EU Range beliebig "
                                                       "wählbar (<= 10) und es wird ein gemittelter Durchschnitt "
                                                       "berechnet", title="Hilfe zum Befehl !poll", color=12370112)
             await ctx.send(embed=wahlhelfembed, delete_after=bp.deltime)
         else:
-            await bp.delete_cmd(ctx)
             await ctx.send(embed=await self.umfrage_ausgeben(parla, count))
 
     @poll.error
     async def poll_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await bp.delete_cmd(ctx)
-            await ctx.send(embed=await self.umfrage_ausgeben('0'))
+            await ctx.send(embed=await self.umfrage_ausgeben('0', 0))
 
 
 def setup(client):
