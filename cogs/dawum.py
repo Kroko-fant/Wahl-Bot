@@ -35,6 +35,8 @@ class Dawum(commands.Cog):
         else:
             umfragenid = [int(k) for k, v in data['Surveys'].items() if v['Parliament_ID'] ==
                           str(parlamentcodes.get(userinput.lower(), 'Error'))]
+        if len(umfragenid) < count:
+            count = len(umfragenid)
         newids = []
         for ids in range(count):
             newids.append(max(umfragenid))
@@ -69,11 +71,6 @@ class Dawum(commands.Cog):
         Syntax: !poll <ländercode> <Umfragenzahl>
         Der Ländercode ist optional. Alle Ländercodes sind intuitiv. Umfragenzahl"""
         await bp.delete_cmd(ctx)
-        if count > 25:
-            errorda01embed = discord.Embed(title="Error #DA01", color=0xff0000,
-                                           description="Fehlendes Feedback! Syntax: !poll <ländercode> <Umfragenzahl>")
-            await ctx.send(embed=errorda01embed)
-            return
         if parla.lower() == "help":
             wahlhelfembed = discord.Embed(description="Verwendung: !poll oder !poll <ländercode> <range>. Länderkürzel "
                                                       "der deutschen Bundesländer, Bundestag oder EU Range beliebig "
@@ -82,12 +79,6 @@ class Dawum(commands.Cog):
             await ctx.send(embed=wahlhelfembed, delete_after=bp.deltime)
         else:
             await ctx.send(embed=await self.umfrage_ausgeben(parla, count))
-
-    @poll.error
-    async def poll_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await bp.delete_cmd(ctx)
-            await ctx.send(embed=await self.umfrage_ausgeben('0', 0))
 
 
 def setup(client):
