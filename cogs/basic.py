@@ -14,7 +14,7 @@ class Basic(commands.Cog):
     async def version(self, ctx):
         """Zeigt die aktuelle Bot-Version."""
         await bp.delete_cmd(ctx)
-        await ctx.send(f'Der Bot läuft auf :eyes: **Version Beta 1.3.0**. '
+        await ctx.send(f'Der Bot läuft auf :eyes: **Version Beta 1.3.1**. '
                        f'Die API läuft auf Version :mailbox: **{discord.__version__}**', delete_after=bp.deltime)
 
     @commands.command()
