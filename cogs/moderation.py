@@ -18,15 +18,14 @@ class Moderation(commands.Cog):
     # print("Unfinished")
 
     async def update_member(self, member):
-        if bp.user(member):
-            lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
-            with open(lastmember, 'r') as f:
-                members = json.load(f)
+        lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
+        with open(lastmember, 'r') as f:
+            members = json.load(f)
 
-            members[str(member.id)] = int(round(time.time() / 8640, 0))
+        members[str(member.id)] = int(round(time.time() / 8640, 0))
 
-            with open(lastmember, 'w') as f:
-                json.dump(members, f, indent=4)
+        with open(lastmember, 'w') as f:
+            json.dump(members, f, indent=4)
 
     @commands.command()
     async def verify(self, ctx):
@@ -66,7 +65,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx, member: discord.Member, *, reason=None):
+    async def kick(self, ctx, member: discord.Member, *, reason="Kick-Befehl wurde benutzt"):
         """Kickt den User vom Server
         Syntax: {prefix}kick <@user>"""
         await bp.delete_cmd(ctx)
@@ -118,9 +117,7 @@ class Moderation(commands.Cog):
         await bp.delete_cmd(ctx)
         if amount >= 90:
             ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!", delete_after=bp.deltime)
-
             await self.client.wait_for('message', check=lambda message: message.content.lower() == "accept", timeout=60)
-
         elif 90 > amount > 0:
             ctx.send("Die eingegebene Tageszahl ist zu klein!", delete_after=bp.deltime)
         else:
@@ -181,29 +178,27 @@ class Moderation(commands.Cog):
     # Memberjoin
     @commands.Cog.listener()
     async def on_member_join(self, member):
+        if not bp.user(member):
+            return
         await self.update_member(member)
         try:
-            if bp.user(member):
-                with open('./data/channel/logchannel.json', 'r') as f:
-                    logs = json.load(f)
-                logch = self.client.get_channel(int(logs[str(member.guild.id)]))
-                await logch.send(f":inbox_tray: **{str(member)} ({str(member.id)})** ist dem Sever beigetreten.")
-            else:
-                pass
+            with open('./data/channel/logchannel.json', 'r') as f:
+                logs = json.load(f)
+            logch = self.client.get_channel(int(logs[str(member.guild.id)]))
+            await logch.send(f":inbox_tray: **{str(member)} ({str(member.id)})** ist dem Sever beigetreten.")
         except Exception:
             pass
 
     # Memberleave
     @commands.Cog.listener()
     async def on_member_remove(self, member):
+        if not bp.user(member):
+            return
         try:
-            if bp.user(member):
-                with open('./data/channel/logchannel.json', 'r') as f:
-                    logs = json.load(f)
-                logch = self.client.get_channel(int(logs[str(member.guild.id)]))
-                await logch.send(f":outbox_tray: **{str(member)} ({str(member.id)})** hat den Server verlassen.")
-            else:
-                pass
+            with open('./data/channel/logchannel.json', 'r') as f:
+                logs = json.load(f)
+            logch = self.client.get_channel(int(logs[str(member.guild.id)]))
+            await logch.send(f":outbox_tray: **{str(member)} ({str(member.id)})** hat den Server verlassen.")
         except Exception:
             pass
 
@@ -223,74 +218,68 @@ class Moderation(commands.Cog):
 
     # Member wird entbannt
     @commands.Cog.listener()
-    async def on_member_unban(self, guild, user):
+    async def on_member_unban(self, guild, member):
+        if not bp.user(member):
+            return
         try:
-            if bp.user(user):
-                with open('./data/channel/logchannel.json', 'r') as f:
-                    logs = json.load(f)
-                logch = self.client.get_channel(int(logs[str(guild.id)]))
-                await logch.send(f":white_check_mark: **{str(user)} ({str(user.id)})** wurde entgebannt.")
-            else:
-                pass
+            with open('./data/channel/logchannel.json', 'r') as f:
+                logs = json.load(f)
+            logch = self.client.get_channel(int(logs[str(guild.id)]))
+            await logch.send(f":white_check_mark: **{str(member)} ({str(member.id)})** wurde entgebannt.")
         except Exception:
             pass
 
     # Nachricht löschen
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
-        if payload.guild_id is not None:
-            content = payload.cached_message.content
-            user = payload.cached_message.author
-            channel = payload.channel_id
-            with open('./data/channel/logchannel.json', 'r') as f:
-                logs = json.load(f)
-            logch = self.client.get_channel(int(logs[str(payload.guild_id)]))
-            if len(content) > 1800:
-                await logch.send(':recycle: **Nachricht:**')
-                await logch.send(str(content).replace("@", "👤"))
-                await logch.send(f'von User: {str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
-            else:
-                await logch.send(f':recycle: **Nachricht: **{str(content).replace("@", "👤")}von User: '
-                                 f'{str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
+        if payload.guild_id is None:
+            return
+        content = payload.cached_message.content
+        user = payload.cached_message.author
+        channel = payload.channel_id
+        with open('./data/channel/logchannel.json', 'r') as f:
+            logs = json.load(f)
+        logch = self.client.get_channel(int(logs[str(payload.guild_id)]))
+        if len(content) > 1800:
+            await logch.send(':recycle: **Nachricht:**')
+            await logch.send(str(content).replace("@", "👤"))
+            await logch.send(f'von User: {str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
+        else:
+            await logch.send(f':recycle: **Nachricht: **{str(content).replace("@", "👤")}von User: '
+                             f'{str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
 
     # Voice-Änderungen
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
+        if not bp.user(member) and member.guild is not None:
+            return
         await self.update_member(member)
         try:
-            if bp.user(member) and member.guild is not None:
-                with open('./data/channel/logchannel.json', 'r') as f:
-                    logs = json.load(f)
-                logch = self.client.get_channel(int(logs[str(member.guild.id)]))
-                if before.channel is None:
-                    await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
-                                     f"**{str(before.channel)}** verlassen.")
-                elif before.channel is not None and after.channel is None:
-                    await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
-                                     f"**{str(before.channel)}** verlassen.")
-                elif before.channel is not None and after.channel is not None:
-                    await logch.send(f":mega: **{str(member)} ({str(member.id)} )** hat den Voice Channel von ** "
-                                     f"{str(before.channel)} ** zu ** {str(after.channel)}** gewechselt.")
-            else:
-                pass
+            with open('./data/channel/logchannel.json', 'r') as f:
+                logs = json.load(f)
+            logch = self.client.get_channel(int(logs[str(member.guild.id)]))
+            if before.channel is None:
+                await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
+                                 f"**{str(before.channel)}** verlassen.")
+            elif before.channel is not None and after.channel is None:
+                await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
+                                 f"**{str(before.channel)}** verlassen.")
+            elif before.channel is not None and after.channel is not None:
+                await logch.send(f":mega: **{str(member)} ({str(member.id)} )** hat den Voice Channel von ** "
+                                 f"{str(before.channel)} ** zu ** {str(after.channel)}** gewechselt.")
         except Exception:
             pass
 
     # Linkblocker
     @commands.Cog.listener()
     async def on_message(self, message):
+        if not bp.user(message.author):
+            return
         await self.update_member(message.author)
-        member = message.author
-        if bp.user(member):
-            if any([curse in message.content.lower() for curse in bl.blacklist]):
-                await message.delete()
-                await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von "
-                                           f"Discord-Links")
-                return True
-            else:
-                pass
-        else:
-            pass
+        if any([curse in message.content.lower() for curse in bl.blacklist]):
+            await message.delete()
+            await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von Discord-Links"
+                                       )
 
 
 def setup(client):

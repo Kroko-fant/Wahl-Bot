@@ -80,7 +80,7 @@ class Autoverify(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.guild is not None:
+        if message.guild is not None and message.author is not None:
             try:
                 guild = message.guild
                 member = message.guild.get_member(int(message.author.id))
