@@ -60,7 +60,7 @@ class Dawum(commands.Cog):
                 output += f"\n** {party}**: {round(score / count, 2)} %"
 
         wahlembed = discord.Embed(title=data['Parliaments'][data['Surveys'][str(newids[0])]['Parliament_ID']]['Name'],
-                                  description=output, color=12370112)
+                                  description=output, color=2263842)
         wahlembed.set_footer(text=f"UmfragenId: {newids[0]}\n Daten aus der Dawum APi: "
                                   f"https://dawum.de/" if count == 1 else "Daten aus der Dawum APi: https://dawum.de/")
 
