@@ -85,9 +85,10 @@ class Dawum(commands.Cog):
     async def createchart(self, ctx):
         await bp.delete_cmd(ctx)
         data = {"Spd": 20, "CDU": 30, "Afd": 10, "FDP": 8, "Grüne": 22, "Linke": 5, "Sonstige": 5}
+        colors = {"Spd": 20, "CDU": 30, "Afd": 10, "FDP": 8, "Grüne": 22, "Linke": 5, "Sonstige": 5}
         serie = pd.Series(data)
         print(serie)
-        chart = serie.plot(kind='bar', figsize=(12, 8), fontsize=18,
+        chart = serie.plot(kind='bar', figsize=(12, 8), fontsize=18, colormap="Dark2",
                            title="Wahlumfrage vom 20.3. anhand von Testdaten",
                            ylim=(0, 40))
         print(type(chart))

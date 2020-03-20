@@ -239,6 +239,8 @@ class Moderation(commands.Cog):
         channel = payload.channel_id
         with open('./data/channel/logchannel.json', 'r') as f:
             logs = json.load(f)
+        if str(payload.guild_id) not in logs.keys():
+            return
         logch = self.client.get_channel(int(logs[str(payload.guild_id)]))
         if len(content) > 1800:
             await logch.send(':recycle: **Nachricht:**')
