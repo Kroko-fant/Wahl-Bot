@@ -2,6 +2,7 @@ import json
 import urllib
 
 import discord
+import pandas as pd
 from discord.ext import commands
 
 from botdata import botparameters as bp
@@ -79,6 +80,21 @@ class Dawum(commands.Cog):
             await ctx.send(embed=wahlhelfembed, delete_after=bp.deltime)
         else:
             await ctx.send(embed=await self.umfrage_ausgeben(parla, count))
+
+    @commands.command()
+    async def createchart(self, ctx):
+        await bp.delete_cmd(ctx)
+        data = {"Spd": 20, "CDU": 30, "Afd": 10, "FDP": 8, "Grüne": 22, "Linke": 5, "Sonstige": 5}
+        serie = pd.Series(data)
+        print(serie)
+        chart = serie.plot(kind='bar', figsize=(12, 8), fontsize=18,
+                           title="Wahlumfrage vom 20.3. anhand von Testdaten",
+                           ylim=(0, 40))
+        print(type(chart))
+        fig = chart.get_figure()
+        print(type(fig))
+        fig.savefig("temp/output.png")
+        await ctx.send(file=discord.File(fp=open("temp/output.png", "rb"), filename="Chart.png"))
 
 
 def setup(client):
