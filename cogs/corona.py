@@ -20,6 +20,7 @@ class Corona(commands.Cog):
         response = re.search("</html>.*<br>", str(response))
         response = response[0].replace("</html>\\n", "").replace("<br>", "\n")
         newsembed = discord.Embed(title="Aktuelle Corona-News", description=response, color=2263842)
+        newsembed.set_footer(text="Niklas Fehde, https://covidapi.org/")
         await ctx.send(embed=newsembed)
 
     @commands.command(aliases=["corn"])
@@ -58,7 +59,6 @@ class Corona(commands.Cog):
                                     description=description,
                                     color=2263842)
         coronaembed.set_footer(text="Niklas Fehde, https://covidapi.org/")
-        await bp.delete_cmd(ctx)
         await ctx.send(embed=coronaembed)
 
 
