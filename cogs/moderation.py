@@ -232,7 +232,7 @@ class Moderation(commands.Cog):
     # Nachricht löschen
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
-        if payload.guild_id is None or payload is None:
+        if payload.guild_id is None or payload is None or payload.cached_message is None:
             return
         content = payload.cached_message.content
         user = payload.cached_message.author

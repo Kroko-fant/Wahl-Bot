@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.3.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/moderation.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/moderation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/servers/275305547916378113/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/275305547916378113/lastdata.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -364,6 +364,8 @@
       <workItem from="1584749367175" duration="108000" />
       <workItem from="1584815565962" duration="2749000" />
       <workItem from="1584818753805" duration="1795000" />
+      <workItem from="1584826952653" duration="243000" />
+      <workItem from="1584827220136" duration="1082000" />
     </task>
     <task id="LOCAL-00026" summary="Pre-Version 1.2.3">
       <created>1571579363401</created>
@@ -780,10 +782,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1577373024842" />
-    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2" timestamp="1584820619518">
+    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2" timestamp="1584828404166">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584820619518" />
+    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584828404166" />
     <state x="-927" y="-65" key="CommitChangelistDialog2/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579552539559" />
     <state x="868" y="49" key="CommitChangelistDialog2/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884235367" />
     <state x="184" y="91" key="DiffContextDialog" timestamp="1582471404290">
@@ -795,28 +797,28 @@
     </state>
     <state x="-787" y="174" key="FileChooserDialogImpl/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1584052493267" />
     <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1581678147856" />
-    <state width="1877" height="432" key="GridCell.Tab.0.bottom" timestamp="1584820589711">
+    <state width="1877" height="385" key="GridCell.Tab.0.bottom" timestamp="1584828367261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="432" key="GridCell.Tab.0.bottom/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584820589711" />
+    <state width="1877" height="385" key="GridCell.Tab.0.bottom/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584828367261" />
     <state width="1237" height="340" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391037" />
-    <state width="1877" height="432" key="GridCell.Tab.0.center" timestamp="1584820589711">
+    <state width="1877" height="385" key="GridCell.Tab.0.center" timestamp="1584828367261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="432" key="GridCell.Tab.0.center/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584820589711" />
+    <state width="1877" height="385" key="GridCell.Tab.0.center/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584828367261" />
     <state width="1237" height="340" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391036" />
-    <state width="1877" height="432" key="GridCell.Tab.0.left" timestamp="1584820589711">
+    <state width="1877" height="385" key="GridCell.Tab.0.left" timestamp="1584828367261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="432" key="GridCell.Tab.0.left/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584820589711" />
+    <state width="1877" height="385" key="GridCell.Tab.0.left/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584828367261" />
     <state width="1237" height="340" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391036" />
-    <state width="1877" height="432" key="GridCell.Tab.0.right" timestamp="1584820589711">
+    <state width="1877" height="385" key="GridCell.Tab.0.right" timestamp="1584828367261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="432" key="GridCell.Tab.0.right/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584820589711" />
+    <state width="1877" height="385" key="GridCell.Tab.0.right/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584828367261" />
     <state width="1237" height="340" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391036" />
     <state width="1877" height="391" key="GridCell.Tab.1.bottom" timestamp="1582588540833">
@@ -847,10 +849,10 @@
     <state x="451" y="183" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584748106449" />
     <state x="-979" y="100" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579552542695" />
     <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884239154" />
-    <state x="0" y="0" width="457" height="268" key="com.intellij.ide.util.TipDialog" timestamp="1584818759924">
+    <state x="0" y="0" width="457" height="268" key="com.intellij.ide.util.TipDialog" timestamp="1584827332682">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584818759924" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584827332682" />
     <state x="502" y="253" width="606" height="327" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1577369217238" />
     <state x="-1280" y="-73" width="457" height="268" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1584115702723" />
     <state x="0" y="0" width="457" height="283" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1584139161396" />
@@ -866,6 +868,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="main Coverage Results" MODIFIED="1573142282124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/WahlBot$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1584820589699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1584828367252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
