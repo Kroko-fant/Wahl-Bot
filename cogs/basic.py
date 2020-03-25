@@ -25,7 +25,7 @@ class Basic(commands.Cog):
         Syntax: {Prefix}bug <bugtext>"""
         channel = self.client.get_channel(int(643546804750909454))
         if 1800 >= len(bugt) >= 1:
-            await channel.send(f"**Bug von {str(ctx.author)}:**{bugt}")
+            await channel.send(f"**Bug von {str(ctx.author)} ({str(ctx.author.id)}):**{bugt}")
             await bp.delete_cmd(ctx)
             await ctx.send(f'Danke <@{str(ctx.author.id)}> für das einreichen deines Bugs, wir melden uns zurück.',
                            delete_after=bp.deltime)
@@ -45,7 +45,7 @@ class Basic(commands.Cog):
         Syntax; {Prefix}feedback <feedbacktext>"""
         channel = self.client.get_channel(int(643540415919816717))
         if 1800 >= len(feedbackt) >= 1:
-            await channel.send(f'**Feedback von {str(ctx.author)}:**  {feedbackt}')
+            await channel.send(f'**Feedback von {str(ctx.author)} ({str(ctx.author.id)}):**  {feedbackt}')
             await bp.delete_cmd(ctx)
             await ctx.send(f'Danke <@{str(ctx.author.id)}> für das einreichen deines Feedbacks, wir melden uns zurück.',
                            delete_after=bp.deltime)
