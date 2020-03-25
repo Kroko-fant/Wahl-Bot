@@ -85,7 +85,7 @@ class Basic(commands.Cog):
 
         if (ctx.channel.id == self.bugchannel or ctx.channel.id == self.feedbackchannel or
             ctx.channel.id == self.dmchannel) and str(ctx.content[0:18]).isnumeric():
-            print("Test")
+            ctx.add_reaction("✅")
             user = ctx.content[0:18]
             msg = ctx.content[19:]
             dmchannel = self.client.get_user(int(user))
