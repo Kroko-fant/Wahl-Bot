@@ -10,6 +10,7 @@ class Basic(commands.Cog):
         self.client = client
         self.feedbackchannel = 643540415919816717
         self.bugchannel = 643546804750909454
+        self.dmchannel = 635544300834258995
 
     # Commands
     @commands.command()
@@ -82,8 +83,8 @@ class Basic(commands.Cog):
                 await channel.send(content[0:1800])
                 await channel.send(content[1801])
 
-        if ctx.channel.id == self.bugchannel or ctx.channel.id == self.feedbackchannel and \
-                str(ctx.content[0:18]).isNumeric():
+        if (ctx.channel.id == self.bugchannel or ctx.channel.id == self.feedbackchannel or
+            ctx.channel.id == self.dmchannel) and str(ctx.content[0:18]).isnumeric():
             print("Test")
             user = ctx.content[0:18]
             msg = ctx.content[19:]
