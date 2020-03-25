@@ -275,7 +275,7 @@ class Moderation(commands.Cog):
     # Linkblocker
     @commands.Cog.listener()
     async def on_message(self, message):
-        if not bp.user(message.author):
+        if not bp.user(message.author) or message.guild is None:
             return
         await self.update_member(message.author)
         if any([curse in message.content.lower() for curse in bl.blacklist]):

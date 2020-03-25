@@ -50,7 +50,7 @@ async def ping(ctx):
 
 
 @client.command()
-@commands.check(bp.botowner)
+@commands.is_owner()
 async def load(ctx, extension):
     """Lädt ein Modul in den Bot"""
     await bp.delete_cmd(ctx)
@@ -60,7 +60,7 @@ async def load(ctx, extension):
 
 
 @client.command()
-@commands.check(bp.botowner)
+@commands.is_owner()
 async def unload(ctx, extension):
     """Lädt ein Modul aus dem Bot"""
     await bp.delete_cmd(ctx)
@@ -70,7 +70,7 @@ async def unload(ctx, extension):
 
 
 @client.command()
-@commands.check(bp.botowner)
+@commands.is_owner()
 async def reload(ctx, extension):
     """Lädt ein Modul neu"""
     await bp.delete_cmd(ctx)
@@ -94,7 +94,7 @@ async def reload(ctx, extension):
 
 
 @client.command()
-@commands.check(bp.botowner)
+@commands.is_owner()
 async def shutdown(ctx):
     """Fährt den Bot herunter.
     Danach muss man ihn auf dem Server in der Console neustarten lol."""
@@ -107,11 +107,8 @@ async def shutdown(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith(".py"):
         if not filename.startswith('test'):
-            if filename.endswith('.py'):
-                client.load_extension(f'cogs.{filename[:-3]}')
-                print(filename[:-3] + ' aktiviert')
-            else:
-                print(F'{filename}' + ' ist fehlerhaft')
+            client.load_extension(f'cogs.{filename[:-3]}')
+            print(filename[:-3] + ' aktiviert')
     elif filename.endswith('__pycache__'):
         print('Py-Cache gefunden')
     else:
