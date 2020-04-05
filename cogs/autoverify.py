@@ -1,5 +1,6 @@
 import json
 
+import discord
 from discord.ext import commands
 
 from botdata import botparameters as bp
@@ -12,102 +13,73 @@ class Autoverify(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def setmainrole(self, ctx, roleid):
+    async def setmainrole(self, ctx, role: discord.Role):
         """Setze die Rolle die neue User bekommen"""
-        if ctx.guild.get_role(roleid) is not None:
+        if role.guild is ctx.guild:
             with open('./data/roles/mainrole.json', 'r') as f:
                 roles = json.load(f)
 
-            roles[str(ctx.guild.id)] = int(roleid)
+            roles[str(ctx.guild.id)] = int(role.id)
 
             with open('./data/roles/mainrole.json', 'w') as f:
                 json.dump(roles, f, indent=4)
             await bp.delete_cmd(ctx)
             await ctx.send("Main-Rolle gesetzt.", delete_after=bp.deltime)
         else:
-            pass  # TODO ERROR
+            await ctx.send("Rolle wurde auf dem Server nicht gefunden.", delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def setspacerone(self, ctx, roleid):
-        """Setze die Spacerrolle 1, welche jeder User bekommen soll."""
-        if ctx.guild.get_role(roleid) is not None:
-            with open('./data/roles/spacerone.json', 'r') as f:
-                roles = json.load(f)
-
-            roles[str(ctx.guild.id)] = int(roleid)
-
-            with open('./data/roles/spacerone.json', 'w') as f:
-                json.dump(roles, f, indent=4)
-            await bp.delete_cmd(ctx)
-            await ctx.send("Spacer 1 Rolle gesetzt.", delete_after=bp.deltime)
+    async def addspacer(self, ctx, role: discord.Role):
+        """Füge eine Spacerrolle hinzu"""
+        if role.guild is ctx.guild:
+            with open('./data/roles/spacer.json', 'r') as f:
+                spacers = json.load(f)
+            if str(ctx.guild.id) not in spacers.keys():
+                spacers[str(ctx.guild.id)] = []
+            spacers[str(ctx.guild.id)].append(int(role.id))
+            with open('./data/roles/spacer.json', 'w') as f:
+                json.dump(spacers, f, indent=4)
         else:
-            pass  # TODO ERROR
+            await ctx.send("Rolle wurde auf dem Server nicht gefunden.", delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def setspacertwo(self, ctx, roleid):
-        """Setze die Spacerrolle 2, welche jeder User bekommen soll."""
-        if ctx.guild.get_role(roleid) is not None:
-            with open('./data/roles/spacertwo.json', 'r') as f:
+    async def removespacer(self, ctx, role: discord.Role):
+        """Entfernt einen Spacer"""
+        if role.guild is ctx.guild:
+            with open('./data/roles/spacer.json', 'r') as f:
                 roles = json.load(f)
 
-            roles[str(ctx.guild.id)] = int(roleid)
+            roles[str(ctx.guild.id)].remove(int(role.id))
 
-            with open('./data/roles/spacertwo.json', 'w') as f:
+            with open('./data/roles/spacer.json', 'w') as f:
                 json.dump(roles, f, indent=4)
             await bp.delete_cmd(ctx)
-            await ctx.send("Spacer 2 Rolle gesetzt.", delete_after=bp.deltime)
+            await ctx.send("Spacerrolle entfernt.", delete_after=bp.deltime)
         else:
-            pass  # TODO ERROR
-
-    @commands.command()
-    @commands.has_permissions(administrator=True)
-    async def setspacerthree(self, ctx, roleid):
-        """Setze die Spacerrolle 3, welche jeder User bekommen soll."""
-        if ctx.guild.get_role(roleid) is not None:
-            with open('./data/roles/spacerthree.json', 'r') as f:
-                roles = json.load(f)
-
-            roles[str(ctx.guild.id)] = int(roleid)
-
-            with open('./data/roles/spacerthree.json', 'w') as f:
-                json.dump(roles, f, indent=4)
-            await bp.delete_cmd(ctx)
-            await ctx.send("Spacer 3 Rolle gesetzt.", delete_after=bp.deltime)
-        else:
-            pass  # TODO ERROR
+            await ctx.send("Rolle wurde auf dem Server nicht gefunden.", delete_after=bp.deltime)
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.guild is not None and message.author is not None:
+        if message.guild is not None and message.author is not None and len(message.author.roles) == 1:
             try:
                 guild = message.guild
                 member = message.guild.get_member(int(message.author.id))
                 # Main Rolle setzen
                 with open('./data/roles/mainrole.json', 'r') as f:
-                    roles = json.load(f)
-                roleid = (roles[str(guild.id)])
+                    servers = json.load(f)
+                roleid = (servers[str(guild.id)])
                 role = guild.get_role(roleid)
                 await member.add_roles(role, reason="verify")
-                # Spacer 1 Setzen
-                with open('./data/roles/spacerone.json', 'r') as f:
-                    roles = json.load(f)
-                roleid = (roles[str(guild.id)])
-                role = guild.get_role(roleid)
-                await member.add_roles(role, reason="verify")
-                # Spacer 2 Setzen
-                with open('./data/roles/spacertwo.json', 'r') as f:
-                    roles = json.load(f)
-                roleid = (roles[str(guild.id)])
-                role = guild.get_role(roleid)
-                await member.add_roles(role, reason="verify")
-                # Spacer 3 setzen
-                with open('./data/roles/spacerthree.json', 'r') as f:
-                    roles = json.load(f)
-                roleid = (roles[str(guild.id)])
-                role = guild.get_role(roleid)
-                await member.add_roles(role, reason="verify")
+                # Spacer setzen
+                with open('./data/roles/spacer.json', 'r') as f:
+                    servers = json.load(f)
+                roles = servers[str(guild.id)]
+                for rid in roles:
+                    print(rid)
+                    trole = guild.get_role(rid)
+                    await member.add_roles(trole, reason="verify")
             except KeyError:
                 pass
 

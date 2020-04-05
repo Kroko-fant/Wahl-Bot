@@ -95,7 +95,7 @@ class Autosetup(commands.Cog):
         else:
             await ctx.send("Datei Sperren bereits vorhanden :white_check_mark:", delete_after=bp.deltime2)
 
-        await ctx.send("Alle Probleme behoben.", delete_after=bp.deltime)
+        await ctx.send("Alle Probleme behoben.", delete_after=bp.deltime2)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
