@@ -2,16 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68e9d650-304e-49ba-bf38-8f65c8d57ec2" name="Default" comment="Version Beta 1.3.2c">
+      <change afterPath="$PROJECT_DIR$/data/roles/spacer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/autosetup.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/autosetup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/autoverify.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/autoverify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/basic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/basic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/moderation.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/moderation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/prefixes.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/prefixes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/testvoiceutility.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/testvoiceutility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/userinfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/userinfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/prefixes.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/prefixes.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/roles/mainrole.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/roles/mainrole.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/roles/spacerone.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/roles/spacer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/roles/spacerone.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/roles/spacerthree.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/roles/spacertwo.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/roles/verify-role.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/servers/275305547916378113/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/275305547916378113/lastdata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/servers/482966043355119626/lastdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/servers/482966043355119626/lastdata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/lastdata.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/reactions.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/servers/612711527258259456/sperren.json" beforeDir="false" />
@@ -73,10 +80,11 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../dawum-data" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -394,13 +402,13 @@
       <workItem from="1586115898850" duration="4948000" />
       <workItem from="1586120875819" duration="555000" />
       <workItem from="1586121449639" duration="658000" />
-    </task>
-    <task id="LOCAL-00033" summary="Version Beta 1.0.3">
-      <created>1571936787413</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1571936787413</updated>
+      <workItem from="1586122386000" duration="379000" />
+      <workItem from="1586122888993" duration="241000" />
+      <workItem from="1586175604059" duration="812000" />
+      <workItem from="1586198764034" duration="663000" />
+      <workItem from="1586204657509" duration="4800000" />
+      <workItem from="1586283796558" duration="2739000" />
+      <workItem from="1586439214578" duration="7274000" />
     </task>
     <task id="LOCAL-00034" summary="Version Beta 1.0.3">
       <created>1571937632958</created>
@@ -738,11 +746,18 @@
       <option name="project" value="LOCAL" />
       <updated>1585160722699</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Version Beta 1.3.3">
+      <created>1586122487440</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1586122487441</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -759,16 +774,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Pre-Version 1.1.8" />
     <MESSAGE value="Pre-Version 1.2.0" />
     <MESSAGE value="Pre-Version 1.2.1" />
     <MESSAGE value="Pre-Version 1.2.1b" />
@@ -793,7 +806,8 @@
     <MESSAGE value="Version Beta 1.3.2" />
     <MESSAGE value="Version Beta 1.3.2b" />
     <MESSAGE value="Version Beta 1.3.2c" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.3.2c" />
+    <MESSAGE value="Version Beta 1.3.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version Beta 1.3.3" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -806,43 +820,44 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="701" y="323" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583782487230" />
-    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2" timestamp="1585160720395">
+    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2" timestamp="1586122484607">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1585160720395" />
+    <state x="784" y="65" width="700" height="669" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586122484607" />
     <state x="-927" y="-65" key="CommitChangelistDialog2/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579552539559" />
     <state x="868" y="49" key="CommitChangelistDialog2/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884235367" />
-    <state x="184" y="91" key="DiffContextDialog" timestamp="1582471404290">
+    <state x="184" y="91" key="DiffContextDialog" timestamp="1586122475543">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="184" y="91" key="DiffContextDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586122475543" />
     <state x="184" y="91" key="DiffContextDialog/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1582471404290" />
     <state x="-787" y="174" key="FileChooserDialogImpl" timestamp="1584052493267">
       <screen x="-1280" y="-73" width="1280" height="984" />
     </state>
     <state x="-787" y="174" key="FileChooserDialogImpl/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1584052493267" />
     <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1581678147856" />
-    <state width="1877" height="271" key="GridCell.Tab.0.bottom" timestamp="1586121431129">
+    <state width="1877" height="248" key="GridCell.Tab.0.bottom" timestamp="1586446412585">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="271" key="GridCell.Tab.0.bottom/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586121431129" />
+    <state width="1877" height="248" key="GridCell.Tab.0.bottom/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586446412585" />
     <state width="1237" height="340" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391037" />
-    <state width="1877" height="271" key="GridCell.Tab.0.center" timestamp="1586121431129">
+    <state width="1877" height="248" key="GridCell.Tab.0.center" timestamp="1586446412584">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="271" key="GridCell.Tab.0.center/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586121431129" />
+    <state width="1877" height="248" key="GridCell.Tab.0.center/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586446412584" />
     <state width="1237" height="340" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391036" />
-    <state width="1877" height="271" key="GridCell.Tab.0.left" timestamp="1586121431129">
+    <state width="1877" height="248" key="GridCell.Tab.0.left" timestamp="1586446412584">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="271" key="GridCell.Tab.0.left/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586121431129" />
+    <state width="1877" height="248" key="GridCell.Tab.0.left/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586446412584" />
     <state width="1237" height="340" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391036" />
-    <state width="1877" height="271" key="GridCell.Tab.0.right" timestamp="1586121431129">
+    <state width="1877" height="248" key="GridCell.Tab.0.right" timestamp="1586446412584">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="271" key="GridCell.Tab.0.right/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586121431129" />
+    <state width="1877" height="248" key="GridCell.Tab.0.right/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586446412584" />
     <state width="1237" height="340" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579553298409" />
     <state width="1877" height="272" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884391036" />
     <state width="1877" height="391" key="GridCell.Tab.1.bottom" timestamp="1582588540833">
@@ -871,19 +886,23 @@
     <state x="197" y="103" key="SettingsEditor/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584723254858" />
     <state x="-1149" y="24" key="SettingsEditor/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1584052785151" />
     <state x="461" y="161" key="SettingsEditor/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1579916549130" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1585155576439">
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1586122489078">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1585155576439" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586122489078" />
     <state x="-979" y="100" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1579552542695" />
     <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1583884239154" />
-    <state x="0" y="0" width="457" height="254" key="com.intellij.ide.util.TipDialog" timestamp="1586122389477">
+    <state x="0" y="0" width="457" height="254" key="com.intellij.ide.util.TipDialog" timestamp="1586283800315">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1280" y="0" width="457" height="254" key="com.intellij.ide.util.TipDialog/-1280.0.1280.984/0.0.1920.1040@-1280.0.1280.984" timestamp="1585406159202" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586122389477" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586283800315" />
     <state x="-1280" y="-73" width="457" height="268" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1280.-73.1280.984@-1280.-73.1280.984" timestamp="1584115702723" />
     <state x="0" y="0" width="457" height="283" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1280.-73.1280.984@0.0.1920.1040" timestamp="1584139161396" />
+    <state x="656" y="252" width="607" height="536" key="find.popup" timestamp="1586206339132">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="252" width="607" height="536" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1586206339132" />
     <state x="670" y="312" key="git4idea.merge.GitPullDialog" timestamp="1584722765166">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -892,6 +911,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WahlBot$Main.coverage" NAME="main Coverage Results" MODIFIED="1573142282124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/WahlBot$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1586121403991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WahlBot$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1586445677885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
