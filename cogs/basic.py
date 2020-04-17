@@ -8,16 +8,13 @@ class Basic(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.feedbackchannel = 643540415919816717
-        self.bugchannel = 643546804750909454
-        self.dmchannel = 635544300834258995
 
     # Commands
     @commands.command()
     async def version(self, ctx):
         """Zeigt die aktuelle Bot-Version."""
         await bp.delete_cmd(ctx)
-        await ctx.send(f'Der Bot läuft auf :eyes: **Version Beta 1.3.2c**. '
+        await ctx.send(f'Der Bot läuft auf :eyes: **Version Beta 1.3.3a**. '
                        f'Die API läuft auf Version :mailbox: **{discord.__version__}**', delete_after=bp.deltime)
 
     @commands.command()
@@ -54,7 +51,7 @@ class Basic(commands.Cog):
             await ctx.send("Dein Feedback darf maximal 1800 Zeichen umfassen.")
 
     @feedback.error
-    async def userinfo_error(self, ctx, error):
+    async def feedback_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             errorba01embed = discord.Embed(title="Error #BA01",
                                            description="Fehlendes Feedback! Syntax: feedback <userid>", color=0xff0000)
@@ -64,34 +61,11 @@ class Basic(commands.Cog):
     async def about(self, ctx):
         """Zeigt Informationen über den Bot an."""
         await bp.delete_cmd(ctx)
-        embed = discord.Embed(
-            title='Über den Bot!', description='Bot programmiert von Krokofant#0909. '
-                                               'Bei Bugs bitte Bug mit !bug <bug> einreichen. '
-                                               'Feedback mit !feedback <feedback> einreichen. '
-        )
+        embed = discord.Embed(description='Bot programmiert von Krokofant#0909. Bei Bugs bitte Bug mit !bug <bug> '
+                                          'einreichen. Feedback mit !feedback <feedback> einreichen. ',
+                              title='Über den Bot!')
         embed.set_footer(text='UltimateBot 2019')
         await ctx.send(embed=embed, delete_after=bp.deltime)
-
-    @commands.Cog.listener()
-    async def on_message(self, ctx):
-        if ctx.guild is None and bp.user(ctx.author):
-            channel = self.client.get_channel(int(635544300834258995))
-            content = f'**{str(ctx.author)}** sagt: "{str(ctx.content)}"'
-            if len(ctx.content) < 1800:
-                await channel.send(content)
-            else:
-                await channel.send(content[0:1800])
-                await channel.send(content[1801])
-
-        if (ctx.channel.id == self.bugchannel or ctx.channel.id == self.feedbackchannel or
-            ctx.channel.id == self.dmchannel) and str(ctx.content[0:18]).isnumeric():
-            ctx.add_reaction("✅")
-            user = ctx.content[0:18]
-            msg = ctx.content[19:]
-            dmchannel = self.client.get_user(int(user))
-            if dmchannel.dm_channel is None:
-                await dmchannel.create_dm()
-            await dmchannel.dm_channel.send(msg)
 
 
 def setup(client):

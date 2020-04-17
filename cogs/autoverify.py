@@ -40,6 +40,7 @@ class Autoverify(commands.Cog):
             spacers[str(ctx.guild.id)].append(int(role.id))
             with open('./data/roles/spacer.json', 'w') as f:
                 json.dump(spacers, f, indent=4)
+            await ctx.send(f'Rolle {discord.role} hinzugefügt.')
         else:
             await ctx.send("Rolle wurde auf dem Server nicht gefunden.", delete_after=bp.deltime)
 

@@ -33,7 +33,7 @@ print('Module werden geladen')
 # Botstart
 @client.event
 async def on_ready():
-    print('{0.user} ist jetzt online'.format(client))
+    print(f'{client.user} ist jetzt online')
     await client.change_presence(status=discord.Status.online, activity=discord.Game('Bot online und bereit'))
     print('Status geändert')
     number = 0
@@ -47,6 +47,13 @@ async def ping(ctx):
     """Zeigt den aktuellen Ping"""
     await bp.delete_cmd(ctx)
     await ctx.send(f'Pong! Meine Latenz sind aktuell {round(client.latency * 1000)} ms.')
+
+
+@client.command()
+@commands.is_owner()
+async def status(ctx, *, status):
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(status))
+    await ctx.send(f'Der Status lautet nun: **{status}**')
 
 
 @client.command()

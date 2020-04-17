@@ -24,31 +24,34 @@ class Voiceutility(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def addque(self, ctx, chid):
+        await bp.delete_cmd(ctx)
         if self.client.get_channel(int(chid)) is not None:
             if ctx.guild.id not in self.queues.keys():
                 self.queues[ctx.guild.id] = dict()
             self.queues[ctx.guild.id][int(chid)] = []
-            await ctx.send("Warteschlangenchannel hinzugefügt!")
+            await ctx.send("Warteschlangenchannel hinzugefügt!", delete_after=bp.deltime)
         else:
-            await ctx.send("Kanal konnte nicht gefunden werden.")
-        await bp.delete_cmd(ctx)
+            await ctx.send("Kanal konnte nicht gefunden werden.", delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def removeque(self, ctx, chid):
         result = self.queues[ctx.guild.id].pop(int(chid), None)
-        if result is None:
-            await ctx.send("Channel konnte nicht gefunden werden!")
-        else:
-            await ctx.send("Channel erfolgreich entfernt")
         await bp.delete_cmd(ctx)
+        if result is None:
+            await ctx.send("Channel konnte nicht gefunden werden!", delete_after=bp.deltime)
+        else:
+            await ctx.send("Channel erfolgreich entfernt", delete_after=bp.deltime)
 
     @commands.command()
     async def checkpos(self, ctx, que=None):
+        await bp.delete_cmd(ctx)
         if ctx.guild.id not in self.queues.keys():
-            await ctx.send(embed=discord.Embed(title="Error!", description="Keine Queues auf diesem Server gefunden"))
+            await ctx.send(embed=discord.Embed(title="Error!", description="Keine Queues auf diesem Server gefunden"),
+                           delete_after=bp.deltime)
         elif len(self.queues[ctx.guild.id].keys()) == 0:
-            await ctx.send(embed=discord.Embed(title="Error!", description="Keine Queues auf diesem Server gefunden"))
+            await ctx.send(embed=discord.Embed(title="Error!", description="Keine Queues auf diesem Server gefunden"
+                                               ), delete_after=bp.deltime)
         elif len(self.queues[ctx.guild.id].keys()) == 1:
             key = list(self.queues[ctx.guild.id].keys())[0]
             liste = self.queues[ctx.guild.id][key]
@@ -61,8 +64,9 @@ class Voiceutility(commands.Cog):
                 body += f"{index + 1}. {self.client.get_user(obj)}\n"
                 if index == 4:
                     break
-            await ctx.send(embed=discord.Embed(title="Aktuelle Queue:", description=f"Deine Position: "
-                                                                                    f"{position}\n{body}"))
+            await ctx.send(embed=discord.Embed(title="Aktuelle Queue:",
+                                               description=f"Deine Position: {position}\n{body}"),
+                           delete_after=bp.deltime)
 
 
 def setup(client):

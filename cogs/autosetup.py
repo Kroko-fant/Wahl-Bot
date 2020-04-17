@@ -114,7 +114,7 @@ class Autosetup(commands.Cog):
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
         # Serverdata löschen
-        serverdir = './data/servers/' + str(guild.id)
+        serverdir = f'./data/servers/{str(guild.id)}'
         shutil.rmtree(serverdir)
 
         # Prefix löschen
@@ -125,12 +125,6 @@ class Autosetup(commands.Cog):
 
         with open('./data/prefixes.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
-
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        if bp.botowner(message) and message.content == "admin.fixserver":
-            channel = message.channel
-            await self.fixstuff(channel)
 
 
 def setup(client):

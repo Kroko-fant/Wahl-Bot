@@ -6,7 +6,7 @@ from discord.ext import commands
 from botdata import botparameters as bp
 
 
-class Voiceutility(commands.Cog):
+class Voiceutility2(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -43,4 +43,4 @@ class Voiceutility(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Voiceutility(client))
+    client.add_cog(Voiceutility2(client))

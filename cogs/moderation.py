@@ -12,19 +12,24 @@ class Moderation(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.feedbackchannel = 643540415919816717
+        self.bugchannel = 643546804750909454
+        self.dmchannel = 635544300834258995
+        with open('./data/channel/logchannel.json', 'r') as f:
+            self.logs = json.load(f)
+        with open('./data/prefixes.json', 'r') as f:
+            self.prefixes = json.load(f)
 
     # async def delete_member_from_purge(self, member):
     # TODO: Mitglieder wieder aus purge löschen
     # print("Unfinished")
 
     async def update_member(self, member):
-        lastmember = './data/servers/' + str(member.guild.id) + '/lastdata.json'
-        with open(lastmember, 'r') as f:
+        # TODO
+        with open(f'./data/servers/{member.guild.id}/lastdata.json', 'r') as f:
             members = json.load(f)
-
         members[str(member.id)] = int(round(time.time() / 8640, 0))
-
-        with open(lastmember, 'w') as f:
+        with open(f'./data/servers/{member.guild.id}/lastdata.json', 'w') as f:
             json.dump(members, f, indent=4)
 
     @commands.command()
@@ -34,7 +39,7 @@ class Moderation(commands.Cog):
         await bp.delete_cmd(ctx)
         if await bp.unverifiziert(ctx):
             # USERID in Verify
-            verifydir = './data/servers/' + str(ctx.guild.id) + '/verified.json'
+            verifydir = f'./data/servers/{ctx.guild.id}/verified.json'
             with open(verifydir, 'r') as f:
                 verified = json.load(f)
 
@@ -43,13 +48,7 @@ class Moderation(commands.Cog):
             with open(verifydir, 'w') as f:
                 json.dump(verified, f, indent=4)
             await ctx.send('Verifiziert')
-
-            # Rolle geben
-            with open(verifydir, 'r') as f:
-                verified = json.load(f)
-
             await ctx.author.add_roles(verified[str(ctx.guild.id)], reason="Verify", atomic=True)
-            await ctx.send('Verifiziert')
         elif await bp.verifiziert(ctx):
             await ctx.send("Du bist bereits verifiziert!")
         else:
@@ -58,43 +57,38 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=10):
-        """Löscht den gewählten Amount an Nachrichten
-        Standardmenge: 10"""
+        """Löscht den gewählten Amount an Nachrichten Standardmenge: 10"""
         await ctx.channel.purge(limit=amount + 1)
         await ctx.send(f"Es wurden **{amount}** Nachrichten gelöscht.", delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason="Kick-Befehl wurde benutzt"):
-        """Kickt den User vom Server
-        Syntax: {prefix}kick <@user>"""
+        """Kickt den User vom Server Syntax: {prefix}kick <@user>"""
         await bp.delete_cmd(ctx)
         await member.kick(reason=reason)
-        await ctx.send(f"User **{str(member)}** wurde gekickt.", delete_after=bp.deltime)
+        await ctx.send(f"User **{member}** wurde gekickt.", delete_after=bp.deltime)
 
     @kick.error
     async def kick_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            errorcm01embed = discord.Embed(title="Error #CM01",
-                                           description="Fehlende NutzerID! Syntax: kick <userid> oder kick @<user>",
-                                           color=0xff0000)
+            errorcm01embed = discord.Embed(title="Error #CM01", color=0xff0000,
+                                           description="Fehlende NutzerID! Syntax: kick <userid> oder kick @<user>")
             await ctx.send(embed=errorcm01embed, delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
-        """Ban den User vom Server
-        Syntax: {prefix}ban <@user>"""
+        """Ban den User vom Server Syntax: {prefix}ban <@user>"""
         await bp.delete_cmd(ctx)
         await member.ban(reason=reason)
-        await ctx.send(f"User **{str(member)}** wurde gebannt.", delete_after=bp.deltime)
+        await ctx.send(f"User **{member}** wurde gebannt.", delete_after=bp.deltime)
 
     @ban.error
     async def ban_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            errorcm02embed = discord.Embed(title="Error #CM02",
-                                           description="Fehlende NutzerID! Syntax: ban <userid> oder ban @<user>",
-                                           color=0xff0000)
+            errorcm02embed = discord.Embed(title="Error #CM02", color=0xff0000,
+                                           description="Fehlende NutzerID! Syntax: ban <userid> oder ban @<user>")
             await ctx.send(embed=errorcm02embed, delete_after=bp.deltime)
         elif isinstance(error, commands.BadArgument):
             errorcm03embed = discord.Embed(title="Error #CM03", description="Nutzer konnte nicht gefunden werden!",
@@ -130,50 +124,46 @@ class Moderation(commands.Cog):
         await bp.delete_cmd(ctx)
         bans = await ctx.guild.bans()
         if len(bans) > 0:
-            await ctx.send(f"Es wurden **{len(bans)}** User zum entbannen gefunden. Gebe Okay zum entbannen ein.",
-                           delete_after=len(bans) + 20)
+            await ctx.send(f"Es wurden **{len(bans)}** User zum Entbannen gefunden. Gebe Okay zum Entbannen ein.",
+                           delete_after=bp.deltime)
             await self.client.wait_for('message', check=lambda message: message.content.lower() == "okay", timeout=60)
             await ctx.send(
                 f"Starte Unban.\n Dies kann etwas dauern.\n Geschätzte Zeit: **{round(len(bans) / 6.5)}** Sekunden")
             start = time.time()
-            x = 0
-            while x < len(bans):
-                await ctx.guild.unban(bans[x][1], reason="Unbanall")
-                x = x + 1
+            for ban in bans:
+                await ctx.guild.unban(ban[1], reason="Unbanall")
             ende = time.time()
-            await ctx.send(
-                f"Alle User erfolgreich entbannt. :white_check_mark:\nUserzahl: **{len(bans)}**\n"
-                f"Zeit: **{'{:5.3f}'.format(ende - start)}**\nBans/Sekunde: **{round(len(bans) / (ende - start))}**")
+            await ctx.send(f"Alle User erfolgreich entbannt. :white_check_mark:\nUserzahl: **{len(bans)}**\nZeit: **"
+                           f"{'{:5.3f}'.format(ende - start)}**\nBans/Sekunde: **{round(len(bans) / (ende - start))}**")
         else:
-            await ctx.send(f'Es wurden 0 User zum entbannen gefunden.')
+            await ctx.send(f'Es wurden 0 User zum Entbannen gefunden.')
 
     # LogChannel setzen
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def setlogchannel(self, ctx, lchannelid):
-        """Setze einen Logkanal
-        Zum Setzen des Channels wird die Channelid als Argument benötigt.
+    async def setlogchannel(self, ctx, lchannelid=None):
+        """Setze einen Logkanal Zum Setzen des Channels wird die Channelid als Argument benötigt.
         Syntax: !setlogchannel <channelid>"""
-        if ctx.guild.get_channel(lchannelid) is not None:
-            with open('./data/channel/logchannel.json', 'r') as f:
-                logs = json.load(f)
+        if not lchannelid.isnumeric():
+            await ctx.send("Channelid ungültig!")
+            return
+        if self.client.get_channel(lchannelid) is None:
+            await ctx.send("Channelid ungültig!")
+            return
+        self.logs[str(ctx.guild.id)] = int(lchannelid)
+        with open('./data/channel/logchannel.json', 'w') as f:
+            json.dump(self.logs, f, indent=4)
+        await bp.delete_cmd(ctx)
+        await ctx.send(f"Channel <#{lchannelid}> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
 
-            logs[str(ctx.guild.id)] = str(lchannelid)
-
-            with open('./data/channel/logchannel.json', 'w') as f:
-                json.dump(logs, f, indent=4)
-            await bp.delete_cmd(ctx)
-            await ctx.send(f"Channel <#{lchannelid}> ist jetzt der Channel für den Log.", delete_after=bp.deltime)
-        else:
-            pass  # TODO ERRORS
-
-    @setlogchannel.error
-    async def setlogchannel_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            errorcm03embed = discord.Embed(title="Error #CM03",
-                                           description=f'Fehlendes Argument! Syntax: !setlogchannel <channel>'
-                                                       f' <channelid>', color=0xff0000)
-            await ctx.send(embed=errorcm03embed)
+    @commands.command()
+    @commands.is_owner()
+    async def send(self, ctx, ch, *, text):
+        try:
+            await self.client.get_channel(int(ch)).send(text)
+            await ctx.message.add_reaction(self.client.get_emoji(634870836255391754))
+        except Exception:
+            await ctx.message.add_reaction("⚠")
 
     # Memberjoin
     @commands.Cog.listener()
@@ -182,10 +172,8 @@ class Moderation(commands.Cog):
             return
         await self.update_member(member)
         try:
-            with open('./data/channel/logchannel.json', 'r') as f:
-                logs = json.load(f)
-            logch = self.client.get_channel(int(logs[str(member.guild.id)]))
-            await logch.send(f":inbox_tray: **{str(member)} ({str(member.id)})** ist dem Sever beigetreten.")
+            logch = self.client.get_channel(self.logs[str(member.guild.id)])
+            await logch.send(f":inbox_tray: **{member} ({member.id})** ist dem Sever beigetreten.")
         except Exception:
             pass
 
@@ -195,22 +183,18 @@ class Moderation(commands.Cog):
         if not bp.user(member):
             return
         try:
-            with open('./data/channel/logchannel.json', 'r') as f:
-                logs = json.load(f)
-            logch = self.client.get_channel(int(logs[str(member.guild.id)]))
-            await logch.send(f":outbox_tray: **{str(member)} ({str(member.id)})** hat den Server verlassen.")
+            logch = self.client.get_channel(self.logs[str(member.guild.id)])
+            await logch.send(f":outbox_tray: **{member} ({member.id})** hat den Server verlassen.")
         except Exception:
             pass
 
     # Member wird gebannt
     @commands.Cog.listener()
-    async def on_member_ban(self, guild, user):
+    async def on_member_ban(self, guild, member):
         try:
-            if bp.user(user):
-                with open('./data/channel/logchannel.json', 'r') as f:
-                    logs = json.load(f)
-                logch = self.client.get_channel(int(logs[str(guild.id)]))
-                await logch.send(f":no_entry_sign: **{str(user)} ({str(user.id)})** wurde gebannt.")
+            if bp.user(member):
+                logch = self.client.get_channel(self.logs[str(member.guild.id)])
+                await logch.send(f":no_entry_sign: **{member} ({member.id})** wurde gebannt.")
             else:
                 pass
         except Exception:
@@ -222,66 +206,87 @@ class Moderation(commands.Cog):
         if not bp.user(member):
             return
         try:
-            with open('./data/channel/logchannel.json', 'r') as f:
-                logs = json.load(f)
-            logch = self.client.get_channel(int(logs[str(guild.id)]))
-            await logch.send(f":white_check_mark: **{str(member)} ({str(member.id)})** wurde entgebannt.")
+            logch = self.client.get_channel(self.logs[str(guild.id)])
+            await logch.send(f":white_check_mark: **{member} ({member.id})** wurde entgebannt.")
         except Exception:
             pass
 
     # Nachricht löschen
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
-        if payload.guild_id is None or payload is None or payload.cached_message is None:
+        if payload.guild_id is None or payload is None or payload.cached_message is None \
+                or str(payload.guild_id) not in self.logs.keys():
             return
-        content = payload.cached_message.content
-        user = payload.cached_message.author
-        channel = payload.channel_id
-        with open('./data/channel/logchannel.json', 'r') as f:
-            logs = json.load(f)
-        if str(payload.guild_id) not in logs.keys():
-            return
-        logch = self.client.get_channel(int(logs[str(payload.guild_id)]))
-        if len(content) > 1800:
+        logch = self.client.get_channel(self.logs[str(payload.cached_message.author.guild.id)])
+        if len(payload.cached_message.content) > 1800:
             await logch.send(':recycle: **Nachricht:**')
-            await logch.send(str(content).replace("@", "👤"))
-            await logch.send(f'von User: {str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
+            await logch.send(payload.cached_message.content)
+            await logch.send(f'von User: {payload.cached_message.author} ({payload.cached_message.author.id}'
+                             f') in Channel: {payload.channel_id} gelöscht.')
         else:
-            await logch.send(f':recycle: **Nachricht: **{str(content).replace("@", "👤")}von User: '
-                             f'{str(user)} ({str(user.id)}) in Channel: {str(channel)} gelöscht.')
+            await logch.send(f':recycle: **Nachricht: **{payload.cached_message.content}von User: '
+                             f'{payload.cached_message.author} ({payload.cached_message.author.id}) in Channel: '
+                             f'{payload.channel_id} gelöscht.')
 
     # Voice-Änderungen
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if not bp.user(member) and member.guild is not None:
             return
+
         await self.update_member(member)
-        try:
-            with open('./data/channel/logchannel.json', 'r') as f:
-                logs = json.load(f)
-            logch = self.client.get_channel(int(logs[str(member.guild.id)]))
-            if before.channel is None:
-                await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
-                                 f"**{str(before.channel)}** verlassen.")
-            elif before.channel is not None and after.channel is None:
-                await logch.send(f":mega: **{str(member)} ({str(member.id)})** hat den Voice Channel "
-                                 f"**{str(before.channel)}** verlassen.")
-            elif before.channel is not None and after.channel is not None:
-                await logch.send(f":mega: **{str(member)} ({str(member.id)} )** hat den Voice Channel von ** "
-                                 f"{str(before.channel)} ** zu ** {str(after.channel)}** gewechselt.")
-        except Exception:
-            pass
+        logch = self.client.get_channel(self.logs[str(member.guild.id)])
+        if before.channel is None:
+            await logch.send(f":mega: **{member} ({member.id})** hat den Voice Channel **{before.channel}** verlassen.")
+        elif before.channel is not None and after.channel is None:
+            await logch.send(f":mega: **{member} ({member.id})** hat den Voice Channel **{before.channel}** verlassen.")
+        elif before.channel is not None and after.channel is not None:
+            await logch.send(f":mega: **{member} ({member.id} )** hat den Voice Channel von ** "
+                             f"{before.channel} ** zu ** {after.channel}** gewechselt.")
+
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def newprefix(self, ctx, prefix='!'):
+        """Weist einen neuen Prefix zu.
+        Syntax: {prefix} newprefix <prefix>
+        Wird kein Prefix angegeben wird ! gesetzt."""
+        await bp.delete_cmd(ctx)
+        self.prefixes[str(ctx.guild.id)] = prefix
+        with open('./data/prefixes.json', 'w') as f:
+            json.dump(self.prefixes, f, indent=4)
+        await ctx.send(f'Prefix zu:** {prefix} **geändert', delete_after=bp.deltime)
 
     # Linkblocker
     @commands.Cog.listener()
     async def on_message(self, message):
         if not bp.user(message.author) or message.guild is None:
             return
+        # DMs empfangen
+        if message.guild is None and bp.user(message.author):
+            channel = self.client.get_channel(int(635544300834258995))
+            content = f'**{message.author}** sagt: "{message.content}"'
+            if len(message.content) < 1800:
+                await channel.send(content)
+            else:
+                await channel.send(content[0:1800])
+                await channel.send(content[1801])
+            return
+        # DMs senden
+        if (message.channel.id == self.bugchannel or message.channel.id == self.feedbackchannel
+            or message.channel.id == self.dmchannel) and message.content[0:18].isnumeric():
+            await message.add_reaction("✅")
+            dmchannel = self.client.get_user(int(message.content[0:18]))
+            if dmchannel.dm_channel is None:
+                await dmchannel.create_dm()
+            await dmchannel.dm_channel.send(message.content[19:])
+            return
         await self.update_member(message.author)
+        if "prefix" in message.content.lower() and bp.user(message.author) and "bot" in message.content.lower():
+            await message.channel.send(f"Dieser Server hat den Prefix: **{self.prefixes[str(message.guild.id)]}**")
         if any([curse in message.content.lower() for curse in bl.blacklist]):
             await message.delete()
-            await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von Discord-Links"
-                                       )
+            await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von "
+                                       f"Discord-Links")
 
 
 def setup(client):
