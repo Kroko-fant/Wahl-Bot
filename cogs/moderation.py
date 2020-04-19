@@ -219,12 +219,12 @@ class Moderation(commands.Cog):
             return
         logch = self.client.get_channel(self.logs[str(payload.cached_message.author.guild.id)])
         if len(payload.cached_message.content) > 1800:
-            await logch.send(':recycle: **Nachricht:**')
+            await logch.send(':recycle: **Nachricht:**|')
             await logch.send(payload.cached_message.content)
-            await logch.send(f'von User: {payload.cached_message.author} ({payload.cached_message.author.id}'
+            await logch.send(f'|von User: {payload.cached_message.author} ({payload.cached_message.author.id}'
                              f') in Channel: {payload.channel_id} gelöscht.')
         else:
-            await logch.send(f':recycle: **Nachricht: **{payload.cached_message.content}von User: '
+            await logch.send(f':recycle: **Nachricht: **{payload.cached_message.content} von User: '
                              f'{payload.cached_message.author} ({payload.cached_message.author.id}) in Channel: '
                              f'{payload.channel_id} gelöscht.')
 
@@ -255,6 +255,32 @@ class Moderation(commands.Cog):
         with open('./data/prefixes.json', 'w') as f:
             json.dump(self.prefixes, f, indent=4)
         await ctx.send(f'Prefix zu:** {prefix} **geändert', delete_after=bp.deltime)
+
+    # ErrorHandler
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error, force=False):
+        # Skippen, wenn wir einen lokalen Handler haben
+        if hasattr(ctx.command, 'on_error') and not force:
+            return
+
+        error = getattr(error, 'original', error)
+
+        # Missing Permissions
+        if isinstance(error, (commands.errors.MissingPermissions, commands.errors.NotOwner)):
+            await ctx.send("Dazu fehlen dir die Permissions :P")
+        # Fehlendes erwartetes Argument
+        elif isinstance(error, commands.errors.MissingRequiredArgument):
+            await ctx.send("Fehlendes Argument! gucke dir doch !help <command> an")
+        elif isinstance(error, commands.errors.CommandNotFound):
+            await ctx.send("Diesen Befehl gibt es nicht :(")
+        # DiscordErrors
+        elif isinstance(error, commands.CommandError):
+            await ctx.send(f"Irgendwas funktioniert da nicht ganz...{error} {type(error)} "
+                           f"<@!137291894953607168>")
+        # Sonstige Errors
+        else:
+            await ctx.send(f"Ein unerwarteter Fehler ist aufgetreten!... {error} "
+                           f"{type(error)} <@!137291894953607168>")
 
     # Linkblocker
     @commands.Cog.listener()

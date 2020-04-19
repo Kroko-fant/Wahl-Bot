@@ -16,7 +16,7 @@ class Autobumper(commands.Cog):
     def cog_unload(self):
         self.bump.cancel()
 
-    @tasks.loop(hours=8.1)
+    @tasks.loop(hours=9.01)
     async def bump(self):
         for ch in self.channels.values():
             channel = self.client.get_channel(ch)

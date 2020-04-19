@@ -11,6 +11,14 @@ class ChannelUtility(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        with open("./data/channel/archives.json", "r") as f:
+            self.archives = json.load(f)
+        with open('./data/channel/newtopicchannel.json', 'r') as f:
+            self.topiccreate = json.load(f)
+        with open('./data/channel/topiccategorys.json', 'r') as f:
+            self.categorys = json.load(f)
+        with open('./data/channel/addreactchannel.json', 'r') as f:
+            self.addreactchannel = json.load(f)
         self.archiver.start()
 
     def cog_unload(self):
@@ -18,13 +26,6 @@ class ChannelUtility(commands.Cog):
 
     @tasks.loop(hours=6)
     async def archiver(self):
-        with open('./data/channel/newtopicchannel.json', 'r') as f:
-            topiccreate = json.load(f)
-        with open('./data/channel/topiccategorys.json', 'r') as f:
-            categorys = json.load(f)
-        with open("./data/channel/archives.json", "r") as f:
-            archives = json.load(f)
-
         # TODO
         # Kategorie finden
         for channel in:  # loopen
@@ -37,11 +38,9 @@ class ChannelUtility(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def setarchiv(self, ctx, archiv):
         """Setze eine Archivkategorie"""
-        with open("./data/channel/archives.json", "r") as f:
-            archives = json.load(f)
-        archives[str[ctx.guild.id]] = str(archiv)
+        self.archives[str[ctx.guild.id]] = str(archiv)
         with open("./data/channel/archives.json", "w") as f:
-            json.dump(archives, f, indent=4)
+            json.dump(self.archives, f, indent=4)
         await bp.delete_cmd(ctx)
         await ctx.send(f'Kategorie {archiv} wurde erfolgreich als Archiv gesetzt')
 
@@ -50,11 +49,9 @@ class ChannelUtility(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def setcategory(self, ctx, category):
         """"Setze eine Kategorie, in der neue Themen erstellt werden."""
-        with open('./data/channel/topiccategorys.json', 'r') as f:
-            categorys = json.load(f)
-        categorys[str(ctx.guild.id)] = str(category)
+        self.categorys[str(ctx.guild.id)] = str(category)
         with open('./data/channel/topiccategorys.json', 'w') as f:
-            json.dump(categorys, f, indent=4)
+            json.dump(self.categorys, f, indent=4)
         await bp.delete_cmd(ctx)
         await ctx.send(f"Kategorie {category} ist jetzt die Kategorie für neue Themen.", delete_after=bp.deltime)
 
@@ -63,34 +60,30 @@ class ChannelUtility(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def settopiccreate(self, ctx, newtopicchannel):
         """Setze einen Kanal, in welchem neue Themen erstellt werden."""
-        with open('./data/channel/newtopicchannel.json', 'r') as f:
-            topiccreate = json.load(f)
-        topiccreate[str(ctx.guild.id)] = str(newtopicchannel)
+        self.topiccreate[str(ctx.guild.id)] = str(newtopicchannel)
         with open('./data/channel/newtopicchannel.json', 'w') as f:
-            json.dump(topiccreate, f, indent=4)
+            json.dump(self.topiccreate, f, indent=4)
         await bp.delete_cmd(ctx)
         await ctx.send(f"Channel <#{newtopicchannel}> ist jetzt der Channel für die Themenerstellung.",
                        delete_after=bp.deltime)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def setaddreactchannel(self, ctx, addreactchannel, *emojis):
+    async def setaddreactchannel(self, ctx, addreactchannelarg, *emojis):
         """Setze einen Kanal, in welchem immer mit einer Liste von Emojis
         Benutzung: !setaddreactchannel <channel> <emoji-liste>"""
         # emojis checken
-        with open('./data/channel/addreactchannel.json', 'r') as f:
-            topiccreate = json.load(f)
         if emojis[0].lower() == "clear":
-            topiccreate.pop(str(addreactchannel), None)
+            self.addreactchannel.pop(addreactchannelarg, None)
             with open('./data/channel/addreactchannel.json', 'w') as f:
-                json.dump(topiccreate, f, indent=4)
-            await ctx.send(f'Emojis für Channel <#{addreactchannel}> entfernt.')
+                json.dump(self.addreactchannel, f, indent=4)
+            await ctx.send(f'Emojis für Channel <#{addreactchannelarg}> entfernt.')
         else:
-            topiccreate[addreactchannel] = emojis
+            self.addreactchannel[addreactchannelarg] = emojis
             with open('./data/channel/addreactchannel.json', 'w') as f:
-                json.dump(topiccreate, f, indent=4)
+                json.dump(self.addreactchannel, f, indent=4)
             await bp.delete_cmd(ctx)
-            await ctx.send(f"Channel <#{addreactchannel}> ist jetzt der Channel für das hinzufügen von Reaktionen."
+            await ctx.send(f"Channel <#{addreactchannelarg}> ist jetzt der Channel für das hinzufügen von Reaktionen."
                            f"Folgende Reaktionen wurden hinzugefügt: {emojis}",
                            delete_after=bp.deltime)
 
@@ -105,23 +98,17 @@ class ChannelUtility(commands.Cog):
                                                            "führe hier keine Befehle aus!", color=0xff0000)
                 await ctx.channel.send(embed=errorct02embed, delete_after=bp.deltime)
             return
-        with open('./data/channel/newtopicchannel.json', 'r') as newtopic:
-            topiccreate = json.load(newtopic)
-        with open('./data/channel/topiccategorys.json', 'r') as topiccat:
-            categorys = json.load(topiccat)
-        with open('./data/channel/addreactchannel.json') as addreact:
-            addreact = json.load(addreact)
-        if str(ctx.channel.id) in addreact:
-            for emoji in addreact[str(ctx.channel.id)]:
+        if str(ctx.channel.id) in self.addreact:
+            for emoji in self.addreact[str(ctx.channel.id)]:
                 await ctx.add_reaction(emoji)
-        if not topiccreate[str(ctx.guild.id)] == str(ctx.channel.id):
+        if not self.topiccreate[str(ctx.guild.id)] == str(ctx.channel.id):
             return
 
         if len(str(ctx.content)) <= 100:
             # if str(ctx.content).isalnum():
             try:
                 # neuer channel erstellen
-                if str(ctx.channel.category.id) == str(categorys[str(ctx.guild.id)]):
+                if str(ctx.channel.category.id) == str(self.categorys[str(ctx.guild.id)]):
                     await bp.delete_cmd(ctx)
                     # TODO Channel first NAchricht
                     await ctx.guild.create_text_channel(
