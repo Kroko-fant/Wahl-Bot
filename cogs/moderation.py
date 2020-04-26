@@ -262,7 +262,6 @@ class Moderation(commands.Cog):
         # Skippen, wenn wir einen lokalen Handler haben
         if hasattr(ctx.command, 'on_error') and not force:
             return
-
         error = getattr(error, 'original', error)
 
         # Missing Permissions
@@ -272,6 +271,9 @@ class Moderation(commands.Cog):
         elif isinstance(error, commands.errors.MissingRequiredArgument):
             await ctx.send("Fehlendes Argument! gucke dir doch !help <command> an")
         elif isinstance(error, commands.errors.CommandNotFound):
+            if ctx.message.content[1:].startswith("bump") or ctx.message.content[1:].isnumeric() or \
+                    ctx.message.content[1:].startswith("d bump") or ctx.message.content[1:].startswith("disboard"):
+                return
             await ctx.send("Diesen Befehl gibt es nicht :(")
         # DiscordErrors
         elif isinstance(error, commands.CommandError):
@@ -279,7 +281,7 @@ class Moderation(commands.Cog):
                            f"<@!137291894953607168>")
         # Sonstige Errors
         else:
-            await ctx.send(f"Ein unerwarteter Fehler ist aufgetreten!... {error} "
+            await ctx.send(f"Ein unerwarteter Fehler ist aufgetreten!... \n {error} "
                            f"{type(error)} <@!137291894953607168>")
 
     # Linkblocker

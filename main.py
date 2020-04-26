@@ -53,6 +53,7 @@ async def ping(ctx):
 @commands.is_owner()
 async def status(ctx, *, status):
     await client.change_presence(status=discord.Status.online, activity=discord.Game(status))
+    await bp.delete_cmd(ctx)
     await ctx.send(f'Der Status lautet nun: **{status}**')
 
 
