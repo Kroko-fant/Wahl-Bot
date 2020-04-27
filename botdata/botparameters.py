@@ -2,11 +2,6 @@ deltime = 30
 deltime2 = 60
 
 
-# Personen
-def botowner(ctx):
-    return ctx.author.id == 137291894953607168
-
-
 def ultimatebotid():
     return 612702321985585172
 

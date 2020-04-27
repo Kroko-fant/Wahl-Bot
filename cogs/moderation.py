@@ -4,7 +4,6 @@ import time
 import discord
 from discord.ext import commands
 
-from botdata import blacklist as bl
 from botdata import botparameters as bp
 
 
@@ -19,6 +18,8 @@ class Moderation(commands.Cog):
             self.logs = json.load(f)
         with open('./data/prefixes.json', 'r') as f:
             self.prefixes = json.load(f)
+        with open('./data/blacklist.json', 'r') as f:
+            self.blacklist = json.load(f)['0']
 
     # async def delete_member_from_purge(self, member):
     # TODO: Mitglieder wieder aus purge löschen
@@ -105,7 +106,7 @@ class Moderation(commands.Cog):
 
     # Member purgen
     @commands.command()
-    @commands.check(bp.botowner)
+    @commands.is_owner()
     async def purge(self, ctx, amount=90):
         """Kickt User, welche zu lange nicht auf dem Server aktiv waren."""
         await bp.delete_cmd(ctx)
@@ -164,6 +165,28 @@ class Moderation(commands.Cog):
             await ctx.message.add_reaction(self.client.get_emoji(634870836255391754))
         except Exception:
             await ctx.message.add_reaction("⚠")
+
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def newprefix(self, ctx, prefix='!'):
+        """Weist einen neuen Prefix zu.
+        Syntax: {prefix} newprefix <prefix>
+        Wird kein Prefix angegeben wird ! gesetzt."""
+        await bp.delete_cmd(ctx)
+        self.prefixes[str(ctx.guild.id)] = prefix
+        with open('./data/prefixes.json', 'w') as f:
+            json.dump(self.prefixes, f, indent=4)
+        await ctx.send(f'Prefix zu:** {prefix} **geändert', delete_after=bp.deltime)
+
+    @commands.command()
+    @commands.is_owner()
+    async def blacklistadd(self, ctx, curse):
+        self.blacklist.append(curse)
+        print(self.blacklist)
+        with open('./data/blacklist.json', 'w') as f:
+            json.dump({"0": self.blacklist}, f, indent=4)
+        await bp.delete_cmd(ctx)
+        await ctx.send("Seite erfolgreich hinzugefügt!", delete_after=bp.deltime)
 
     # Memberjoin
     @commands.Cog.listener()
@@ -244,18 +267,6 @@ class Moderation(commands.Cog):
             await logch.send(f":mega: **{member} ({member.id} )** hat den Voice Channel von ** "
                              f"{before.channel} ** zu ** {after.channel}** gewechselt.")
 
-    @commands.command()
-    @commands.has_permissions(administrator=True)
-    async def newprefix(self, ctx, prefix='!'):
-        """Weist einen neuen Prefix zu.
-        Syntax: {prefix} newprefix <prefix>
-        Wird kein Prefix angegeben wird ! gesetzt."""
-        await bp.delete_cmd(ctx)
-        self.prefixes[str(ctx.guild.id)] = prefix
-        with open('./data/prefixes.json', 'w') as f:
-            json.dump(self.prefixes, f, indent=4)
-        await ctx.send(f'Prefix zu:** {prefix} **geändert', delete_after=bp.deltime)
-
     # ErrorHandler
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error, force=False):
@@ -289,6 +300,10 @@ class Moderation(commands.Cog):
     async def on_message(self, message):
         if not bp.user(message.author) or message.guild is None:
             return
+        if any([curse in message.content.lower() for curse in self.blacklist]):
+            await message.delete()
+            await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von "
+                                       f"Discord-Links")
         # DMs empfangen
         if message.guild is None and bp.user(message.author):
             channel = self.client.get_channel(int(635544300834258995))
@@ -311,10 +326,6 @@ class Moderation(commands.Cog):
         await self.update_member(message.author)
         if "prefix" in message.content.lower() and bp.user(message.author) and "bot" in message.content.lower():
             await message.channel.send(f"Dieser Server hat den Prefix: **{self.prefixes[str(message.guild.id)]}**")
-        if any([curse in message.content.lower() for curse in bl.blacklist]):
-            await message.delete()
-            await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von "
-                                       f"Discord-Links")
 
 
 def setup(client):
