@@ -96,28 +96,6 @@ class Moderation(commands.Cog):
                                            color=0xff0000)
             await ctx.send(embed=errorcm03embed, delete_after=bp.deltime)
 
-    # @commands.command()
-    # @commands.has_permissions(ban_members=True)
-    # async def block(self, message):
-    #  """Blockt den User vom Server
-    # Syntax: {prefix}block <@user>"""
-    # await bp.delete_cmd(message)
-    # TODO
-
-    # Member purgen
-    @commands.command()
-    @commands.is_owner()
-    async def purge(self, ctx, amount=90):
-        """Kickt User, welche zu lange nicht auf dem Server aktiv waren."""
-        await bp.delete_cmd(ctx)
-        if amount >= 90:
-            ctx.send("Suche Mitglieder zum purgen... das kann einen Moment dauern!", delete_after=bp.deltime)
-            await self.client.wait_for('message', check=lambda message: message.content.lower() == "accept", timeout=60)
-        elif 90 > amount > 0:
-            ctx.send("Die eingegebene Tageszahl ist zu klein!", delete_after=bp.deltime)
-        else:
-            ctx.send("Bitte gebe eine natürliche Zahl größer als 90 ein", delete_after=bp.deltime)
-
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def unbanall(self, ctx):
@@ -182,7 +160,6 @@ class Moderation(commands.Cog):
     @commands.is_owner()
     async def blacklistadd(self, ctx, curse):
         self.blacklist.append(curse)
-        print(self.blacklist)
         with open('./data/blacklist.json', 'w') as f:
             json.dump({"0": self.blacklist}, f, indent=4)
         await bp.delete_cmd(ctx)
@@ -291,6 +268,9 @@ class Moderation(commands.Cog):
             await ctx.send(f"Irgendwas funktioniert da nicht ganz...{error} {type(error)} "
                            f"<@!137291894953607168>")
         # Sonstige Errors
+        elif isinstance(error, discord.errors.Forbidden):
+            await ctx.send(f"403-Forbidden Mir sind Hände und Füße gebunden ich habe keine Rechte!")
+        # Sonstige Errors
         else:
             await ctx.send(f"Ein unerwarteter Fehler ist aufgetreten!... \n {error} "
                            f"{type(error)} <@!137291894953607168>")
@@ -304,6 +284,7 @@ class Moderation(commands.Cog):
             await message.delete()
             await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von "
                                        f"Discord-Links")
+            return
         # DMs empfangen
         if message.guild is None and bp.user(message.author):
             channel = self.client.get_channel(int(635544300834258995))

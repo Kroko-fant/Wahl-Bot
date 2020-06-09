@@ -78,7 +78,6 @@ class Autoverify(commands.Cog):
                     servers = json.load(f)
                 roles = servers[str(guild.id)]
                 for rid in roles:
-                    print(rid)
                     trole = guild.get_role(rid)
                     await member.add_roles(trole, reason="verify")
             except KeyError:
