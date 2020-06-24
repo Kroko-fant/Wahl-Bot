@@ -282,7 +282,7 @@ class Moderation(commands.Cog):
             return
         if any([curse in message.content.lower() for curse in self.blacklist]):
             await message.delete()
-            await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von "
+            await message.channel.send(f"{message.author.mention}, dieser Server verbietet das Senden von Werbung oder"
                                        f"Discord-Links")
             return
         # DMs empfangen
